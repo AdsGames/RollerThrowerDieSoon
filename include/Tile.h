@@ -6,9 +6,15 @@
 class Tile
 {
     public:
-        Tile(int,int);
+        Tile(int,int,int);
         virtual ~Tile();
         void draw();
+        int getX(){return x;}
+        int getY(){return y;}
+        int getIsoX(){return iso_x;}
+        int getIsoY(){return iso_y;}
+        void setType(int t){type=t;}
+
 
     protected:
 
@@ -17,6 +23,9 @@ class Tile
         ALLEGRO_BITMAP *grid;
         int x;
         int y;
+        int type;
+        int iso_x;
+        int iso_y;
 };
 
 #endif // TILE_H

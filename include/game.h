@@ -42,7 +42,7 @@ class game : public state{
     void update();
     void draw();
 
-    Tile *createTile(int,int);
+    Tile *createTile(int,int,int);
     Guest *createGuest(int,int);
 
 
