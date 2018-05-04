@@ -6,7 +6,7 @@
 class Tile
 {
     public:
-        Tile();
+        Tile(int,int);
         virtual ~Tile();
         void draw();
 
@@ -14,6 +14,9 @@ class Tile
 
     private:
         ALLEGRO_BITMAP *sprite;
+        ALLEGRO_BITMAP *grid;
+        int x;
+        int y;
 };
 
 #endif // TILE_H
