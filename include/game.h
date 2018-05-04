@@ -31,6 +31,7 @@
 #include "MusicManager.h"
 #include "Tile.h"
 #include "Guest.h"
+#include "Enemy.h"
 
 class game : public state{
   public:
@@ -49,6 +50,8 @@ class game : public state{
     // Test mode
     std::vector <Tile*> gameTiles;
     std::vector <Guest*> gameGuests;
+    std::vector <Enemy*> gameEnemies;
+
 
 
   private:

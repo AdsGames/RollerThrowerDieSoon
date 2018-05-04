@@ -10,8 +10,9 @@
 				<Option output="bin/Release/RollerThrowerDieSoon" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin/Release/" />
 				<Option object_output="obj/Release/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="include" />
@@ -46,6 +47,7 @@
 		<Unit filename="include/CollisionBox.h" />
 		<Unit filename="include/DisplayMode.h" />
 		<Unit filename="include/DynamicBox.h" />
+		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/Explosive.h" />
 		<Unit filename="include/Goat.h" />
 		<Unit filename="include/Guest.h" />
@@ -76,6 +78,7 @@
 		<Unit filename="include/tools.h" />
 		<Unit filename="src/CheckBox.cpp" />
 		<Unit filename="src/DisplayMode.cpp" />
+		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/Guest.cpp" />
 		<Unit filename="src/MusicManager.cpp" />
 		<Unit filename="src/Options.cpp" />

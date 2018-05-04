@@ -15,7 +15,7 @@ game::game(){
 
       }
     }
-
+  gameEnemies.push_back(new Enemy());
 
 
 }
@@ -79,6 +79,10 @@ void game::draw(){
     for(int i=0; i<gameGuests.size(); i++){
       gameGuests.at(i) -> draw();
     }
+     for(int i=0; i<gameEnemies.size(); i++){
+      gameEnemies.at(i) -> draw();
+    }
+
 
 
 
