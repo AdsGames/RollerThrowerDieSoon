@@ -28,6 +28,12 @@ Tile *game::createTile(int new_x, int new_y){
 
 }
 
+Guest *game::createGuest(int new_x, int new_y){
+    Guest *newGuest= new Guest(new_x,new_y);
+    return newGuest;
+
+}
+
 // Draw to screen
 void game::draw(){
   // Background
@@ -35,6 +41,10 @@ void game::draw(){
 
     for(int i=0; i<gameTiles.size(); i++){
       gameTiles.at(i) -> draw();
+    }
+
+    for(int i=0; i<gameGuests.size(); i++){
+      gameGuests.at(i) -> draw();
     }
 
 

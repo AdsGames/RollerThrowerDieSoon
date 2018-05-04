@@ -30,6 +30,7 @@
 #include "Sound.h"
 #include "MusicManager.h"
 #include "Tile.h"
+#include "Guest.h"
 
 class game : public state{
   public:
@@ -42,9 +43,13 @@ class game : public state{
     void draw();
 
     Tile *createTile(int,int);
+    Guest *createGuest(int,int);
+
 
     // Test mode
     std::vector <Tile*> gameTiles;
+    std::vector <Guest*> gameGuests;
+
 
   private:
     ALLEGRO_BITMAP *tile;
