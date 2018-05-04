@@ -14,6 +14,7 @@ class Tile
         int getIsoX(){return iso_x;}
         int getIsoY(){return iso_y;}
         void setType(int t){type=t;}
+        int getType(){return type;}
 
 
     protected:
