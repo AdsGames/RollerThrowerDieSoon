@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="RollerThrowerDieSoon" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/Release/RollerThrowerDieSoon" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="include" />
+			<Add directory="/usr/include" />
+			<Add directory="/media/ubuntu-mate/WINDOWS/Danny/allegro5/include/allegro5" />
+		</Compiler>
+		<Linker>
+			<Add option="-lallegro" />
+			<Add option="-lallegro_primitives" />
+			<Add option="-lallegro_image" />
+			<Add option="-lallegro_audio" />
+			<Add option="-lallegro_font" />
+			<Add option="-lallegro_color" />
+			<Add option="-lallegro_dialog" />
+			<Add option="-lallegro_ttf" />
+			<Add option="-lallegro_acodec" />
+			<Add directory="include" />
+			<Add directory="usr/include" />
+			<Add directory="/media/ubuntu-mate/WINDOWS/Danny/allegro5/include/allegro5" />
+		</Linker>
+		<Unit filename="include/Character.h" />
+		<Unit filename="include/CheckBox.h" />
+		<Unit filename="include/CollisionBox.h" />
+		<Unit filename="include/DisplayMode.h" />
+		<Unit filename="include/DynamicBox.h" />
+		<Unit filename="include/Explosive.h" />
+		<Unit filename="include/Goat.h" />
+		<Unit filename="include/LevelSelect.h" />
+		<Unit filename="include/MusicManager.h" />
+		<Unit filename="include/Options.h" />
+		<Unit filename="include/Sensor.h" />
+		<Unit filename="include/Sound.h" />
+		<Unit filename="include/StaticBox.h" />
+		<Unit filename="include/ToggleBox.h" />
+		<Unit filename="include/UIElement.h" />
+		<Unit filename="include/UIHandler.h" />
+		<Unit filename="include/button.h" />
+		<Unit filename="include/editor.h" />
+		<Unit filename="include/game.h" />
+		<Unit filename="include/globals.h" />
+		<Unit filename="include/init.h" />
+		<Unit filename="include/joystickListener.h" />
+		<Unit filename="include/keyListener.h" />
+		<Unit filename="include/menu.h" />
+		<Unit filename="include/mouseListener.h" />
+		<Unit filename="include/rapidxml.hpp" />
+		<Unit filename="include/rapidxml_iterators.hpp" />
+		<Unit filename="include/rapidxml_print.hpp" />
+		<Unit filename="include/rapidxml_utils.hpp" />
+		<Unit filename="include/state.h" />
+		<Unit filename="include/tools.h" />
+		<Unit filename="src/CheckBox.cpp" />
+		<Unit filename="src/DisplayMode.cpp" />
+		<Unit filename="src/MusicManager.cpp" />
+		<Unit filename="src/Options.cpp" />
+		<Unit filename="src/Sound.cpp" />
+		<Unit filename="src/ToggleBox.cpp" />
+		<Unit filename="src/UIElement.cpp" />
+		<Unit filename="src/UIHandler.cpp" />
+		<Unit filename="src/button.cpp" />
+		<Unit filename="src/game.cpp" />
+		<Unit filename="src/init.cpp" />
+		<Unit filename="src/joystickListener.cpp" />
+		<Unit filename="src/keyListener.cpp" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/menu.cpp" />
+		<Unit filename="src/mouseListener.cpp" />
+		<Unit filename="src/state.cpp" />
+		<Unit filename="src/tools.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
