@@ -60,6 +60,8 @@ class game : public state{
     ALLEGRO_BITMAP *tile;
     ALLEGRO_BITMAP *entrance_back;
     ALLEGRO_BITMAP *entrance_front;
+    ALLEGRO_BITMAP *cursor_open;
+    ALLEGRO_BITMAP *cursor_closed;
 
     // Functions
 

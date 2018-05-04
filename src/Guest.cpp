@@ -7,6 +7,12 @@ Guest::Guest(int newX, int newY)
   for( int i = 0; i < 43; i++)
     spritesheet[i] = al_create_sub_bitmap( sprite, 0, i*38, 17, 38);
 
+
+  sprite = tools::load_bitmap_ex("images/panic.png");
+
+  for( int i = 0; i <25; i++)
+    spritesheet_panic[i] = al_create_sub_bitmap( sprite, 0, i*36, 17, 36);
+
     //fricking spritesheets
 
     x = newX;
@@ -41,11 +47,18 @@ void Guest::update(){
   frame++;
   if(frame>42)
     frame=0;
+
+  frame_panic++;
+  if(frame_panic>=25)
+    frame_panic=0;
 }
 
 void Guest::draw(){
 
 
-  al_draw_bitmap(spritesheet[frame],x-8,y-18,0);
+  if(!captured)al_draw_bitmap(spritesheet[frame],x-8,y-18,0);
+    else
+  al_draw_bitmap(spritesheet_panic[frame_panic],x-10,y-18,0);
+
 }
 

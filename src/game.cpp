@@ -20,6 +20,9 @@ game::game(){
   entrance_back =  tools::load_bitmap_ex("images/tiles/EntranceBack.png");
   entrance_front =  tools::load_bitmap_ex("images/tiles/EntranceFront.png");
 
+  cursor_open = tools::load_bitmap_ex("images/tweezersOpen.png");
+  cursor_closed = tools::load_bitmap_ex("images/tweezersClosed.png");
+
 
 
 }
@@ -30,6 +33,10 @@ game::~game(){
 
 }
 void game::update(){
+
+  if(selectedGuest!=nullptr)
+    selectedGuest -> update();
+
   for(int i=0; i<gameTiles.size(); i++){
     int mxo=mouseListener::mouse_x-64;
     int myo=mouseListener::mouse_y-32;
@@ -49,6 +56,8 @@ void game::update(){
 
   //gameGuests.push_back(createGuest(200,900));
     if(mouseListener::mouse_released & 1 && selectedGuest!=nullptr){
+      selectedGuest -> setCaptured(false);
+
       gameGuests.push_back(selectedGuest);
       selectedGuest=nullptr;
     }
@@ -57,8 +66,9 @@ void game::update(){
     for(int i=0; i<gameGuests.size(); i++){
       gameGuests.at(i) -> update();
 
-      if(tools::clicked(gameGuests.at(i) -> getX()-8,gameGuests.at(i) -> getX()+8,gameGuests.at(i) -> getY()-16,gameGuests.at(i) -> getY()+16) && selectedGuest==nullptr){
+      if(tools::clicked(gameGuests.at(i) -> getX()-15,gameGuests.at(i) -> getX()+15,gameGuests.at(i) -> getY()-30,gameGuests.at(i) -> getY()+30) && selectedGuest==nullptr){
         selectedGuest=gameGuests.at(i);
+        selectedGuest -> setCaptured(true);
         gameGuests.erase(gameGuests.begin()+i);
 
       }
@@ -120,7 +130,16 @@ void game::draw(){
       selectedGuest -> setY(mouseListener::mouse_y);
       selectedGuest -> draw();
 
+      al_draw_bitmap(cursor_closed,mouseListener::mouse_x-8,mouseListener::mouse_y-56,0);
+
+
+  }else{
+
+        al_draw_bitmap(cursor_open,mouseListener::mouse_x-8,mouseListener::mouse_y-56,0);
+
   }
+
+
 
 
 
