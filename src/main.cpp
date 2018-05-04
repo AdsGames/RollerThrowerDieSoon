@@ -55,8 +55,8 @@ float scaleH;
 float scaleX;
 float scaleY;
 
-int screenWidth=1024;
-int screenHeight=768;
+int screenWidth=1920;
+int screenHeight=1080;
 
 enum{
   fullscreen_window_stretch,
@@ -160,8 +160,8 @@ void setup(){
   Options::graphics_mode=graphics_mode;
 
 
-  float windowWidth=1024;
-  float windowHeight=768;
+  float windowWidth=1920;
+  float windowHeight=1080;
 
 
   if(graphics_mode>=1 && graphics_mode<=3){
@@ -246,7 +246,7 @@ void setup(){
   al_start_timer(timer);
 
   // Window title
-  al_set_window_title(display,"Jumping Jimothy");
+  al_set_window_title(display,"Roller Thrower DieSoon");
 
   std::cout<<" Sucesss.\n";
 

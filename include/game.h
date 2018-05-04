@@ -39,14 +39,13 @@ class game : public state{
     // Override parent
     void update();
     void draw();
-    bool level_complete();
 
     // Test mode
-    static bool testing;
-    static const char *testing_file_name;
-    static int level_to_start;
+
 
   private:
+    ALLEGRO_BITMAP *tile;
+
     // Functions
 
 };
