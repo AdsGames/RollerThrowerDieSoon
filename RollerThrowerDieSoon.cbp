@@ -48,6 +48,7 @@
 		<Unit filename="include/DynamicBox.h" />
 		<Unit filename="include/Explosive.h" />
 		<Unit filename="include/Goat.h" />
+		<Unit filename="include/Guest.h" />
 		<Unit filename="include/LevelSelect.h" />
 		<Unit filename="include/MusicManager.h" />
 		<Unit filename="include/Options.h" />
@@ -75,6 +76,7 @@
 		<Unit filename="include/tools.h" />
 		<Unit filename="src/CheckBox.cpp" />
 		<Unit filename="src/DisplayMode.cpp" />
+		<Unit filename="src/Guest.cpp" />
 		<Unit filename="src/MusicManager.cpp" />
 		<Unit filename="src/Options.cpp" />
 		<Unit filename="src/Sound.cpp" />
