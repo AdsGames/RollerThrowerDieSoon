@@ -15,6 +15,10 @@ Guest::~Guest()
 {
   //dtor
 }
+void Guest::update(){
+  x+=1;
+  y-=0.5;
+}
 
 void Guest::draw(){
 

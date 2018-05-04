@@ -11,13 +11,14 @@ class Guest
     Guest(int,int);
     virtual ~Guest();
     void draw();
+    void update();
 
   protected:
 
   private:
     ALLEGRO_BITMAP *sprite;
-    int x=0;
-    int y=0;
+    float x=0;
+    float y=0;
 };
 
 #endif // GUEST_H

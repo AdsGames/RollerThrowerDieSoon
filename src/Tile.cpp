@@ -8,7 +8,8 @@ Tile::Tile(int newX, int newY, int newType)
       sprite = tools::load_bitmap_ex("images/tiles/Grass.png");
      if(type==1)
       sprite = tools::load_bitmap_ex("images/tiles/Path.png");
-
+     if(type==2)
+      sprite = tools::load_bitmap_ex("images/tiles/Spawn.png");
 
     grid = tools::load_bitmap_ex("images/tiles/EmptyGrid.png");
 
