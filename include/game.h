@@ -52,6 +52,8 @@ class game : public state{
     std::vector <Guest*> gameGuests;
     std::vector <Enemy*> gameEnemies;
 
+    Guest *selectedGuest = nullptr;
+
 
 
   private:

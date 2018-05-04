@@ -34,19 +34,36 @@ void game::update(){
     int mxo=mouseListener::mouse_x-64;
     int myo=mouseListener::mouse_y-32;
     int to=24;
-    if(mouseListener::mouse_button & 1)
-      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),1);
-      }
-    }
+//    if(mouseListener::mouse_button & 1)
+//      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
+//        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),1);
+//      }
+//    }
+
+
+
+}
+  if(selectedGuest!=nullptr)
+    std::cout<<selectedGuest -> getX() <<","<<selectedGuest -> getY()<<"\n";
 
 
   //gameGuests.push_back(createGuest(200,900));
+    if(mouseListener::mouse_released & 1 && selectedGuest!=nullptr){
+      gameGuests.push_back(selectedGuest);
+      selectedGuest=nullptr;
+    }
 
 
     for(int i=0; i<gameGuests.size(); i++){
       gameGuests.at(i) -> update();
+
+      if(tools::clicked(gameGuests.at(i) -> getX()-8,gameGuests.at(i) -> getX()+8,gameGuests.at(i) -> getY()-16,gameGuests.at(i) -> getY()+16) && selectedGuest==nullptr){
+        selectedGuest=gameGuests.at(i);
+        gameGuests.erase(gameGuests.begin()+i);
+
+      }
     }
+
 
     for(int i=0; i<gameTiles.size(); i++){
       if(gameTiles.at(i) -> getType()==2){
@@ -74,6 +91,9 @@ Guest *game::createGuest(int new_x, int new_y){
 // Draw to screen
 void game::draw(){
   // Background
+
+
+
   al_clear_to_color( al_map_rgb(40,40,60));
 
     for(int i=0; i<gameTiles.size(); i++){
@@ -94,6 +114,13 @@ void game::draw(){
      for(int i=0; i<gameEnemies.size(); i++){
       gameEnemies.at(i) -> draw();
     }
+
+    if(selectedGuest!=nullptr){
+      selectedGuest -> setX(mouseListener::mouse_x);
+      selectedGuest -> setY(mouseListener::mouse_y);
+      selectedGuest -> draw();
+
+  }
 
 
 
