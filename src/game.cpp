@@ -6,8 +6,9 @@
 // Constructor
 game::game(){
 
-      tile = tools::load_bitmap_ex("images/tiles/Grass.png");
-
+      //tile =  niceTile=createTile();
+    tools::load_bitmap_ex("images/tiles/Grass.png");
+    niceTile=createTile();
 
 }
 
@@ -20,12 +21,19 @@ void game::update(){
 
 }
 
+Tile *game::createTile(){
+    Tile *newTile= new Tile();
+    return newTile;
+
+}
+
 // Draw to screen
 void game::draw(){
   // Background
   al_clear_to_color( al_map_rgb(40,40,60));
 
-  al_draw_bitmap(tile,300,300,0);
+  //al_draw_bitmap(tile,300,300,0);
+    niceTile -> draw();
 
 
 

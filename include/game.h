@@ -29,6 +29,7 @@
 #include <button.h>
 #include "Sound.h"
 #include "MusicManager.h"
+#include "Tile.h"
 
 class game : public state{
   public:
@@ -40,8 +41,12 @@ class game : public state{
     void update();
     void draw();
 
-    // Test mode
+    Tile *createTile();
 
+    // Test mode
+    Tile *niceTile;
+
+  // std::vector<std::vector<
 
   private:
     ALLEGRO_BITMAP *tile;

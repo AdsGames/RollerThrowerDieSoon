@@ -14,6 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -53,6 +54,7 @@
 		<Unit filename="include/Sensor.h" />
 		<Unit filename="include/Sound.h" />
 		<Unit filename="include/StaticBox.h" />
+		<Unit filename="include/Tile.h" />
 		<Unit filename="include/ToggleBox.h" />
 		<Unit filename="include/UIElement.h" />
 		<Unit filename="include/UIHandler.h" />
@@ -76,6 +78,7 @@
 		<Unit filename="src/MusicManager.cpp" />
 		<Unit filename="src/Options.cpp" />
 		<Unit filename="src/Sound.cpp" />
+		<Unit filename="src/Tile.cpp" />
 		<Unit filename="src/ToggleBox.cpp" />
 		<Unit filename="src/UIElement.cpp" />
 		<Unit filename="src/UIHandler.cpp" />
