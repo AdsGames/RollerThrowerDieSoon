@@ -17,8 +17,10 @@ class Guest
 
   private:
     ALLEGRO_BITMAP *sprite;
+    ALLEGRO_BITMAP *spritesheet[43];
     float x=0;
     float y=0;
+    int frame=0;
 };
 
 #endif // GUEST_H
