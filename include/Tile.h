@@ -22,6 +22,7 @@ class Tile
     private:
         ALLEGRO_BITMAP *sprite;
         ALLEGRO_BITMAP *grid;
+        ALLEGRO_BITMAP *foreground=nullptr;
         int x;
         int y;
         int type;

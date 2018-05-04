@@ -56,6 +56,8 @@ class game : public state{
 
   private:
     ALLEGRO_BITMAP *tile;
+    ALLEGRO_BITMAP *entrance_back;
+    ALLEGRO_BITMAP *entrance_front;
 
     // Functions
 

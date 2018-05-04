@@ -32,6 +32,9 @@ void Tile::draw(){
 
    al_draw_bitmap(sprite,iso_x,iso_y,0);
    al_draw_bitmap(grid,iso_x,iso_y,0);
+   if(foreground!=nullptr)
+    al_draw_bitmap(foreground,iso_x,iso_y,0);
+
 
 
 

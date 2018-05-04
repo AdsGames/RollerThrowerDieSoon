@@ -8,7 +8,7 @@ game::game(){
 
     for(int i=5; i<25; i++){
       for(int j=-15; j<15; j++){
-        if(i==15 && j == 13)
+        if(i==15 && j == 14)
           gameTiles.push_back(createTile(i,j,2));
         else
           gameTiles.push_back(createTile(i,j,0));
@@ -16,6 +16,10 @@ game::game(){
       }
     }
   gameEnemies.push_back(new Enemy());
+
+  entrance_back =  tools::load_bitmap_ex("images/tiles/EntranceBack.png");
+  entrance_front =  tools::load_bitmap_ex("images/tiles/EntranceFront.png");
+
 
 
 }
@@ -32,7 +36,7 @@ void game::update(){
     int to=24;
     if(mouseListener::mouse_button & 1)
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),2);
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),1);
       }
     }
 
@@ -76,9 +80,17 @@ void game::draw(){
       gameTiles.at(i) -> draw();
     }
 
+    al_draw_bitmap(entrance_back,129,640,0);
+
+
+
     for(int i=0; i<gameGuests.size(); i++){
       gameGuests.at(i) -> draw();
     }
+
+    al_draw_bitmap(entrance_front,255,767,0);
+
+
      for(int i=0; i<gameEnemies.size(); i++){
       gameEnemies.at(i) -> draw();
     }
