@@ -490,13 +490,13 @@
 
 1525447679 /media/ubuntu-mate/WINDOWS/Danny/RollerThrowerDieSoon/include/DisplayMode.h
 
-1525462318 source:/media/ubuntu-mate/WINDOWS/Danny/RollerThrowerDieSoon/src/game.cpp
+1525463409 source:/media/ubuntu-mate/WINDOWS/Danny/RollerThrowerDieSoon/src/game.cpp
 	"game.h"
 	<allegro5/bitmap.h>
 	<allegro5/allegro_audio.h>
 	<allegro5/allegro_native_dialog.h>
 
-1525459752 /media/ubuntu-mate/WINDOWS/Danny/RollerThrowerDieSoon/include/game.h
+1525463351 /media/ubuntu-mate/WINDOWS/Danny/RollerThrowerDieSoon/include/game.h
 	<vector>
 	<allegro5/allegro.h>
 	<allegro5/allegro_primitives.h>
@@ -515,6 +515,7 @@
 	"MusicManager.h"
 	"Tile.h"
 	"Guest.h"
+	"Enemy.h"
 
 1525447285 /usr/include/allegro5/allegro_ttf.h
 	"allegro5/allegro.h"
@@ -668,4 +669,11 @@
 
 1525461837 source:/media/ubuntu-mate/WINDOWS/Danny/RollerThrowerDieSoon/src/Guest.cpp
 	"Guest.h"
+
+1525463428 source:/media/ubuntu-mate/WINDOWS/Danny/RollerThrowerDieSoon/src/Enemy.cpp
+	"Enemy.h"
+
+1525463579 /media/ubuntu-mate/WINDOWS/Danny/RollerThrowerDieSoon/include/Enemy.h
+	"allegro5/allegro.h"
+	"tools.h"
 
