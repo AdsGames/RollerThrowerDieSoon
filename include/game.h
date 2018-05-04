@@ -41,12 +41,10 @@ class game : public state{
     void update();
     void draw();
 
-    Tile *createTile();
+    Tile *createTile(int,int);
 
     // Test mode
-    Tile *niceTile;
-
-  // std::vector<std::vector<
+    std::vector <Tile*> gameTiles;
 
   private:
     ALLEGRO_BITMAP *tile;

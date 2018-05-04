@@ -6,10 +6,11 @@
 // Constructor
 game::game(){
 
-      //tile =  niceTile=createTile();
-    tools::load_bitmap_ex("images/tiles/Grass.png");
-    niceTile=createTile();
-
+    for(int i=5; i<25; i++){
+      for(int j=-15; j<15; j++){
+        gameTiles.push_back(createTile(i,j));
+      }
+    }
 }
 
 // Destructor
@@ -21,8 +22,8 @@ void game::update(){
 
 }
 
-Tile *game::createTile(){
-    Tile *newTile= new Tile();
+Tile *game::createTile(int new_x, int new_y){
+    Tile *newTile= new Tile(new_x,new_y);
     return newTile;
 
 }
@@ -32,8 +33,9 @@ void game::draw(){
   // Background
   al_clear_to_color( al_map_rgb(40,40,60));
 
-  //al_draw_bitmap(tile,300,300,0);
-    niceTile -> draw();
+    for(int i=0; i<gameTiles.size(); i++){
+      gameTiles.at(i) -> draw();
+    }
 
 
 
