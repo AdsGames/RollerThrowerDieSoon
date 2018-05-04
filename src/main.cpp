@@ -179,7 +179,7 @@ void setup(){
 
   display = al_create_display(windowWidth, windowHeight);
 
-  if(graphics_mode>=1 && graphics_mode<=3)
+  //f(graphics_mode>=1 && graphics_mode<=3)
     al_hide_mouse_cursor(display);
 
 

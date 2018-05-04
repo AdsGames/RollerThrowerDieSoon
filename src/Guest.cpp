@@ -21,8 +21,23 @@ Guest::~Guest()
   //dtor
 }
 void Guest::update(){
-  x+=1;
-  y-=0.5;
+  if(direction==0){
+    x+=1;
+    y-=0.5;
+  }
+  if(direction==1){
+    x+=1;
+    y+=0.5;
+  }
+  if(direction==2){
+    x-=1;
+    y+=0.5;
+  }
+  if(direction==3){
+    x-=1;
+    y-=0.5;
+  }
+
   frame++;
   if(frame>42)
     frame=0;
@@ -31,6 +46,6 @@ void Guest::update(){
 void Guest::draw(){
 
 
-  al_draw_bitmap(spritesheet[frame],x,y,0);
+  al_draw_bitmap(spritesheet[frame],x-8,y-18,0);
 }
 

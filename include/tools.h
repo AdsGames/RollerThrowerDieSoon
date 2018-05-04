@@ -18,6 +18,7 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_font.h>
+#include "mouseListener.h"
 
 
 
@@ -40,7 +41,7 @@ class tools{
         static int get_text_offset_y(ALLEGRO_FONT *newFont, std::string newText);
         static int get_text_width(ALLEGRO_FONT *newFont, std::string newText);
         static int get_text_height(ALLEGRO_FONT *newFont, std::string newText);
-
+        static bool clicked(int,int,int,int);
 
 
         // Clamp values

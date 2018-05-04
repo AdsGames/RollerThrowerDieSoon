@@ -13,6 +13,12 @@ int tools::convertStringToInt( std::string newString){
   return result;
 }
 
+bool tools::clicked(int x_1, int x_2, int y_1, int y_2){
+  if(mouseListener::mouse_button & 1 && x_1<mouseListener::mouse_x && x_2>mouseListener::mouse_x && y_1<mouseListener::mouse_y && y_2>mouseListener::mouse_y)
+    return true;
+  return false;
+
+}
 
 // A function to streamline error reporting in file loading
 void tools::abort_on_error( std::string message, std::string title){
