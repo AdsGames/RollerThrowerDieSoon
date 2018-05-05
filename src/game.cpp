@@ -91,22 +91,22 @@ void game::update(){
     int mxo = mouseListener::mouse_x - 64;
     int myo = mouseListener::mouse_y - 32;
     int to = 24;
-    if(mouseListener::mouse_pressed & 1 && editor_tool==0){
+    if(mouseListener::mouse_button & 1 && editor_tool==0){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
         gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),5);
       }
     }
-    if(mouseListener::mouse_pressed & 1 && editor_tool==1){
+    if(mouseListener::mouse_button & 1 && editor_tool==1){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
         gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),6);
       }
     }
-    if(mouseListener::mouse_pressed & 1 && editor_tool==2){
+    if(mouseListener::mouse_button & 1 && editor_tool==2){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
         gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),7);
       }
     }
-    if(mouseListener::mouse_pressed & 1 && editor_tool==3){
+    if(mouseListener::mouse_button & 1 && editor_tool==3){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
         gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),4);
       }
@@ -145,6 +145,9 @@ void game::update(){
 
   // Rest of guests
   for( int i = 0; i < gameGuests.size(); i++ ){
+
+    bool is_this_guest_still_alive_question_mark=true;
+
     gameGuests.at(i) -> update();
 
     // Pick up guest
@@ -155,39 +158,50 @@ void game::update(){
       selectedGuest = gameGuests.at(i);
       selectedGuest -> setCaptured( true );
       gameGuests.erase( gameGuests.begin() + i );
+      is_this_guest_still_alive_question_mark=false;
       break;
     }
+    bool off_map=true;
 
     for( int j = 0; j < gameTiles.size(); j++ ){
-      int guest_x=gameGuests.at(i) -> getX()-75;
-      int guest_y=gameGuests.at(i) -> getY()-0;
+      if(is_this_guest_still_alive_question_mark){
 
-      if(guest_x>gameTiles.at(j) -> getIsoX()-24 && guest_x<gameTiles.at(j) -> getIsoX()+24 && guest_y<gameTiles.at(j) -> getIsoY()+24 && guest_y>gameTiles.at(j) -> getIsoY()-24){
-        if(gameTiles.at(j) -> getType() == 4)
-          gameGuests.at(i) -> setDirection(3);
-        if(gameTiles.at(j) -> getType() == 5)
-          gameGuests.at(i) -> setDirection(0);
-        if(gameTiles.at(j) -> getType() == 6)
-          gameGuests.at(i) -> setDirection(1);
-        if(gameTiles.at(j) -> getType() == 7)
-          gameGuests.at(i) -> setDirection(2);
+        int guest_x=gameGuests.at(i) -> getX()-75;
+        int guest_y=gameGuests.at(i) -> getY()-0;
 
+        if(guest_x>gameTiles.at(j) -> getIsoX()-24 && guest_x<gameTiles.at(j) -> getIsoX()+24 && guest_y<gameTiles.at(j) -> getIsoY()+24 && guest_y>gameTiles.at(j) -> getIsoY()-24){
+        off_map=false;
+          if(gameTiles.at(j) -> getType() == 4)
+            gameGuests.at(i) -> setDirection(3);
+          if(gameTiles.at(j) -> getType() == 5)
+            gameGuests.at(i) -> setDirection(0);
+          if(gameTiles.at(j) -> getType() == 6)
+            gameGuests.at(i) -> setDirection(1);
+          if(gameTiles.at(j) -> getType() == 7)
+            gameGuests.at(i) -> setDirection(2);
+
+        }
       }
     }
-
+    if(off_map){
+      gameGuests.erase( gameGuests.begin() + i );
+      is_this_guest_still_alive_question_mark=false;
+    }
     // Guest with enemy collision
-    for( int j = 0; j < gameEnemies.size(); j++){
-      if( tools::collision( gameGuests.at(i) -> getX(),
-                            gameGuests.at(i) -> getX() + 16,
-                            gameEnemies.at(j) -> getX() + 100,
-                            gameEnemies.at(j) -> getX() + 400,
-                            gameGuests.at(i) -> getY(),
-                            gameGuests.at(i) -> getY() + 54,
-                            gameEnemies.at(j) -> getY() + 100,
-                            gameEnemies.at(j) -> getY() + 200)){
-        gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
-        gameGuests.erase( gameGuests.begin() + i );
-        break;
+    if(is_this_guest_still_alive_question_mark){
+      for( int j = 0; j < gameEnemies.size(); j++){
+        if( tools::collision( gameGuests.at(i) -> getX(),
+                              gameGuests.at(i) -> getX() + 16,
+                              gameEnemies.at(j) -> getX() + 100,
+                              gameEnemies.at(j) -> getX() + 400,
+                              gameGuests.at(i) -> getY(),
+                              gameGuests.at(i) -> getY() + 54,
+                              gameEnemies.at(j) -> getY() + 100,
+                              gameEnemies.at(j) -> getY() + 200)){
+          gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
+          gameGuests.erase( gameGuests.begin() + i );
+          break;
+        }
       }
     }
 
