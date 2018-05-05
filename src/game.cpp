@@ -22,8 +22,10 @@ game::game(){
   // Create map
   for( int i = 5; i < 25; i++ ){
     for( int j =- 15; j < 15; j++ ){
-      if( i == 17 && j == 7 )
+      if( i == 15 && j == 14 )
         gameTiles.push_back( createTile( i, j, 2 ) );
+      else if( i == 15 && j == 8 )
+        gameTiles.push_back( createTile( i, j, 3 ) );
       else
         gameTiles.push_back( createTile( i, j, 0 ) );
     }
@@ -185,7 +187,13 @@ void game::update(){
             gameGuests.at(i) -> setDirection(1);
           if(gameTiles.at(j) -> getType() == 7)
             gameGuests.at(i) -> setDirection(2);
+          if(gameTiles.at(j) -> getType() == 3){
+            is_this_guest_still_alive_question_mark=false;
+            guests_rescued++;
+            gameGuests.erase( gameGuests.begin() + i );
 
+            break;
+          }
         }
         if(tools::collision(guest_x-50,guest_x+50,gameTiles.at(j) -> getIsoX()-24,gameTiles.at(j) -> getIsoX()+24,guest_y-50,guest_y+50,gameTiles.at(j) -> getIsoY()+24, gameTiles.at(j) -> getIsoY()-24)){
           off_map=false;
