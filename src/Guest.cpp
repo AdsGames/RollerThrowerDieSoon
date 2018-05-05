@@ -104,6 +104,6 @@ std::string Guest::genInital()
 
 std::string Guest::getName()
 {
-  return name + " " + inial;
+  return name + " " + inital;
 }
 

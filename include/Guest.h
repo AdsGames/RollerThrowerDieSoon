@@ -4,6 +4,7 @@
 
 #include "tools.h"
 #include "allegro5/allegro.h"
+#include "Message.h"
 
 class Guest
 {
@@ -26,7 +27,7 @@ class Guest
     bool getIsCart(){return is_cart;}
     void setCaptured(bool b){captured=b;}
     bool giveUmbrella(){if(!has_umbrella){has_umbrella=true;return true;}return false;}
-    std::string getName()
+    std::string getName();
 
   protected:
     ALLEGRO_BITMAP *sprite;
