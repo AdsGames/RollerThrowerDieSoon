@@ -16,8 +16,10 @@ class Enemy
 
   private:
     ALLEGRO_BITMAP *sprite;
+    ALLEGRO_BITMAP *spritesheet[62];
     int x=1000;
     int y=200;
+    int frame=0;
 };
 
 #endif // ENEMY_H
