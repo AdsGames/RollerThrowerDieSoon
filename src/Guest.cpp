@@ -1,7 +1,10 @@
 #include "Guest.h"
 
 Guest::Guest(int x, int y){
+
   sprite = tools::load_bitmap_ex( "images/walk.png" );
+  umbrella = tools::load_bitmap_ex( "images/Umbrella.png" );
+
 
   for( int i = 0; i < 43; i++ )
     spritesheet[i] = al_create_sub_bitmap( sprite, 0, i * 38, 17, 38);
@@ -65,9 +68,14 @@ void Guest::update(){
 }
 
 void Guest::draw(){
+
+
   if( !captured )
     al_draw_bitmap( spritesheet[frame], x - 8, y-18, 0 );
   else
     al_draw_bitmap( spritesheet_panic[frame_panic], x-10, y-18, 0 );
+
+  if(has_umbrella)
+    al_draw_bitmap( umbrella, x, y, 0 );
 }
 
