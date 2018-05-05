@@ -25,16 +25,16 @@ void Guest::update(){
   if( y_velocity > -threshold && y_velocity < threshold )
     y_velocity = 0;
 
-  if( y_velocity > threshold )
+  if( y_velocity > 0 ){
+    y_velocity /= decel;
+}
+  if( y_velocity < 0)
     y_velocity /= decel;
 
-  if( y_velocity < -threshold )
-    y_velocity /= decel;
-
-  if( x_velocity > threshold )
+  if( x_velocity > 0 )
     x_velocity /= decel;
 
-  if( x_velocity < -threshold )
+  if( x_velocity < 0 )
     x_velocity /= decel;
 
   if( y_velocity == 0 && x_velocity == 0 ){
