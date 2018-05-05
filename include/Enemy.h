@@ -8,7 +8,7 @@
 class Enemy
 {
   public:
-    Enemy();
+    Enemy( int x, int y );
     virtual ~Enemy();
 
     // Run any logic needed by enemy
@@ -32,8 +32,8 @@ class Enemy
     ALLEGRO_FONT *font;
 
     // Position
-    int x=1000;
-    int y=200;
+    int x;
+    int y;
 
     // Animation
     int frame=0;
