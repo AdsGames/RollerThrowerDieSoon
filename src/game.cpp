@@ -45,6 +45,7 @@ game::game(){
   path[1] = tools::load_bitmap_ex( "images/tiles/Path_1.png" );
   path[2] = tools::load_bitmap_ex( "images/tiles/Path_2.png" );
   path[3] = tools::load_bitmap_ex( "images/tiles/Path_3.png" );
+  coaster = tools::load_bitmap_ex( "images/tiles/Coaster.png" );
 
   // Load font
   font = al_load_ttf_font( "font/font.ttf", 36, 0);
@@ -55,6 +56,9 @@ game::game(){
   gameUI.addElement( new Button( 25 + 128 * 2, 25, "path_2",  path[2] ));
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
   gameUI.addElement( new Button( 25  +128 * 4, 25, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
+
+  gameUI.addElement( new Button( 25  +128 * 5, 25, "coaster", coaster));
+
 
 
   // Add enemy
@@ -84,6 +88,8 @@ void game::update(){
     editor_tool = 3;
   if( gameUI.getElementById("tweezer") -> clicked() )
     editor_tool = 4;
+   if( gameUI.getElementById("coaster") -> clicked() )
+    editor_tool = 5;
 
   // Velocity of mouse
   x_velocity = -1 * ( old_mouse_x - mouseListener::mouse_x );
@@ -112,6 +118,9 @@ void game::update(){
           break;
         case 3:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 4 );
+          break;
+        case 5:
+          gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 10 );
           break;
         default:
           break;
@@ -305,6 +314,11 @@ void game::draw(){
         gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) ){
       al_draw_bitmap( path_hover, gameTiles.at(i) -> getIsoX(), gameTiles.at(i) -> getIsoY(), 0);
     }
+    if( editor_tool == 5 &&
+                            gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) )
+
+      al_draw_bitmap( coaster, gameTiles.at(i) -> getIsoX()-200, gameTiles.at(i) -> getIsoY()-300, 0);
+
   }
 
   // Picked up guest
@@ -328,6 +342,9 @@ void game::draw(){
       break;
     case 3:
       al_draw_bitmap( path[3], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
+      break;
+     case 5:
+      al_draw_bitmap( coaster, mouseListener::mouse_x - 64-200, mouseListener::mouse_y - 32-300, 0 );
       break;
     default:
       break;

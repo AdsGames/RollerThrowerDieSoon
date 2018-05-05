@@ -6,6 +6,7 @@ Guest::Guest(int x, int y){
   umbrella = tools::load_bitmap_ex( "images/Umbrella.png" );
 
 
+
   for( int i = 0; i < 43; i++ )
     spritesheet[i] = al_create_sub_bitmap( sprite, 0, i * 38, 17, 38);
 
