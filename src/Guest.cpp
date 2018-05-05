@@ -1,6 +1,6 @@
 #include "Guest.h"
 
-Guest::Guest(int newX, int y){
+Guest::Guest(int x, int y){
   sprite = tools::load_bitmap_ex( "images/walk.png" );
 
   for( int i = 0; i < 43; i++ )
