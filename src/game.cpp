@@ -3,6 +3,7 @@
 #include <allegro5/bitmap.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_native_dialog.h>
+#include <time.h>
 
 #include "listeners/mouseListener.h"
 #include "listeners/keyListener.h"
@@ -22,6 +23,8 @@ game::game(){
 
   // Create map
   // World gen skillzzzz are over 9000
+
+  srand( time(NULL));
   for( int i = 5; i < 25; i++ ){
     for( int j =- 15; j < 15; j++ ){
       if( i == 15 && j == 14 )
@@ -59,7 +62,6 @@ game::game(){
   entrance_back = tools::load_bitmap_ex( "images/tiles/EntranceBack.png" );
   entrance_front = tools::load_bitmap_ex( "images/tiles/EntranceFront.png" );
   path_hover = tools::load_bitmap_ex( "images/tiles/Path_Hover.png" );
-
 
   // Load grabber images
   cursor_open = tools::load_bitmap_ex( "images/tweezersOpen.png" );
@@ -280,9 +282,6 @@ void game::draw(){
   gameUI.draw();
 
   // Modified x and y for isometric conversions
-  int mxo = mouseListener::mouse_x - 64;
-  int myo = mouseListener::mouse_y - 32;
-
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( editor_tool >= 0 && editor_tool <= 3 &&
         gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) ){
