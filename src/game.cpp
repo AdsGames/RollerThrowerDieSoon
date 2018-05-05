@@ -349,11 +349,8 @@ void game::draw(){
         gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) ){
       al_draw_bitmap( path_hover, gameTiles.at(i) -> getIsoX(), gameTiles.at(i) -> getIsoY(), 0);
     }
-    if( editor_tool == 5 &&
-                            gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) )
-
+    if( editor_tool == 5 && gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) )
       al_draw_bitmap( coaster, gameTiles.at(i) -> getIsoX()-200, gameTiles.at(i) -> getIsoY()-300, 0);
-
   }
 
   // Picked up guest
