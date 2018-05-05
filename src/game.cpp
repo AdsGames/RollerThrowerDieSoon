@@ -16,6 +16,8 @@ game::game(){
   old_mouse_x = 0;
   old_mouse_y = 0;
 
+  Message::load();
+
   x_velocity = 0;
   y_velocity = 0;
 
@@ -78,6 +80,7 @@ game::game(){
 
 // Update
 void game::update(){
+  Message::update();
   gameUI.update();
 
   if( gameUI.getElementById("path_0") -> clicked() )
@@ -254,7 +257,11 @@ void game::update(){
                               gameEnemies.at(j) -> getY() + 100,
                               gameEnemies.at(j) -> getY() + 200)){
           gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
+
+          std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
+          Message::sendMessage(stringyboi);
           gameGuests.erase( gameGuests.begin() + i );
+
           guests_died_enemies++;
           break;
         }
@@ -409,6 +416,8 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Guests died to falling:%i",guests_died_falling);
 
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 370, 0, "Money:%i",money);
+
+  Message::draw();
 
 
 
