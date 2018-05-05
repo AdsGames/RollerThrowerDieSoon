@@ -24,9 +24,9 @@ class Guest
     int getVelocityX(){return x_velocity;}
     int getVelocityY(){return y_velocity;}
     bool getIsCart(){return is_cart;}
-
     void setCaptured(bool b){captured=b;}
     bool giveUmbrella(){if(!has_umbrella){has_umbrella=true;return true;}return false;}
+    std::string getName()
 
   protected:
     ALLEGRO_BITMAP *sprite;
@@ -44,6 +44,11 @@ class Guest
     bool captured = false;
     bool has_umbrella=false;
     bool is_cart=false;
+  private:
+    std::string name;
+    std::string inital;
+    std::string genName();
+    std::string genInital();
 
 };
 
