@@ -25,11 +25,12 @@ Cart::~Cart()
 void Cart::update()
 {
   accel += 0.02f;
-  spin += 0.1f;
-    x_velocity += accel * -4;
-    y_velocity += accel * -4;
-    x += x_velocity;
-    y += y_velocity;
+  if(accel > 0.4f)
+    spin += 0.1f;
+  x_velocity += accel * -4;
+  y_velocity += accel * -4;
+  x += x_velocity;
+  y += y_velocity;
 
 }
 
