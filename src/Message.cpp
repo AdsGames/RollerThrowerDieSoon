@@ -36,7 +36,12 @@ void Message::update(){
 }
 
 void Message::draw(){
-  for(int i=0; i<messageList.size(); i++)
-    al_draw_textf( font, al_map_rgb( 255, 255, 255 ), 1500, 1040-i*20, 0, messageList.at(i).c_str()  );
 
+    if(messageList.size()>0){
+
+
+      for(int i=messageList.size()-1; i>-1; i--)
+      //for(int i=0; i<messageList.size(); i++)
+        al_draw_textf( font, al_map_rgb( 255, 255, 255 ), 1500, -(1040+(i*20)), 0, messageList.at(i).c_str()  );
+  }
 }
