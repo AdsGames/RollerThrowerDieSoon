@@ -255,7 +255,6 @@ void game::update(){
           // End point
 
           // Water tile
-
         }
       }
     }

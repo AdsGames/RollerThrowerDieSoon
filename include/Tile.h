@@ -15,6 +15,7 @@ class Tile
     int getIsoX(){ return iso_x; }
     int getIsoY(){ return iso_y; }
     void setType( int type ){ this -> type = type; }
+    void update();
     int getType(){ return type; }
 
     // Check if x and y are in tile
@@ -26,7 +27,8 @@ class Tile
   private:
     ALLEGRO_BITMAP *sprite;
     ALLEGRO_BITMAP *grid;
-
+    ALLEGRO_BITMAP *spritesheet_Water[4];
+    int frame = 0;
     int x;
     int y;
     int type;
