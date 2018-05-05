@@ -248,6 +248,10 @@ void game::update(){
 
     // Off the edge
     if( off_map ){
+        if(!is_cart){
+            std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
+            Message::sendMessage(stringyboi);
+          }
       gameGuests.erase( gameGuests.begin() + i );
       guests_died_falling++;
       continue;
@@ -266,8 +270,10 @@ void game::update(){
                               gameEnemies.at(j) -> getY() + 200)){
           gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
 
-          std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
-          Message::sendMessage(stringyboi);
+          if(!is_cart){
+            std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
+            Message::sendMessage(stringyboi);
+          }
           gameGuests.erase( gameGuests.begin() + i );
 
           guests_died_enemies++;
