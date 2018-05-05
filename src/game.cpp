@@ -187,6 +187,8 @@ void game::update(){
         if(tools::collision(guest_x-50,guest_x+50,gameTiles.at(j) -> getIsoX()-24,gameTiles.at(j) -> getIsoX()+24,guest_y-50,guest_y+50,gameTiles.at(j) -> getIsoY()+24, gameTiles.at(j) -> getIsoY()-24)){
           off_map=false;
         }
+        if(guest_x>1920 || guest_y<0)
+          off_map = true;
 
       }
     }
@@ -215,11 +217,10 @@ void game::update(){
     //Guest and tile collision
 
   }
-
+  std::cout<<"guest numbers:"<<gameGuests.size()<<"\n";
   // Spawn guests
   for( int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 2 ){
-    std::cout<<gameTiles.at(i) -> getIsoX()<<","<<gameTiles.at(i) -> getIsoY()<<".\n";
       if( tools::random_int( 1, 100 ) == 1 )
       gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64-8,
                                          gameTiles.at(i) -> getIsoY() + 32-20 ));
