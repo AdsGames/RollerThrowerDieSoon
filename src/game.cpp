@@ -93,22 +93,22 @@ void game::update(){
     int to = 24;
     if(mouseListener::mouse_pressed & 1 && editor_tool==0){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),4);
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),5);
       }
     }
     if(mouseListener::mouse_pressed & 1 && editor_tool==1){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),5);
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),6);
       }
     }
     if(mouseListener::mouse_pressed & 1 && editor_tool==2){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),6);
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),7);
       }
     }
     if(mouseListener::mouse_pressed & 1 && editor_tool==3){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),7);
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),4);
       }
     }
 
@@ -151,7 +151,7 @@ void game::update(){
     if( tools::clicked( gameGuests.at(i) -> getX() - 25,
                         gameGuests.at(i) -> getX() + 25,
                         gameGuests.at(i) -> getY() - 45,
-                        gameGuests.at(i) -> getY() + 45) && !selectedGuest){
+                        gameGuests.at(i) -> getY() + 45) && !selectedGuest  && editor_tool==4){
       selectedGuest = gameGuests.at(i);
       selectedGuest -> setCaptured( true );
       gameGuests.erase( gameGuests.begin() + i );
