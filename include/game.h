@@ -50,14 +50,18 @@ class game : public state{
   private:
     // Images
     ALLEGRO_BITMAP *tile;
+    ALLEGRO_BITMAP *path[3];
     ALLEGRO_BITMAP *entrance_back;
     ALLEGRO_BITMAP *entrance_front;
     ALLEGRO_BITMAP *cursor_open;
     ALLEGRO_BITMAP *cursor_closed;
+    ALLEGRO_BITMAP *path_hover;
 
     // Grabber info
     int old_mouse_x;
     int old_mouse_y;
+
+    int editor_tool=0;
 
     float x_velocity;
     float y_velocity;
