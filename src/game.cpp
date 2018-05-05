@@ -92,6 +92,10 @@ void game::update(){
       }
     }
 
+    for(int i=0; i<gameEnemies.size(); i++){
+      gameEnemies.at(i) -> update();
+    }
+
 }
 
 Tile *game::createTile(int new_x, int new_y, int newType){
