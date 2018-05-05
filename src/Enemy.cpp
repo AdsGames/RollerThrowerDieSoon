@@ -4,13 +4,16 @@ Enemy::Enemy( int x, int y ){
   sprite = tools::load_bitmap_ex( "images/flail.png" );
   font = al_load_ttf_font( "font/font.ttf", 18, 0 );
 
-  for( int i = 0; i < 62; i++){
-    spritesheet[i] = al_create_bitmap( 498, 297 );
-    al_draw_bitmap_region( sprite, 0, i * 297, 498, 297, 0, 0, 0 );
-    std::cout << i << "\n";
-  }
+  for( int i = 0; i < 8; i++){
+    for( int t = 0; t < 8; t++){
+      int index = t + i * 8;
 
-  al_destroy_bitmap( sprite);
+      if( index < 62){
+        spritesheet[index] = al_create_sub_bitmap(  sprite, t * 498, i * 297, 498, 297);
+        std::cout << index << "\n";
+      }
+    }
+  }
 
   int bigx = x * 64;
   int bigy = y * 64;
