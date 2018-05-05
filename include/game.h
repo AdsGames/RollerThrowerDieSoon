@@ -21,6 +21,7 @@
 #include "Guest.h"
 #include "Enemy.h"
 #include "UI/UIHandler.h"
+#include "Cart.h"
 
 class game : public state{
   public:
@@ -37,6 +38,8 @@ class game : public state{
 
     // Create guest at coordinate
     Guest *createGuest( int, int );
+        Cart *createCart( int, int );
+
     UIHandler gameUI;
 
     // Test mode

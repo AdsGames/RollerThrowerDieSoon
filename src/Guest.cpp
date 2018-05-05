@@ -1,9 +1,12 @@
 #include "Guest.h"
 
+Guest::Guest(){int butts;};
+
 Guest::Guest(int x, int y){
 
   sprite = tools::load_bitmap_ex( "images/walk.png" );
   umbrella = tools::load_bitmap_ex( "images/Umbrella.png" );
+
 
 
 
@@ -17,6 +20,7 @@ Guest::Guest(int x, int y){
 
   this -> x = x;
   this -> y = y;
+
 }
 
 void Guest::update(){
@@ -29,17 +33,17 @@ void Guest::update(){
   if( y_velocity > -threshold && y_velocity < threshold )
     y_velocity = 0;
 
-  if( y_velocity > 0 ){
-    y_velocity /= decel;
-}
-  if( y_velocity < 0)
-    y_velocity /= decel;
+    if( y_velocity > 0 )
+      y_velocity /= decel;
 
-  if( x_velocity > 0 )
-    x_velocity /= decel;
+    if( y_velocity < 0)
+      y_velocity /= decel;
 
-  if( x_velocity < 0 )
-    x_velocity /= decel;
+    if( x_velocity > 0 )
+      x_velocity /= decel;
+
+    if( x_velocity < 0 )
+      x_velocity /= decel;
 
   if( y_velocity == 0 && x_velocity == 0 ){
     if( direction == 0 ){
@@ -71,12 +75,17 @@ void Guest::update(){
 void Guest::draw(){
 
 
-  if( !captured )
-    al_draw_bitmap( spritesheet[frame], x - 8, y-18, 0 );
-  else
-    al_draw_bitmap( spritesheet_panic[frame_panic], x-10, y-18, 0 );
+    if( !captured )
+      al_draw_bitmap( spritesheet[frame], x - 8, y-18, 0 );
+    else
+      al_draw_bitmap( spritesheet_panic[frame_panic], x-10, y-18, 0 );
 
-  if(has_umbrella)
-    al_draw_bitmap( umbrella, x, y, 0 );
+    if(has_umbrella)
+      al_draw_bitmap( umbrella, x, y, 0 );
+
+
+
+
+
 }
 
