@@ -36,6 +36,6 @@ void Cart::update()
 void Cart::draw()
 {
   //al_draw_bitmap(cart, x, y, 0 );
-  al_draw_rotated_bitmap(cart, x, y, 0, 0, spin, 0);
+  al_draw_rotated_bitmap(cart, 24, 16, x, y, spin, 0);
 
 }
