@@ -9,6 +9,14 @@ Enemy::Enemy()
 
 
 }
+void Enemy::applyDamage(int newDamage){
+  health-=newDamage;
+  if(health<0)
+    health=0;
+
+
+}
+
 
 Enemy::~Enemy()
 {
@@ -26,5 +34,6 @@ void Enemy::update(){
 void Enemy::draw(){
 
     al_draw_bitmap(spritesheet[frame],x,y,0);
+    //textp
 
 }

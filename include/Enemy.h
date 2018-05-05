@@ -11,6 +11,10 @@ class Enemy
     virtual ~Enemy();
     void update();
     void draw();
+    void applyDamage(int);
+
+    int getX(){return x;}
+    int getY(){return y;}
 
   protected:
 
@@ -20,6 +24,7 @@ class Enemy
     int x=1000;
     int y=200;
     int frame=0;
+    int health=1000;
 };
 
 #endif // ENEMY_H

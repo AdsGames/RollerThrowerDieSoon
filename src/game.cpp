@@ -34,6 +34,7 @@ game::~game(){
 }
 void game::update(){
 
+
   x_velocity=-1.3*(old_mouse_x-mouseListener::mouse_x);
   y_velocity=-1.3*(old_mouse_y-mouseListener::mouse_y);
 
@@ -71,16 +72,29 @@ void game::update(){
       selectedGuest=nullptr;
     }
 
+    for(int i=0; i<gameEnemies.size(); i++){
+      gameEnemies.at(i) -> update();
+    }
+
 
     for(int i=0; i<gameGuests.size(); i++){
       gameGuests.at(i) -> update();
+
+
 
       if(tools::clicked(gameGuests.at(i) -> getX()-25,gameGuests.at(i) -> getX()+25,gameGuests.at(i) -> getY()-45,gameGuests.at(i) -> getY()+45) && selectedGuest==nullptr){
         selectedGuest=gameGuests.at(i);
         selectedGuest -> setCaptured(true);
         gameGuests.erase(gameGuests.begin()+i);
+        break;
 
       }
+      for(int j=0; j<gameEnemies.size(); j++){
+        if(tools::collision(gameGuests.at(i) -> getX(),gameGuests.at(i) -> getX()+16,gameEnemies.at(j) -> getX()+100,gameEnemies.at(j) -> getX()+400,gameGuests.at(i) -> getY(),gameGuests.at(i) -> getY()+54,gameEnemies.at(j) -> getY()+100,gameEnemies.at(j) -> getY()+200)){
+        gameGuests.erase(gameGuests.begin()+i);
+        }
+      }
+
     }
 
 
@@ -92,9 +106,7 @@ void game::update(){
       }
     }
 
-    for(int i=0; i<gameEnemies.size(); i++){
-      gameEnemies.at(i) -> update();
-    }
+
 
 }
 
