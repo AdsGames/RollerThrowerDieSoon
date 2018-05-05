@@ -41,7 +41,7 @@ Tile::Tile(int x, int y, int type){
       sprite = tools::load_bitmap_ex("images/tiles/umbrellaStand2.png");
       break;
     case 10:
-      sprite = tools::load_bitmap_ex("images/tiles/Coaster.png");
+      sprite = tools::load_bitmap_ex("images/tiles/coaster.png");
       break;
     default:
       break;
@@ -81,7 +81,7 @@ void Tile::draw(){
     if(type==9)
           al_draw_bitmap( sprite, iso_x, iso_y-57, 0);
     else if(type==10)
-          al_draw_bitmap( sprite, iso_x-200, iso_y-300, 0);
+          al_draw_bitmap( sprite, iso_x-238, iso_y-319, 0);
 
     else
       al_draw_bitmap( sprite, iso_x, iso_y, 0);

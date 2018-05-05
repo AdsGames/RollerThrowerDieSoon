@@ -42,7 +42,7 @@
 			<Add directory="usr/include" />
 			<Add directory="/media/ubuntu-mate/WINDOWS/Danny/allegro5/include/allegro5" />
 		</Linker>
-		<Unit filename="include/DisplayMode.h" />
+		<Unit filename="include/Cart.h" />
 		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/Guest.h" />
 		<Unit filename="include/LevelSelect.h" />
@@ -64,6 +64,7 @@
 		<Unit filename="include/menu.h" />
 		<Unit filename="include/state.h" />
 		<Unit filename="include/tools.h" />
+		<Unit filename="src/Cart.cpp" />
 		<Unit filename="src/DisplayMode.cpp" />
 		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/Guest.cpp" />
