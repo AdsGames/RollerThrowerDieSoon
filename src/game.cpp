@@ -20,14 +20,18 @@ game::game(){
   y_velocity = 0;
 
   // Create map
+  // World gen skillzzzz are over 9000
   for( int i = 5; i < 25; i++ ){
     for( int j =- 15; j < 15; j++ ){
       if( i == 15 && j == 14 )
         gameTiles.push_back( createTile( i, j, 2 ) );
       else if( i == 15 && j == 8 )
         gameTiles.push_back( createTile( i, j, 3 ) );
-      else
+      else if(tools::random_int(1,25)!=17)
         gameTiles.push_back( createTile( i, j, 0 ) );
+      else
+        gameTiles.push_back( createTile( i, j, 8 ) );
+
     }
   }
   path[0] = tools::load_bitmap_ex( "images/tiles/Path_0.png" );
@@ -193,6 +197,11 @@ void game::update(){
             gameGuests.erase( gameGuests.begin() + i );
 
             break;
+          }
+          if(gameTiles.at(j) -> getType() == 8){
+            gameGuests.erase( gameGuests.begin() + i );
+            is_this_guest_still_alive_question_mark=false;
+            guests_died_falling++;
           }
         }
         if(tools::collision(guest_x-50,guest_x+50,gameTiles.at(j) -> getIsoX()-24,gameTiles.at(j) -> getIsoX()+24,guest_y-50,guest_y+50,gameTiles.at(j) -> getIsoY()+24, gameTiles.at(j) -> getIsoY()-24)){

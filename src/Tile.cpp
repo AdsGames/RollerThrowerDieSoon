@@ -34,6 +34,9 @@ Tile::Tile(int x, int y, int type){
     case 7:
       sprite = tools::load_bitmap_ex("images/tiles/Path_2.png");
       break;
+    case 8:
+      sprite = tools::load_bitmap_ex("images/tiles/Water.png");
+      break;
     default:
       break;
   }
