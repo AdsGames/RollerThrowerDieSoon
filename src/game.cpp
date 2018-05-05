@@ -20,7 +20,7 @@ game::game(){
   // Create map
   for( int i = 5; i < 25; i++ ){
     for( int j =- 15; j < 15; j++ ){
-      if( i == 15 && j == 14 )
+      if( i == 17 && j == 7 )
         gameTiles.push_back( createTile( i, j, 2 ) );
       else
         gameTiles.push_back( createTile( i, j, 0 ) );
@@ -48,17 +48,31 @@ void game::update(){
   old_mouse_x = mouseListener::mouse_x;
   old_mouse_y = mouseListener::mouse_y;
 
-  /*for( int i = 0; i < gameTiles.size(); i++ ){
+  for( int i = 0; i < gameTiles.size(); i++ ){
     int mxo = mouseListener::mouse_x - 64;
     int myo = mouseListener::mouse_y - 32;
     int to = 24;
-    if(mouseListener::mouse_button & 1)
+    if(keyListener::key[ALLEGRO_KEY_1]){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),1);
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),4);
       }
     }
-  }*/
-
+    if(keyListener::key[ALLEGRO_KEY_2]){
+      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),5);
+      }
+    }
+    if(keyListener::key[ALLEGRO_KEY_3]){
+      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),6);
+      }
+    }
+    if(keyListener::key[ALLEGRO_KEY_4]){
+      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),7);
+      }
+    }
+  }
   //if( selectedGuest != nullptr )
   //  std::cout << selectedGuest -> getX() << "," << selectedGuest -> getY() << "\n";
 
@@ -97,6 +111,23 @@ void game::update(){
       break;
     }
 
+    for( int j = 0; j < gameTiles.size(); j++ ){
+      int guest_x=gameGuests.at(i) -> getX()-75;
+      int guest_y=gameGuests.at(i) -> getY()-0;
+
+      if(guest_x>gameTiles.at(j) -> getIsoX()-24 && guest_x<gameTiles.at(j) -> getIsoX()+24 && guest_y<gameTiles.at(j) -> getIsoY()+24 && guest_y>gameTiles.at(j) -> getIsoY()-24){
+        if(gameTiles.at(j) -> getType() == 4)
+          gameGuests.at(i) -> setDirection(3);
+        if(gameTiles.at(j) -> getType() == 5)
+          gameGuests.at(i) -> setDirection(0);
+        if(gameTiles.at(j) -> getType() == 6)
+          gameGuests.at(i) -> setDirection(1);
+        if(gameTiles.at(j) -> getType() == 7)
+          gameGuests.at(i) -> setDirection(2);
+
+      }
+    }
+
     // Guest with enemy collision
     for( int j = 0; j < gameEnemies.size(); j++){
       if( tools::collision( gameGuests.at(i) -> getX(),
@@ -109,14 +140,18 @@ void game::update(){
                             gameEnemies.at(j) -> getY() + 200)){
         gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
         gameGuests.erase( gameGuests.begin() + i );
-
+        break;
       }
     }
+
+    //Guest and tile collision
+
   }
 
   // Spawn guests
   for( int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 2 ){
+    std::cout<<gameTiles.at(i) -> getIsoX()<<","<<gameTiles.at(i) -> getIsoY()<<".\n";
       if( tools::random_int( 1, 100 ) == 1 )
       gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64,
                                          gameTiles.at(i) -> getIsoY() + 32 ));
@@ -131,8 +166,8 @@ Tile *game::createTile( int x, int y, int type ){
 }
 
 // Creates a guest at screen coordinate
-Guest *game::createGuest( int x, int y ){
-  Guest *newGuest = new Guest( x, y );
+Guest *game::createGuest( int newX, int newY ){
+  Guest *newGuest = new Guest( newX, newY );
   return newGuest;
 }
 
