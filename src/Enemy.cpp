@@ -1,12 +1,19 @@
 #include "Enemy.h"
 
-Enemy::Enemy(){
+Enemy::Enemy( int x, int y ){
   sprite = tools::load_bitmap_ex( "images/flail.png" );
   font = al_load_ttf_font( "font/font.ttf", 18, 0 );
 
   for( int i = 0; i < 62; i++)
     spritesheet[i] = al_create_sub_bitmap( sprite, 0, i * 297, 498, 297 );
+
+  int bigx = x * 64;
+  int bigy = y * 64;
+
+  this -> x = (bigx - bigy);
+  this -> y = (bigx + bigy) / 2;
 }
+
 void Enemy::applyDamage(int newDamage){
   health -= newDamage;
   if( health < 0)
