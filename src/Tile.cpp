@@ -36,6 +36,8 @@ Tile::Tile(int x, int y, int type){
       break;
     case 8:
       sprite = tools::load_bitmap_ex("images/tiles/Water.png");
+      for( int i = 0; i < 4; i++ )
+        spritesheet_Water[i] = al_create_sub_bitmap( sprite,  i * 128, 0, 128, 64);
       break;
     case 9:
       sprite = tools::load_bitmap_ex("images/tiles/umbrellaStand2.png");
@@ -75,15 +77,24 @@ int Tile::colliding_tight( int x, int y, int width, int height){
   return tools::collision( x, x + width, iso_x + 48, iso_x + 80, y, y + height, iso_y + 16, iso_y + 48 );
 }
 
+
 void Tile::draw(){
   if( sprite != nullptr ){
     if( type == 9 )
       al_draw_bitmap( sprite, iso_x, iso_y-57, 0);
     else if( type == 10 )
       al_draw_bitmap( sprite, iso_x-238, iso_y-319, 0);
+    else if(type == 8)
+    {
+      frame++;
+      al_draw_bitmap(spritesheet_Water[frame / 10], iso_x, iso_y, 0);
+      if(frame >= 39)
+        frame = 0;
+    }
     else
       al_draw_bitmap( sprite, iso_x, iso_y, 0);
   }
-  if( grid != nullptr )
+  if( grid != nullptr)
     al_draw_bitmap( grid, iso_x, iso_y, 0);
+
 }
