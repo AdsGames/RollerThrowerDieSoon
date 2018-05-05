@@ -64,7 +64,7 @@ int Tile::colliding( int x, int y, int width, int height){
 }
 
 int Tile::colliding_loose( int x, int y, int width, int height){
-  return tools::collision( x, x + width, iso_x + 32-128, iso_x + 96+128, y, y + height, iso_y + 0-64, iso_y + 64+64 );
+  return tools::collision( x, x + width, iso_x + 32-64, iso_x + 96+64, y, y + height, iso_y + 0-32, iso_y + 64+32 );
 }
 
 // Check if x and y are in tile (tight)
