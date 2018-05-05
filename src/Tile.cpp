@@ -38,7 +38,7 @@ Tile::Tile(int x, int y, int type){
       sprite = tools::load_bitmap_ex("images/tiles/Water.png");
       break;
     case 9:
-      sprite = tools::load_bitmap_ex("images/tiles/Umbrella.png");
+      sprite = tools::load_bitmap_ex("images/tiles/umbrellaStand2.png");
       break;
     default:
       break;
@@ -73,8 +73,13 @@ int Tile::colliding_tight( int x, int y, int width, int height){
 }
 
 void Tile::draw(){
-  if( sprite != nullptr )
+  if( sprite != nullptr ){
+
+    if(type==9)
+          al_draw_bitmap( sprite, iso_x, iso_y-57, 0);
+
+    else
     al_draw_bitmap( sprite, iso_x, iso_y, 0);
-  if( grid != nullptr )
+  }if( grid != nullptr )
     al_draw_bitmap( grid, iso_x, iso_y, 0);
 }
