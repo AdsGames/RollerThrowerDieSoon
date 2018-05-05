@@ -29,8 +29,10 @@ game::game(){
     for( int j =- 15; j < 15; j++ ){
       if( i == 15 && j == 14 )
         gameTiles.push_back( createTile( i, j, 2 ) );
-      else if( i == 15 && j == 8 )
+      else if( i == 13 && j == 0 )
         gameTiles.push_back( createTile( i, j, 3 ) );
+      else if( i == 14 && j == 4 )
+        gameTiles.push_back( createTile( i, j, 9) );
       else if(tools::random_int(1,25)!=17)
         gameTiles.push_back( createTile( i, j, 0 ) );
       else
@@ -43,6 +45,7 @@ game::game(){
   path[1] = tools::load_bitmap_ex( "images/tiles/Path_1.png" );
   path[2] = tools::load_bitmap_ex( "images/tiles/Path_2.png" );
   path[3] = tools::load_bitmap_ex( "images/tiles/Path_3.png" );
+  coaster = tools::load_bitmap_ex( "images/tiles/Coaster.png" );
 
   // Load font
   font = al_load_ttf_font( "font/font.ttf", 36, 0);
@@ -53,6 +56,9 @@ game::game(){
   gameUI.addElement( new Button( 25 + 128 * 2, 25, "path_2",  path[2] ));
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
   gameUI.addElement( new Button( 25  +128 * 4, 25, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
+
+  gameUI.addElement( new Button( 25  +128 * 5, 25, "coaster", coaster));
+
 
 
   // Add enemy
@@ -82,6 +88,8 @@ void game::update(){
     editor_tool = 3;
   if( gameUI.getElementById("tweezer") -> clicked() )
     editor_tool = 4;
+   if( gameUI.getElementById("coaster") -> clicked() )
+    editor_tool = 5;
 
   // Velocity of mouse
   x_velocity = -1 * ( old_mouse_x - mouseListener::mouse_x );
@@ -110,6 +118,9 @@ void game::update(){
           break;
         case 3:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 4 );
+          break;
+        case 5:
+          gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 10 );
           break;
         default:
           break;
@@ -146,13 +157,16 @@ void game::update(){
     bool off_map = false;
     bool guest_alive = true;
 
+    bool is_cart = gameGuests.at(i) -> getIsCart();
+
+
     gameGuests.at(i) -> update();
 
     // Pick up guest
-    if( !selectedGuest && editor_tool == 4 &&
-        tools::clicked( gameGuests.at(i) -> getX(),
+    if( !selectedGuest && editor_tool == 4 && !is_cart && !selectedGuest &&
+        tools::clicked( gameGuests.at(i) -> getX() - 25,
                         gameGuests.at(i) -> getX() + 25,
-                        gameGuests.at(i) -> getY(),
+                        gameGuests.at(i) -> getY()-30,
                         gameGuests.at(i) -> getY() + 45 )){
       selectedGuest = gameGuests.at(i);
       selectedGuest -> setCaptured( true );
@@ -169,8 +183,35 @@ void game::update(){
         int current = gameTiles.at(j) -> getType();
 
         // Collision with map tile
-        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) )
+        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) && !is_cart){
+
           off_map = false;
+
+          //wattaa
+          if( current == 8 && !is_cart){
+            gameGuests.erase( gameGuests.begin() + i );
+            guest_alive = false;
+            guests_died_falling ++;
+            break;
+          }
+          if( current == 3 && !is_cart){
+            gameGuests.erase( gameGuests.begin() + i );
+            guest_alive = false;
+            guests_rescued ++;
+            break;
+          }
+
+        }
+        if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) && !is_cart){
+          if( current == 9 ){
+            if(gameGuests.at(i) ->giveUmbrella())
+              money+=10;
+
+          }
+
+        }
+
+
 
         // Touching special tile
         if( gameTiles.at(j) -> colliding_tight( guest_x, guest_y )){
@@ -185,19 +226,9 @@ void game::update(){
             gameGuests.at(i) -> setDirection(2);
 
           // End point
-          if( current == 3 ){
-            gameGuests.erase( gameGuests.begin() + i );
-            guest_alive = false;
-            guests_rescued ++;
-            break;
-          }
+
           // Water tile
-          if( current == 8 ){
-            gameGuests.erase( gameGuests.begin() + i );
-            guest_alive = false;
-            guests_died_falling ++;
-            break;
-          }
+
         }
       }
     }
@@ -237,6 +268,14 @@ void game::update(){
                                          gameTiles.at(i) -> getIsoY() + 32 - 20 ));
     }
   }
+
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+    if( gameTiles.at(i) -> getType() == 10 ){
+      if( tools::random_int( 1, 100 ) == 1 )
+      gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() ,
+                                         gameTiles.at(i) -> getIsoY() ));
+    }
+  }
 }
 
 // Creates a tile at screen coordinate
@@ -247,9 +286,15 @@ Tile *game::createTile( int x, int y, int type ){
 
 // Creates a guest at screen coordinate
 Guest *game::createGuest( int newX, int newY ){
-  Guest *newGuest = new Guest( newX, newY );
+  Guest *newGuest = new Guest( newX, newY);
   return newGuest;
 }
+
+Cart *game::createCart( int newX, int newY ){
+  Cart *newCart = new Cart( newX, newY );
+  return newCart;
+}
+
 
 // Draw to screen
 void game::draw(){
@@ -287,6 +332,11 @@ void game::draw(){
         gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) ){
       al_draw_bitmap( path_hover, gameTiles.at(i) -> getIsoX(), gameTiles.at(i) -> getIsoY(), 0);
     }
+    if( editor_tool == 5 &&
+                            gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) )
+
+      al_draw_bitmap( coaster, gameTiles.at(i) -> getIsoX()-200, gameTiles.at(i) -> getIsoY()-300, 0);
+
   }
 
   // Picked up guest
@@ -311,6 +361,9 @@ void game::draw(){
     case 3:
       al_draw_bitmap( path[3], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
       break;
+     case 5:
+      al_draw_bitmap( coaster, mouseListener::mouse_x - 64-200, mouseListener::mouse_y - 32-300, 0 );
+      break;
     default:
       break;
   }
@@ -326,6 +379,10 @@ void game::draw(){
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests rescued:%i",guests_rescued);
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests died to enemies:%i",guests_died_enemies);
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to falling:%i",guests_died_falling);
+
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Money:%i",money);
+
+
 
   ///send help
 

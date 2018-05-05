@@ -8,10 +8,11 @@
 class Guest
 {
   public:
+    Guest();
     Guest(int,int);
     virtual ~Guest() {};
-    void draw();
-    void update();
+    virtual void draw();
+    virtual void update();
 
     int getX(){return x;}
     int getY(){return y;}
@@ -22,11 +23,14 @@ class Guest
     void setVelocityY(float by){y_velocity=by;}
     int getVelocityX(){return x_velocity;}
     int getVelocityY(){return y_velocity;}
+    bool getIsCart(){return is_cart;}
 
     void setCaptured(bool b){captured=b;}
+    bool giveUmbrella(){if(!has_umbrella){has_umbrella=true;return true;}return false;}
 
-  private:
+  protected:
     ALLEGRO_BITMAP *sprite;
+    ALLEGRO_BITMAP *umbrella;
     ALLEGRO_BITMAP *spritesheet[43];
     ALLEGRO_BITMAP *spritesheet_panic[25];
 
@@ -38,6 +42,8 @@ class Guest
     int frame_panic = 0;
     int direction = 0;
     bool captured = false;
+    bool has_umbrella=false;
+    bool is_cart=false;
 
 };
 

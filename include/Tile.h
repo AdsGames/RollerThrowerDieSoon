@@ -20,6 +20,8 @@ class Tile
     // Check if x and y are in tile
     int colliding( int x, int y, int width = 0, int height = 0 );
     int colliding_tight( int x, int y, int width = 0, int height = 0 );
+    int colliding_loose( int x, int y, int width = 0, int height = 0 );
+
 
   private:
     ALLEGRO_BITMAP *sprite;

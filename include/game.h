@@ -21,6 +21,7 @@
 #include "Guest.h"
 #include "Enemy.h"
 #include "UI/UIHandler.h"
+#include "Cart.h"
 
 class game : public state{
   public:
@@ -37,6 +38,8 @@ class game : public state{
 
     // Create guest at coordinate
     Guest *createGuest( int, int );
+        Cart *createCart( int, int );
+
     UIHandler gameUI;
 
     // Test mode
@@ -50,6 +53,7 @@ class game : public state{
   private:
     // Images
     ALLEGRO_BITMAP *tile;
+    ALLEGRO_BITMAP *coaster;
     ALLEGRO_BITMAP *path[4];
     ALLEGRO_BITMAP *entrance_back;
     ALLEGRO_BITMAP *entrance_front;
@@ -62,6 +66,7 @@ class game : public state{
     int guests_rescued=0;
     int guests_died_enemies=0;
     int guests_died_falling=0;
+    int money=0;
 
     // Grabber info
     int old_mouse_x;
