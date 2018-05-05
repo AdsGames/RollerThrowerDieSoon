@@ -169,8 +169,11 @@ void game::update(){
         int guest_x=gameGuests.at(i) -> getX()-75;
         int guest_y=gameGuests.at(i) -> getY()-0;
 
-        if(guest_x>gameTiles.at(j) -> getIsoX()-24 && guest_x<gameTiles.at(j) -> getIsoX()+24 && guest_y<gameTiles.at(j) -> getIsoY()+24 && guest_y>gameTiles.at(j) -> getIsoY()-24){
-        off_map=false;
+        //f(guest_x>gameTiles.at(j) -> getIsoX()-24 && guest_x<gameTiles.at(j) -> getIsoX()+24 && guest_y<gameTiles.at(j) -> getIsoY()+24 && guest_y>gameTiles.at(j) -> getIsoY()-24){
+        if(tools::collision(guest_x-25,guest_x+25,gameTiles.at(j) -> getIsoX()-24,gameTiles.at(j) -> getIsoX()+24,guest_y-25,guest_y+25,gameTiles.at(j) -> getIsoY()+24, gameTiles.at(j) -> getIsoY()-24)){
+
+
+          off_map=false;
           if(gameTiles.at(j) -> getType() == 4)
             gameGuests.at(i) -> setDirection(3);
           if(gameTiles.at(j) -> getType() == 5)
@@ -181,6 +184,10 @@ void game::update(){
             gameGuests.at(i) -> setDirection(2);
 
         }
+        if(tools::collision(guest_x-50,guest_x+50,gameTiles.at(j) -> getIsoX()-24,gameTiles.at(j) -> getIsoX()+24,guest_y-50,guest_y+50,gameTiles.at(j) -> getIsoY()+24, gameTiles.at(j) -> getIsoY()-24)){
+          off_map=false;
+        }
+
       }
     }
     if(off_map){
