@@ -264,6 +264,14 @@ void game::update(){
                                          gameTiles.at(i) -> getIsoY() + 32 - 20 ));
     }
   }
+
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+    if( gameTiles.at(i) -> getType() == 10 ){
+      if( tools::random_int( 1, 100 ) == 1 )
+      gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() ,
+                                         gameTiles.at(i) -> getIsoY() ));
+    }
+  }
 }
 
 // Creates a tile at screen coordinate
@@ -274,9 +282,15 @@ Tile *game::createTile( int x, int y, int type ){
 
 // Creates a guest at screen coordinate
 Guest *game::createGuest( int newX, int newY ){
-  Guest *newGuest = new Guest( newX, newY );
+  Guest *newGuest = new Guest( newX, newY);
   return newGuest;
 }
+
+Cart *game::createCart( int newX, int newY ){
+  Cart *newCart = new Cart( newX, newY );
+  return newCart;
+}
+
 
 // Draw to screen
 void game::draw(){
