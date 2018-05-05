@@ -15,7 +15,7 @@ class Cart : public Guest
   protected:
 
   private:
-
+      float accel;
       ALLEGRO_BITMAP *cart;
 
 };
