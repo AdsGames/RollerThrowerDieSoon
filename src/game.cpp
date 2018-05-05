@@ -4,11 +4,10 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_native_dialog.h>
 
-#include "mouseListener.h"
-#include "keyListener.h"
-#include "joystickListener.h"
-#include "button.h"
-
+#include "listeners/mouseListener.h"
+#include "listeners/keyListener.h"
+#include "listeners/joystickListener.h"
+#include "UI/button.h"
 
 // Constructor
 game::game(){
@@ -18,6 +17,8 @@ game::game(){
 
   x_velocity = 0;
   y_velocity = 0;
+
+  selectedGuest = nullptr;
 
   // Create map
   // World gen skillzzzz are over 9000
@@ -31,23 +32,24 @@ game::game(){
         gameTiles.push_back( createTile( i, j, 0 ) );
       else
         gameTiles.push_back( createTile( i, j, 8 ) );
-
     }
   }
+
+  // Load path images
   path[0] = tools::load_bitmap_ex( "images/tiles/Path_0.png" );
   path[1] = tools::load_bitmap_ex( "images/tiles/Path_1.png" );
   path[2] = tools::load_bitmap_ex( "images/tiles/Path_2.png" );
   path[3] = tools::load_bitmap_ex( "images/tiles/Path_3.png" );
 
+  // Load font
   font = al_load_ttf_font( "font/font.ttf", 36, 0);
 
-
-
-  gameUI.addElement(new Button(25,25,"path_0",path[0]));
-  gameUI.addElement(new Button(25+128,25,"path_1",path[1]));
-  gameUI.addElement(new Button(25+128*2,25,"path_2",path[2]));
-  gameUI.addElement(new Button(25+128*3,25,"path_3",path[3]));
-  gameUI.addElement(new Button(25+128*4,25,"tweezer",tools::load_bitmap_ex( "images/tweezersButton.png" )));
+  // Create buttons
+  gameUI.addElement( new Button( 25          , 25, "path_0",  path[0] ));
+  gameUI.addElement( new Button( 25 + 128    , 25, "path_1",  path[1] ));
+  gameUI.addElement( new Button( 25 + 128 * 2, 25, "path_2",  path[2] ));
+  gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
+  gameUI.addElement( new Button( 25  +128 * 4, 25, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
 
 
   // Add enemy
@@ -56,7 +58,6 @@ game::game(){
   // Load images for entrance
   entrance_back = tools::load_bitmap_ex( "images/tiles/EntranceBack.png" );
   entrance_front = tools::load_bitmap_ex( "images/tiles/EntranceFront.png" );
-
   path_hover = tools::load_bitmap_ex( "images/tiles/Path_Hover.png" );
 
 
@@ -67,27 +68,18 @@ game::game(){
 
 // Update
 void game::update(){
-
   gameUI.update();
 
-  if(gameUI.getElementById("path_0") -> clicked()){
-    editor_tool=0;
-  }
-  if(gameUI.getElementById("path_1") -> clicked()){
-    editor_tool=1;
-  }
-
-  if(gameUI.getElementById("path_2") -> clicked()){
-    editor_tool=2;
-  }
-
-  if(gameUI.getElementById("path_3") -> clicked()){
-    editor_tool=3;
-  }
-  if(gameUI.getElementById("tweezer") -> clicked()){
-    editor_tool=4;
-  }
-
+  if( gameUI.getElementById("path_0") -> clicked() )
+    editor_tool = 0;
+  if( gameUI.getElementById("path_1") -> clicked() )
+    editor_tool = 1;
+  if( gameUI.getElementById("path_2") -> clicked() )
+    editor_tool = 2;
+  if( gameUI.getElementById("path_3") -> clicked() )
+    editor_tool = 3;
+  if( gameUI.getElementById("tweezer") -> clicked() )
+    editor_tool = 4;
 
   // Velocity of mouse
   x_velocity = -1 * ( old_mouse_x - mouseListener::mouse_x );
@@ -96,56 +88,51 @@ void game::update(){
   old_mouse_x = mouseListener::mouse_x;
   old_mouse_y = mouseListener::mouse_y;
 
-  for( int i = 0; i < gameTiles.size(); i++ ){
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     int mxo = mouseListener::mouse_x - 64;
     int myo = mouseListener::mouse_y - 32;
-    int to = 24;
-    if(mouseListener::mouse_button & 1 && editor_tool==0){
-      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),5);
+
+    if( (mouseListener::mouse_button & 1) &&
+        mxo > gameTiles.at(i) -> getIsoX() - 32 && mxo < gameTiles.at(i) -> getIsoX() + 32 &&
+        myo < gameTiles.at(i) -> getIsoY() + 32 && myo > gameTiles.at(i) -> getIsoY() - 32 ){
+
+        switch( editor_tool){
+        case 0:
+          gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 5 );
+          break;
+        case 1:
+          gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 6 );
+          break;
+        case 2:
+          gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 7 );
+          break;
+        case 3:
+          gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 4 );
+          break;
+        default:
+          break;
       }
     }
-    if(mouseListener::mouse_button & 1 && editor_tool==1){
-      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),6);
-      }
-    }
-    if(mouseListener::mouse_button & 1 && editor_tool==2){
-      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),7);
-      }
-    }
-    if(mouseListener::mouse_button & 1 && editor_tool==3){
-      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),4);
-      }
-    }
-
-
-
-    ///mother flipping whitespace
-    ///is so fricking nice
-
   }
 
-
-  //if( selectedGuest != nullptr )
-  //  std::cout << selectedGuest -> getX() << "," << selectedGuest -> getY() << "\n";
-
   // Release guest
-  if( (mouseListener::mouse_released & 1) && selectedGuest){
-    selectedGuest -> setCaptured( false );
-    selectedGuest -> setVelocityX( x_velocity );
-    selectedGuest -> setVelocityY( y_velocity );
+  if( selectedGuest){
+    selectedGuest -> setX( mouseListener::mouse_x );
+    selectedGuest -> setY( mouseListener::mouse_y );
 
-    gameGuests.push_back(selectedGuest);
-    selectedGuest = nullptr;
+    if( mouseListener::mouse_released & 1 ){
+      selectedGuest -> setCaptured( false );
+      selectedGuest -> setVelocityX( x_velocity );
+      selectedGuest -> setVelocityY( y_velocity );
+
+      gameGuests.push_back( selectedGuest );
+      selectedGuest = nullptr;
+    }
   }
 
   // Enemy logic
-  for( int i = 0; i < gameEnemies.size(); i++ ){
+  for( unsigned int i = 0; i < gameEnemies.size(); i++ )
     gameEnemies.at(i) -> update();
-  }
 
   // Run guest logic
   // In grabber
@@ -153,73 +140,76 @@ void game::update(){
     selectedGuest -> update();
 
   // Rest of guests
-  for( int i = 0; i < gameGuests.size(); i++ ){
-
-    bool is_this_guest_still_alive_question_mark=true;
+  for( unsigned int i = 0; i < gameGuests.size(); i++ ){
+    bool off_map = false;
+    bool guest_alive = true;
 
     gameGuests.at(i) -> update();
 
     // Pick up guest
-    if( tools::clicked( gameGuests.at(i) -> getX() - 25,
+    if( !selectedGuest && editor_tool == 4 &&
+        tools::clicked( gameGuests.at(i) -> getX(),
                         gameGuests.at(i) -> getX() + 25,
-                        gameGuests.at(i) -> getY() - 45,
-                        gameGuests.at(i) -> getY() + 45) && !selectedGuest  && editor_tool==4){
+                        gameGuests.at(i) -> getY(),
+                        gameGuests.at(i) -> getY() + 45 )){
       selectedGuest = gameGuests.at(i);
       selectedGuest -> setCaptured( true );
       gameGuests.erase( gameGuests.begin() + i );
-      is_this_guest_still_alive_question_mark=false;
-      break;
+      continue;
     }
-    bool off_map=true;
 
-    for( int j = 0; j < gameTiles.size(); j++ ){
-      if(is_this_guest_still_alive_question_mark){
+    // Collision with tiles
+    for( unsigned int j = 0; j < gameTiles.size(); j++ ){
+      if( guest_alive ){
+        // Shorthand
+        int guest_x = gameGuests.at(i) -> getX() + 8;
+        int guest_y = gameGuests.at(i) -> getY() + 32;
+        int current = gameTiles.at(j) -> getType();
 
-        int guest_x=gameGuests.at(i) -> getX()-75;
-        int guest_y=gameGuests.at(i) -> getY()-0;
+        // Collision with map tile
+        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) )
+          off_map = false;
 
-        //f(guest_x>gameTiles.at(j) -> getIsoX()-24 && guest_x<gameTiles.at(j) -> getIsoX()+24 && guest_y<gameTiles.at(j) -> getIsoY()+24 && guest_y>gameTiles.at(j) -> getIsoY()-24){
-        if(tools::collision(guest_x-25,guest_x+25,gameTiles.at(j) -> getIsoX()-24,gameTiles.at(j) -> getIsoX()+24,guest_y-25,guest_y+25,gameTiles.at(j) -> getIsoY()+24, gameTiles.at(j) -> getIsoY()-24)){
-
-
-          off_map=false;
-          if(gameTiles.at(j) -> getType() == 4)
+        // Touching special tile
+        if( gameTiles.at(j) -> colliding_tight( guest_x, guest_y )){
+          // Directional tilesoff_map
+          if( current == 4 )
             gameGuests.at(i) -> setDirection(3);
-          if(gameTiles.at(j) -> getType() == 5)
+          if( current == 5 )
             gameGuests.at(i) -> setDirection(0);
-          if(gameTiles.at(j) -> getType() == 6)
+          if( current == 6 )
             gameGuests.at(i) -> setDirection(1);
-          if(gameTiles.at(j) -> getType() == 7)
+          if( current == 7 )
             gameGuests.at(i) -> setDirection(2);
-          if(gameTiles.at(j) -> getType() == 3){
-            is_this_guest_still_alive_question_mark=false;
-            guests_rescued++;
-            gameGuests.erase( gameGuests.begin() + i );
 
+          // End point
+          if( current == 3 ){
+            gameGuests.erase( gameGuests.begin() + i );
+            guest_alive = false;
+            guests_rescued ++;
             break;
           }
-          if(gameTiles.at(j) -> getType() == 8){
+          // Water tile
+          if( current == 8 ){
             gameGuests.erase( gameGuests.begin() + i );
-            is_this_guest_still_alive_question_mark=false;
-            guests_died_falling++;
+            guest_alive = false;
+            guests_died_falling ++;
+            break;
           }
         }
-        if(tools::collision(guest_x-50,guest_x+50,gameTiles.at(j) -> getIsoX()-24,gameTiles.at(j) -> getIsoX()+24,guest_y-50,guest_y+50,gameTiles.at(j) -> getIsoY()+24, gameTiles.at(j) -> getIsoY()-24)){
-          off_map=false;
-        }
-        if(guest_x>1920 || guest_y<0)
-          off_map = true;
-
       }
     }
-    if(off_map){
+
+    // Off the edge
+    if( off_map ){
       gameGuests.erase( gameGuests.begin() + i );
-      is_this_guest_still_alive_question_mark=false;
       guests_died_falling++;
+      continue;
     }
+
     // Guest with enemy collision
-    if(is_this_guest_still_alive_question_mark){
-      for( int j = 0; j < gameEnemies.size(); j++){
+    if( guest_alive ){
+      for( unsigned int j = 0; j < gameEnemies.size(); j++){
         if( tools::collision( gameGuests.at(i) -> getX(),
                               gameGuests.at(i) -> getX() + 16,
                               gameEnemies.at(j) -> getX() + 100,
@@ -235,17 +225,14 @@ void game::update(){
         }
       }
     }
-
-    //Guest and tile collision
-
   }
-  std::cout<<"guest numbers:"<<gameGuests.size()<<"\n";
+
   // Spawn guests
-  for( int i = 0; i < gameTiles.size(); i++ ){
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 2 ){
       if( tools::random_int( 1, 100 ) == 1 )
-      gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64-8,
-                                         gameTiles.at(i) -> getIsoY() + 32-20 ));
+      gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64 - 8,
+                                         gameTiles.at(i) -> getIsoY() + 32 - 20 ));
     }
   }
 }
@@ -267,79 +254,82 @@ void game::draw(){
   // Background
   al_clear_to_color( al_map_rgb( 40, 40, 60 ) );
 
-  for( int i = 0; i < gameTiles.size(); i++ )
+  // Draw tiles
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     gameTiles.at(i) -> draw();
+  }
+
+  if( keyListener::key[ALLEGRO_KEY_G] ){
+    for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+      al_draw_rectangle( gameTiles.at(i) -> getIsoX() + 32, gameTiles.at(i) -> getIsoY() + 0, gameTiles.at(i) -> getIsoX() + 96, gameTiles.at(i) -> getIsoY() + 64, al_map_rgb( 99, 33, 00), 1);
+    }
+  }
 
   al_draw_bitmap( entrance_back, 129, 640, 0 );
 
-  for( int i = 0; i < gameGuests.size(); i++ )
+  // Draw guests
+  for( unsigned int i = 0; i < gameGuests.size(); i++ )
     gameGuests.at(i) -> draw();
 
   al_draw_bitmap( entrance_front, 255, 767, 0 );
 
-  for( int i = 0; i < gameEnemies.size(); i++ )
+  // Draw enemies
+  for( unsigned int i = 0; i < gameEnemies.size(); i++ )
     gameEnemies.at(i) -> draw();
 
   gameUI.draw();
 
-  bool over_tile=false;
-
+  // Modified x and y for isometric conversions
   int mxo = mouseListener::mouse_x - 64;
   int myo = mouseListener::mouse_y - 32;
 
-    for( int i = 0; i < gameTiles.size(); i++ ){
-      if(editor_tool==0){
-        if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-          al_draw_bitmap(path_hover,gameTiles.at(i) -> getIsoX(),gameTiles.at(i) -> getIsoY(),0);
-          over_tile=true;
-        }
-      }
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+    if( editor_tool >= 0 && editor_tool <= 3 &&
+        gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) ){
+      al_draw_bitmap( path_hover, gameTiles.at(i) -> getIsoX(), gameTiles.at(i) -> getIsoY(), 0);
     }
+  }
 
+  // Picked up guest
   if( selectedGuest != nullptr ){
-    selectedGuest -> setX( mouseListener::mouse_x );
-    selectedGuest -> setY( mouseListener::mouse_y );
     selectedGuest -> draw();
     al_draw_bitmap( cursor_closed, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
-  else if(editor_tool==4){
+  else if( editor_tool == 4 ){
     al_draw_bitmap( cursor_open, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
 
-    if(editor_tool==0){
+  switch( editor_tool){
+    case 0:
       al_draw_bitmap( path[0], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
-    }
-
-    if(editor_tool==1){
+      break;
+    case 1:
       al_draw_bitmap( path[1], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
-    }
-
-    if(editor_tool==2){
+      break;
+    case 2:
       al_draw_bitmap( path[2], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
-    }
-    if(editor_tool==3){
+      break;
+    case 3:
       al_draw_bitmap( path[3], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
-    }
+      break;
+    default:
+      break;
+  }
+
+  // Cursor pointer
+  al_draw_rectangle( mouseListener::mouse_x, mouseListener::mouse_y, mouseListener::mouse_x + 3, mouseListener::mouse_y + 3, al_map_rgb( 255, 255, 255), 3);
 
 
-    //whitespace is heavenly
-    //angels glow white because they're made of pure whitespace
+  //whitespace is heavenly
+  //angels glow white because they're made of pure whitespace
 
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 120, 0, "Guests in park:%u",(unsigned int)gameGuests.size());
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests rescued:%i",guests_rescued);
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests died to enemies:%i",guests_died_enemies);
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to falling:%i",guests_died_falling);
 
+  ///send help
 
-
-          al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 120, 0, "Guests in park:%i",gameGuests.size());
-          al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests rescued:%i",guests_rescued);
-          al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests died to enemies:%i",guests_died_enemies);
-          al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to falling:%i",guests_died_falling);
-
-          ///send help
-
-          //its 2 am and this is the funniest thing ive ever seen
-
-
-
-
-
+  //its 2 am and this is the funniest thing ive ever seen
 
 }

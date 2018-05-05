@@ -54,14 +54,14 @@
 		<Unit filename="include/UI/ToggleBox.h" />
 		<Unit filename="include/UI/UIElement.h" />
 		<Unit filename="include/UI/UIHandler.h" />
-		<Unit filename="include/button.h" />
+		<Unit filename="include/UI/button.h" />
 		<Unit filename="include/game.h" />
 		<Unit filename="include/globals.h" />
 		<Unit filename="include/init.h" />
-		<Unit filename="include/joystickListener.h" />
-		<Unit filename="include/keyListener.h" />
+		<Unit filename="include/listeners/joystickListener.h" />
+		<Unit filename="include/listeners/keyListener.h" />
+		<Unit filename="include/listeners/mouseListener.h" />
 		<Unit filename="include/menu.h" />
-		<Unit filename="include/mouseListener.h" />
 		<Unit filename="include/state.h" />
 		<Unit filename="include/tools.h" />
 		<Unit filename="src/DisplayMode.cpp" />
@@ -75,14 +75,14 @@
 		<Unit filename="src/UI/ToggleBox.cpp" />
 		<Unit filename="src/UI/UIElement.cpp" />
 		<Unit filename="src/UI/UIHandler.cpp" />
-		<Unit filename="src/button.cpp" />
+		<Unit filename="src/UI/button.cpp" />
 		<Unit filename="src/game.cpp" />
 		<Unit filename="src/init.cpp" />
-		<Unit filename="src/joystickListener.cpp" />
-		<Unit filename="src/keyListener.cpp" />
+		<Unit filename="src/listeners/joystickListener.cpp" />
+		<Unit filename="src/listeners/keyListener.cpp" />
+		<Unit filename="src/listeners/mouseListener.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/menu.cpp" />
-		<Unit filename="src/mouseListener.cpp" />
 		<Unit filename="src/state.cpp" />
 		<Unit filename="src/tools.cpp" />
 		<Extensions>

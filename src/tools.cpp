@@ -71,15 +71,12 @@ int tools::get_text_height(ALLEGRO_FONT *newFont, std::string newText){
   al_get_text_dimensions(newFont,newText.c_str(),&text_offset_x,&text_offset_y,&text_width,&text_height);
 
   return text_height;
-
 }
-
-
 
 // Load sample if exits, or throw error
 ALLEGRO_SAMPLE *tools::load_sample_ex( std::string file){
 
-  std::cout<<"Loading sound "<<file<<".";
+  //std::cout<<"Loading sound "<<file<<".";
 
   // Check if file exists
   std::ifstream f( file.c_str());
@@ -91,7 +88,7 @@ ALLEGRO_SAMPLE *tools::load_sample_ex( std::string file){
   if( !(temp_sample = al_load_sample( file.c_str())))
     abort_on_error( std::string("There was an error loading " + file + "\nOh no :("), "Loading Error");
 
-  std::cout<<" Success.\n";
+  //std::cout<<" Success.\n";
 
   return temp_sample;
 }
@@ -99,7 +96,7 @@ ALLEGRO_SAMPLE *tools::load_sample_ex( std::string file){
 // Load bitmap if exits, or throw error
 ALLEGRO_BITMAP * tools::load_bitmap_ex( std::string file){
 
-  std::cout<<"Loading bitmap "<<file<<".";
+  //std::cout<<"Loading bitmap "<<file<<".";
 
   // Check if file exists
   std::ifstream f( file.c_str());
@@ -111,7 +108,7 @@ ALLEGRO_BITMAP * tools::load_bitmap_ex( std::string file){
   if( !(temp_image = al_load_bitmap( file.c_str())))
     abort_on_error( std::string("There was an error loading " + file + "... \nSorry..."), "Loading Error");
 
-  std::cout<<" Success.\n";
+  //std::cout<<" Success.\n";
 
 
   return temp_image;

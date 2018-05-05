@@ -55,6 +55,16 @@ Tile::Tile(int x, int y, int type){
   iso_y = (bigx + bigy) / 2;
 }
 
+// Check if x and y are in tile
+int Tile::colliding( int x, int y, int width, int height){
+  return tools::collision( x, x + width, iso_x + 32, iso_x + 96, y, y + height, iso_y + 0, iso_y + 64 );
+}
+
+// Check if x and y are in tile (tight)
+int Tile::colliding_tight( int x, int y, int width, int height){
+  return tools::collision( x, x + width, iso_x + 48, iso_x + 80, y, y + height, iso_y + 16, iso_y + 48 );
+}
+
 void Tile::draw(){
   if( sprite != nullptr )
     al_draw_bitmap( sprite, iso_x, iso_y, 0);

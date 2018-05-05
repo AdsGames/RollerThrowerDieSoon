@@ -6,14 +6,14 @@
 #include "state.h"
 #include "UI/UIHandler.h"
 #include "UI/UIElement.h"
-#include "button.h"
+#include "UI/button.h"
 #include "allegro5/allegro_font.h"
 #include "allegro5/allegro_ttf.h"
 
 #include "rapidxml/rapidxml.hpp"
 #include "rapidxml/rapidxml_print.hpp"
-#include "keyListener.h"
-#include "joystickListener.h"
+#include "listeners/keyListener.h"
+#include "listeners/joystickListener.h"
 
 class Options : public state
 {
@@ -36,10 +36,7 @@ class Options : public state
     static void updateJoysticks(std::string newJoyData);
     static bool joystick_mode;
 
-  protected:
-
   private:
-
     std::string graphics_data="";
 
     ALLEGRO_FONT *options_font;
@@ -53,9 +50,6 @@ class Options : public state
     int highlight_y=100;;
     int highlight_y_destination=100;
     bool joystick_direction_hit=false;
-
-
-
 };
 
 #endif // OPTIONS_H

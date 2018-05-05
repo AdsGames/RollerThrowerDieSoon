@@ -21,12 +21,6 @@ class DisplayMode
     static int game_render_height;
     static int window_render_height;
     static int window_render_width;
-
-  protected:
-
-  private:
-
-
 };
 
 #endif // DISPLAYMODE_H

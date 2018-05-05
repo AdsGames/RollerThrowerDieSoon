@@ -11,11 +11,11 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 
-#include "keyListener.h"
-#include "joystickListener.h"
+#include "listeners/keyListener.h"
+#include "listeners/joystickListener.h"
 #include "tools.h"
 #include "state.h"
-#include "button.h"
+#include "UI/button.h"
 #include "Options.h"
 #include "Sound.h"
 #include "MusicManager.h"
