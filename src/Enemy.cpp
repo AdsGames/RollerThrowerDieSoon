@@ -8,10 +8,8 @@ Enemy::Enemy( int x, int y ){
     for( int t = 0; t < 8; t++){
       int index = t + i * 8;
 
-      if( index < 62){
+      if( index < 62)
         spritesheet[index] = al_create_sub_bitmap(  sprite, t * 498, i * 297, 498, 297);
-        std::cout << index << "\n";
-      }
     }
   }
 
