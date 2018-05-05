@@ -23,7 +23,6 @@ class Guest
     int getVelocityX(){return x_velocity;}
     int getVelocityY(){return y_velocity;}
 
-
     void setCaptured(bool b){captured=b;}
 
   private:

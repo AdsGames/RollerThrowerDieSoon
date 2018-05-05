@@ -1,29 +1,22 @@
 #include "Sound.h"
 
-Sound::Sound()
-{
+Sound::Sound(){
+  sample = nullptr;
+  is_wav = false;
+  is_playing = false;
 }
 
-Sound::~Sound()
-{
-  #warning mess my crap the frick up
-  //std::cout<<al_is_audio_installed()<<" is the answer to the question.\n";
-  //al_destroy_sample( sample);
-
+Sound::~Sound(){
+  al_destroy_sample( sample);
 }
-
 
 void Sound::load_wav(std::string newPath){
-
   is_wav=true;
   sample = tools::load_sample_ex(newPath);
-
 }
 
 void Sound::load_ogg(std::string newPath){
-
   sample = tools::load_sample_ex(newPath);
-
 }
 
 void Sound::play(){

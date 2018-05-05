@@ -5,8 +5,7 @@
 #include "allegro5/allegro_audio.h"
 #include "Options.h"
 
-class Sound
-{
+class Sound{
   public:
     Sound();
     virtual ~Sound();
@@ -21,14 +20,11 @@ class Sound
 
     bool getIsPlaying(){return is_playing;}
 
-  protected:
-
   private:
-
     ALLEGRO_SAMPLE *sample;
     ALLEGRO_SAMPLE_ID *sample_id;
 
-    bool is_wav=false;
+    bool is_wav;
     bool is_playing;
 };
 

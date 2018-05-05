@@ -1,9 +1,9 @@
-#include "button.h"
+#include "UI/button.h"
 
 
 Button::Button( int x, int y, std::string text, ALLEGRO_BITMAP *image, float newRotation){
-
   setDefaults();
+
   // Naming schemes are frickin' hard
   this -> image = image;
   this -> bitmap_rotation_angle = newRotation;
@@ -27,10 +27,11 @@ Button::Button( int x, int y, std::string text, ALLEGRO_BITMAP *image, float new
 }
 
 Button::Button( int x, int y, std::string id, ALLEGRO_BITMAP *image){
-
   setDefaults();
+
   // Naming schemes are frickin' hard
   this -> image = image;
+  this -> bitmap_rotation_angle = 0.0f;
 
   // Literally this
   this -> x = x;
@@ -51,8 +52,8 @@ Button::Button( int x, int y, std::string id, ALLEGRO_BITMAP *image){
 
 
 Button::Button( int x, int y, std::string text, ALLEGRO_FONT *UIElement_font){
-
   setDefaults();
+
   this -> bitmap_rotation_angle=0;
   // Literally this
   this -> x = x;
@@ -72,8 +73,8 @@ Button::Button( int x, int y, std::string text, ALLEGRO_FONT *UIElement_font){
 
 }
 Button::Button( int x, int y, std::string text, std::string id, ALLEGRO_FONT *UIElement_font){
-
   setDefaults();
+
   this -> bitmap_rotation_angle=0;
   // Literally this
   this -> id = id;
@@ -98,7 +99,9 @@ Button::Button( int x, int y, std::string text, ALLEGRO_FONT *UIElement_font, in
 
   this -> bitmap_rotation_angle=0;
   this -> alpha = 255;
+
   setDefaults();
+
   // Literally this
   this -> x = x;
   this -> y = y;

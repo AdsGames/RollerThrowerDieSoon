@@ -10,9 +10,9 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
-#include <mouseListener.h>
-#include <keyListener.h>
-#include <joystickListener.h>
+#include <listeners/mouseListener.h>
+#include <listeners/keyListener.h>
+#include <listeners/joystickListener.h>
 
 #include "init.h"
 #include "state.h"
@@ -121,6 +121,7 @@ void change_state(){
 void setup(){
 
   std::cout<<"Initializing Allegro.";
+
   // Init allegro
   if( !al_init())
     tools::abort_on_error( "Allegro could not initilize", "Error");
@@ -156,33 +157,25 @@ void setup(){
   #endif
 
 
-  graphics_mode=windowed;
-  Options::graphics_mode=graphics_mode;
+  graphics_mode = windowed;
+  Options::graphics_mode = graphics_mode;
 
-
-  float windowWidth=1920;
-  float windowHeight=1080;
-
+  float windowWidth = 1920;
+  float windowHeight = 1080;
 
   if(graphics_mode>=1 && graphics_mode<=3){
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
     Options::draw_cursor=true;
   }
-
   else if(graphics_mode==fullscreen_true)
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
-
   else
     al_set_new_display_flags(ALLEGRO_WINDOWED);
 
 
 
   display = al_create_display(windowWidth, windowHeight);
-
-  //f(graphics_mode>=1 && graphics_mode<=3)
-    al_hide_mouse_cursor(display);
-
-
+  al_hide_mouse_cursor(display);
 
   windowWidth = al_get_display_width(display);
   windowHeight = al_get_display_height(display);
@@ -215,17 +208,6 @@ void setup(){
     scaleX = (windowWidth - scaleW) / 2;
     scaleY = (windowHeight - scaleH) / 2;
   }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -329,34 +311,19 @@ void update(){
     // Clear buffer
     al_clear_to_color( al_map_rgb(0,0,0));
 
+    // render a frame
+    if(graphics_mode>=1 && graphics_mode<=3){
+      al_set_target_bitmap(buffer);
+      al_clear_to_color(al_map_rgb(0, 0, 0));
+    }
 
+    currentState -> draw();
 
-      // render a frame
-      if(graphics_mode>=1 && graphics_mode<=3){
-        al_set_target_bitmap(buffer);
-        al_clear_to_color(al_map_rgb(0, 0, 0));
-      }
-
-
-      currentState -> draw();
-
-
-      if(graphics_mode>=1 && graphics_mode<=3){
-
-        al_set_target_backbuffer(display);
-        al_clear_to_color(al_map_rgb(0, 0, 0));
-        al_draw_scaled_bitmap(buffer, 0, 0, screenWidth, screenHeight, scaleX, scaleY, scaleW, scaleH, 0);
-      }
-
-
-
-
-
-
-      // Draw state graphics
-
-
-
+    if(graphics_mode >= 1 && graphics_mode <= 3){
+      al_set_target_backbuffer(display);
+      al_clear_to_color(al_map_rgb(0, 0, 0));
+      al_draw_scaled_bitmap(buffer, 0, 0, screenWidth, screenHeight, scaleX, scaleY, scaleW, scaleH, 0);
+    }
 
     // Flip (OpenGL)
     al_flip_display();
