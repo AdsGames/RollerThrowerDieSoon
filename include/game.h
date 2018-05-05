@@ -51,6 +51,9 @@ class game : public state{
     Guest *selectedGuest = nullptr;
 
   private:
+    // Load map from text
+    void load_level( std::string filename);
+
     // Images
     ALLEGRO_BITMAP *tile;
     ALLEGRO_BITMAP *coaster;

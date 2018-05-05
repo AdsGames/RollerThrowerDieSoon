@@ -4,6 +4,9 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <time.h>
+#include <fstream>
+#include <sstream>
+#include <iterator>
 
 #include "listeners/mouseListener.h"
 #include "listeners/keyListener.h"
@@ -23,24 +26,7 @@ game::game(){
 
   selectedGuest = nullptr;
 
-  // Create map
-  // World gen skillzzzz are over 9000
-
   srand( time(NULL));
-  for( int i = 5; i < 25; i++ ){
-    for( int j =- 15; j < 15; j++ ){
-      if( i == 15 && j == 14 )
-        gameTiles.push_back( createTile( i, j, 2 ) );
-      else if( i == 13 && j == 0 )
-        gameTiles.push_back( createTile( i, j, 3 ) );
-      else if( i == 14 && j == 4 )
-        gameTiles.push_back( createTile( i, j, 9) );
-      else if(tools::random_int(1,25)!=17)
-        gameTiles.push_back( createTile( i, j, 0 ) );
-      else
-        gameTiles.push_back( createTile( i, j, 8 ) );
-    }
-  }
 
   // Load path images
   path[0] = tools::load_bitmap_ex( "images/tiles/Path_0.png" );
@@ -48,7 +34,7 @@ game::game(){
   path[2] = tools::load_bitmap_ex( "images/tiles/Path_2.png" );
   path[3] = tools::load_bitmap_ex( "images/tiles/Path_3.png" );
   coaster = tools::load_bitmap_ex( "images/tiles/coaster.png" );
-    coaster_small = tools::load_bitmap_ex( "images/tiles/coaster_small.png" );
+  coaster_small = tools::load_bitmap_ex( "images/tiles/coaster_small.png" );
 
 
   // Load font
@@ -60,7 +46,6 @@ game::game(){
   gameUI.addElement( new Button( 25 + 128 * 2, 25, "path_2",  path[2] ));
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
   gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
-
   gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
 
 
@@ -76,6 +61,33 @@ game::game(){
   // Load grabber images
   cursor_open = tools::load_bitmap_ex( "images/tweezersOpen.png" );
   cursor_closed = tools::load_bitmap_ex( "images/tweezersClosed.png" );
+
+  // Load level
+  load_level("maps/level1.txt");
+}
+
+// Load map from text
+void game::load_level( std::string filename ){
+  std::string line;
+  std::ifstream myfile( filename.c_str() );
+
+  int i = 0;
+  if( myfile.is_open() ){
+    while ( getline( myfile, line ) ){
+      std::istringstream buf( line );
+      std::istream_iterator<std::string> beg(buf), end;
+      std::vector<std::string> tokens(beg, end);
+
+      int j = 0;
+      for(auto& s: tokens){
+        gameTiles.push_back( createTile( i, j - 12, tools::convertStringToInt(s) ));
+        j++;
+      }
+
+      i++;
+    }
+    myfile.close();
+  }
 }
 
 // Update
