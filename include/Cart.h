@@ -16,6 +16,7 @@ class Cart : public Guest
 
   private:
       float accel;
+      float spin;
       ALLEGRO_BITMAP *cart;
 
 };

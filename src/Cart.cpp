@@ -10,6 +10,7 @@ Cart::Cart(int newx, int newy)
   y_velocity=-20;
   */
   accel = 0.0f;
+  spin = 0.0f;
   x_velocity=-0;
   y_velocity=-0;
   is_cart=true;
@@ -24,6 +25,7 @@ Cart::~Cart()
 void Cart::update()
 {
   accel += 0.02f;
+  spin += 0.1f;
     x_velocity += accel * -4;
     y_velocity += accel * -4;
     x += x_velocity;
@@ -33,6 +35,7 @@ void Cart::update()
 
 void Cart::draw()
 {
-  al_draw_bitmap(cart, x, y, 0 );
+  //al_draw_bitmap(cart, x, y, 0 );
+  al_draw_rotated_bitmap(cart, x, y, 0, 0, spin, 0);
 
 }
