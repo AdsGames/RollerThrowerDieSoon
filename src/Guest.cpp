@@ -42,15 +42,15 @@ void Guest::update(){
       x ++;
       y -= 0.5;
     }
-    if(direction==1){
+    if( direction == 1 ){
       x ++;
       y += 0.5;
     }
-    if(direction==2){
+    if( direction == 2 ){
       x --;
       y += 0.5;
     }
-    if(direction==3){
+    if( direction == 3 ){
       x --;
       y -= 0.5;
     }
