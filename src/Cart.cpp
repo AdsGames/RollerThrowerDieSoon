@@ -7,6 +7,8 @@ Cart::Cart(int newx, int newy)
    y=newy;
    x_velocity=-40;
    y_velocity=-20;
+      is_cart=true;
+
 }
 
 Cart::~Cart()
