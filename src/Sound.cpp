@@ -20,8 +20,6 @@ void Sound::load_ogg(std::string newPath){
 }
 
 void Sound::play(){
-
-
   if(is_wav && Options::sfx_enabled){
     is_playing=true;
     al_play_sample( sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
