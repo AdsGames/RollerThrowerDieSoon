@@ -23,6 +23,7 @@ class Guest
     void setVelocityY(float by){y_velocity=by;}
     int getVelocityX(){return x_velocity;}
     int getVelocityY(){return y_velocity;}
+    bool getIsCart(){return is_cart;}
 
     void setCaptured(bool b){captured=b;}
     bool giveUmbrella(){if(!has_umbrella){has_umbrella=true;return true;}return false;}

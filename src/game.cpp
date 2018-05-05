@@ -157,10 +157,13 @@ void game::update(){
     bool off_map = false;
     bool guest_alive = true;
 
+    bool is_cart = gameGuests.at(i) -> getIsCart();
+
+
     gameGuests.at(i) -> update();
 
     // Pick up guest
-    if( !selectedGuest && editor_tool == 4 &&
+    if( !selectedGuest && editor_tool == 4 && !is_cart && !selectedGuest &&
         tools::clicked( gameGuests.at(i) -> getX() - 25,
                         gameGuests.at(i) -> getX() + 25,
                         gameGuests.at(i) -> getY()-30,
@@ -180,18 +183,18 @@ void game::update(){
         int current = gameTiles.at(j) -> getType();
 
         // Collision with map tile
-        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) ){
+        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) && !is_cart){
 
           off_map = false;
 
           //wattaa
-          if( current == 8 ){
+          if( current == 8 && !is_cart){
             gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
             guests_died_falling ++;
             break;
           }
-          if( current == 3 ){
+          if( current == 3 && !is_cart){
             gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
             guests_rescued ++;
@@ -199,7 +202,7 @@ void game::update(){
           }
 
         }
-        if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) ){
+        if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) && !is_cart){
           if( current == 9 ){
             if(gameGuests.at(i) ->giveUmbrella())
               money+=10;
@@ -207,6 +210,7 @@ void game::update(){
           }
 
         }
+
 
 
         // Touching special tile
