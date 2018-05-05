@@ -12,6 +12,7 @@ class Button : public UIElement
     Button( int x, int y, std::string text, std::string id, ALLEGRO_FONT *button_font);
     Button( int x, int y, std::string text, ALLEGRO_FONT *button_font, int w, int h);
     Button( int x, int y, std::string text, ALLEGRO_BITMAP *newImage,float newRotation);
+    Button( int x, int y, std::string id, ALLEGRO_BITMAP *newImage);
 
 
     Button(){};
