@@ -14,21 +14,9 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_font.h>
 
-
-#include <mouseListener.h>
-#include <keyListener.h>
-#include <joystickListener.h>
-
 #include "state.h"
-#include "rapidxml.hpp"
-#include "rapidxml_print.hpp"
 
-
-
-#include <tools.h>
-#include <button.h>
-#include "Sound.h"
-#include "MusicManager.h"
+#include "tools.h"
 #include "Tile.h"
 #include "Guest.h"
 #include "Enemy.h"
@@ -37,39 +25,40 @@ class game : public state{
   public:
     // Construct / destruct
     game();
-    ~game();
+    ~game(){ };
 
     // Override parent
     void update();
     void draw();
 
-    Tile *createTile(int,int,int);
-    Guest *createGuest(int,int);
+    // Create tile at coordinate
+    Tile *createTile( int, int, int );
 
+    // Create guest at coordinate
+    Guest *createGuest( int, int );
 
     // Test mode
     std::vector <Tile*> gameTiles;
     std::vector <Guest*> gameGuests;
     std::vector <Enemy*> gameEnemies;
 
+    // Guest selected by grabber
     Guest *selectedGuest = nullptr;
 
-
-
   private:
+    // Images
     ALLEGRO_BITMAP *tile;
     ALLEGRO_BITMAP *entrance_back;
     ALLEGRO_BITMAP *entrance_front;
     ALLEGRO_BITMAP *cursor_open;
     ALLEGRO_BITMAP *cursor_closed;
 
-    int old_mouse_x=0;
-    int old_mouse_y=0;
+    // Grabber info
+    int old_mouse_x;
+    int old_mouse_y;
 
-    float x_velocity=0;
-    float y_velocity=0;
-    // Functions
-
+    float x_velocity;
+    float y_velocity;
 };
 
 #endif // GAME_H

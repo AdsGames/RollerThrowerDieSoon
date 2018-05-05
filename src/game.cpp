@@ -1,10 +1,23 @@
 #include "game.h"
+
 #include <allegro5/bitmap.h>
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_native_dialog.h>
 
+#include "mouseListener.h"
+#include "keyListener.h"
+#include "joystickListener.h"
+
 // Constructor
 game::game(){
+  // Init vars
+  old_mouse_x = 0;
+  old_mouse_y = 0;
+
+  x_velocity = 0;
+  y_velocity = 0;
+
+  // Create map
   for( int i = 5; i < 25; i++ ){
     for( int j =- 15; j < 15; j++ ){
       if( i == 15 && j == 14 )
@@ -14,18 +27,16 @@ game::game(){
     }
   }
 
-  gameEnemies.push_back(new Enemy());
+  // Add enemy
+  gameEnemies.push_back( new Enemy() );
 
+  // Load images for entrance
   entrance_back = tools::load_bitmap_ex( "images/tiles/EntranceBack.png" );
   entrance_front = tools::load_bitmap_ex( "images/tiles/EntranceFront.png" );
 
+  // Load grabber images
   cursor_open = tools::load_bitmap_ex( "images/tweezersOpen.png" );
   cursor_closed = tools::load_bitmap_ex( "images/tweezersClosed.png" );
-}
-
-// Destructor
-game::~game(){
-
 }
 
 // Update
