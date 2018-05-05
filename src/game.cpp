@@ -347,8 +347,6 @@ void game::draw(){
     al_draw_bitmap( cursor_closed, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
 
-//  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
-//    if(gameTiles.at(i)gameTiles.at(i) -> draw();
 
   else if( editor_tool == 4 ){
     al_draw_bitmap( cursor_open, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
@@ -373,6 +371,23 @@ void game::draw(){
     default:
       break;
   }
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+    if(gameTiles.at(i) -> getType() == 10)
+
+      gameTiles.at(i) -> draw();
+}
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+    if(gameTiles.at(i) -> getType() == 10)
+
+      gameTiles.at(i) -> draw();
+}
+for( unsigned int i = 0; i < gameGuests.size(); i++ ){
+    if(gameGuests.at(i) -> getIsCart())
+
+      gameGuests.at(i) -> draw();
+}
+
+
 
   // Cursor pointer
   al_draw_rectangle( mouseListener::mouse_x, mouseListener::mouse_y, mouseListener::mouse_x + 3, mouseListener::mouse_y + 3, al_map_rgb( 255, 255, 255), 3);
