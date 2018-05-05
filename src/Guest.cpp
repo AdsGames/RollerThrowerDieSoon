@@ -7,8 +7,8 @@ Guest::Guest(int x, int y){
   sprite = tools::load_bitmap_ex( "images/walk.png" );
   umbrella = tools::load_bitmap_ex( "images/Umbrella.png" );
 
-
-
+  name = genName();
+  inital = genInital();
 
   for( int i = 0; i < 43; i++ )
     spritesheet[i] = al_create_sub_bitmap( sprite, 0, i * 38, 17, 38);
@@ -72,9 +72,8 @@ void Guest::update(){
   frame_panic = (frame + 1) % 25;
 }
 
-void Guest::draw(){
-
-
+void Guest::draw()
+{
     if( !captured )
       al_draw_bitmap( spritesheet[frame], x - 8, y-18, 0 );
     else
@@ -83,9 +82,28 @@ void Guest::draw(){
     if(has_umbrella)
       al_draw_bitmap( umbrella, x, y, 0 );
 
+    std::cout << name + " " + inital + "\n";
 
+}
 
+std::string Guest::genName()
+{
+  int nameInt = tools::random_int(0,49);
 
+  std::string names [50] = {"Ethel","Chung","Fe","Brooke","Nicky","Gail","Andrea","Sigrid","Carmon","Marybelle","Racquel","Dottie","Wilson","Myra","Jackeline","Vonda","Stacey","Jacquelynn","Phebe","Madeline","Miguelina","Loretta","Malissa","Kandy","Nancee","Petronila","Madelaine","Shakira","Jamika","Quentin","Shanell","Adrian","Clement","Gus","Hung","Tamie","Elidia","Jeneva","Shantel","Sage","Susann","Coralie","Alphonso","Stephanie","Gena","Barbera","Jesusita","Donald","Danno","Allan"};
+  return names[nameInt];
+}
 
+std::string Guest::genInital()
+{
+  int initalInt = tools::random_int(0,25);
+  std::string initals [26] = {"Q.", "W.", "E.", "R.", "T.", "Y.", "U.", "I.", "O.", "P.", "A.", "S.", "D.", "F.", "G.", "H.", "J.", "K.", "L.", "Z.", "X.", "C.", "V.", "B.", "N.", "M."};
+
+  return initals[initalInt];
+}
+
+std::string Guest::getName()
+{
+  return name + " " + inial;
 }
 
