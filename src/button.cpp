@@ -22,10 +22,32 @@ Button::Button( int x, int y, std::string text, ALLEGRO_BITMAP *image, float new
     std::cout << "WARNING: Button " << text << " has been given a nullptr image!\n";
   }
 
+  this -> padding_x = 0;
+  this -> padding_y = 0;
+}
+
+Button::Button( int x, int y, std::string id, ALLEGRO_BITMAP *image){
+
+  setDefaults();
+  // Naming schemes are frickin' hard
+  this -> image = image;
+
+  // Literally this
+  this -> x = x;
+  this -> y = y;
+  this -> id = id;
+
+  if( image != nullptr){
+    this -> width = al_get_bitmap_width(image);
+    this -> height = al_get_bitmap_height(image);
+  }
+  else{
+    std::cout << "WARNING: Button " << text << " has been given a nullptr image!\n";
+  }
+
   this -> padding_x = 2;
   this -> padding_y = 2;
 }
-
 
 
 Button::Button( int x, int y, std::string text, ALLEGRO_FONT *UIElement_font){

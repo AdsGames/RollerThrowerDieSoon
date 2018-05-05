@@ -7,6 +7,8 @@
 #include "mouseListener.h"
 #include "keyListener.h"
 #include "joystickListener.h"
+#include "button.h"
+
 
 // Constructor
 game::game(){
@@ -26,7 +28,7 @@ game::game(){
         gameTiles.push_back( createTile( i, j, 0 ) );
     }
   }
-
+  gameUI.addElement(new Button(25,250,"path_0",tools::load_bitmap_ex( "images/tiles/Path_0.png" )));
   // Add enemy
   gameEnemies.push_back( new Enemy() );
 
@@ -41,6 +43,8 @@ game::game(){
 
 // Update
 void game::update(){
+
+gameUI.update();
   // Velocity of mouse
   x_velocity = -1 * ( old_mouse_x - mouseListener::mouse_x );
   y_velocity = -1 * ( old_mouse_y - mouseListener::mouse_y );
@@ -153,8 +157,8 @@ void game::update(){
     if( gameTiles.at(i) -> getType() == 2 ){
     std::cout<<gameTiles.at(i) -> getIsoX()<<","<<gameTiles.at(i) -> getIsoY()<<".\n";
       if( tools::random_int( 1, 100 ) == 1 )
-      gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64,
-                                         gameTiles.at(i) -> getIsoY() + 32 ));
+      gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64-8,
+                                         gameTiles.at(i) -> getIsoY() + 32-20 ));
     }
   }
 }
@@ -198,4 +202,5 @@ void game::draw(){
   else{
     al_draw_bitmap( cursor_open, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
+  gameUI.draw();
 }

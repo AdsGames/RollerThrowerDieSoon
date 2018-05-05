@@ -20,16 +20,16 @@ Tile::Tile(int x, int y, int type){
       sprite = tools::load_bitmap_ex("images/tiles/Spawn.png");
       break;
     case 4:
-      sprite = tools::load_bitmap_ex("images/tiles/Spawn.png");
+      sprite = tools::load_bitmap_ex("images/tiles/Path_3.png");
       break;
     case 5:
-      sprite = tools::load_bitmap_ex("images/tiles/Spawn.png");
+      sprite = tools::load_bitmap_ex("images/tiles/Path_0.png");
       break;
     case 6:
-      sprite = tools::load_bitmap_ex("images/tiles/Spawn.png");
+      sprite = tools::load_bitmap_ex("images/tiles/Path_1.png");
       break;
     case 7:
-      sprite = tools::load_bitmap_ex("images/tiles/Spawn.png");
+      sprite = tools::load_bitmap_ex("images/tiles/Path_2.png");
       break;
     default:
       break;
