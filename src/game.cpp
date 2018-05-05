@@ -28,13 +28,28 @@ game::game(){
         gameTiles.push_back( createTile( i, j, 0 ) );
     }
   }
-  gameUI.addElement(new Button(25,250,"path_0",tools::load_bitmap_ex( "images/tiles/Path_0.png" )));
+  path[0] = tools::load_bitmap_ex( "images/tiles/Path_0.png" );
+  path[1] = tools::load_bitmap_ex( "images/tiles/Path_1.png" );
+  path[2] = tools::load_bitmap_ex( "images/tiles/Path_2.png" );
+  path[3] = tools::load_bitmap_ex( "images/tiles/Path_3.png" );
+
+
+  gameUI.addElement(new Button(25,25,"path_0",path[0]));
+  gameUI.addElement(new Button(25+128,25,"path_1",path[1]));
+  gameUI.addElement(new Button(25+128*2,25,"path_2",path[2]));
+  gameUI.addElement(new Button(25+128*3,25,"path_3",path[3]));
+  gameUI.addElement(new Button(25+128*4,25,"tweezer",tools::load_bitmap_ex( "images/tweezersButton.png" )));
+
+
   // Add enemy
   gameEnemies.push_back( new Enemy() );
 
   // Load images for entrance
   entrance_back = tools::load_bitmap_ex( "images/tiles/EntranceBack.png" );
   entrance_front = tools::load_bitmap_ex( "images/tiles/EntranceFront.png" );
+
+  path_hover = tools::load_bitmap_ex( "images/tiles/Path_Hover.png" );
+
 
   // Load grabber images
   cursor_open = tools::load_bitmap_ex( "images/tweezersOpen.png" );
@@ -44,7 +59,27 @@ game::game(){
 // Update
 void game::update(){
 
-gameUI.update();
+  gameUI.update();
+
+  if(gameUI.getElementById("path_0") -> clicked()){
+    editor_tool=0;
+  }
+  if(gameUI.getElementById("path_1") -> clicked()){
+    editor_tool=1;
+  }
+
+  if(gameUI.getElementById("path_2") -> clicked()){
+    editor_tool=2;
+  }
+
+  if(gameUI.getElementById("path_3") -> clicked()){
+    editor_tool=3;
+  }
+  if(gameUI.getElementById("tweezer") -> clicked()){
+    editor_tool=4;
+  }
+
+
   // Velocity of mouse
   x_velocity = -1 * ( old_mouse_x - mouseListener::mouse_x );
   y_velocity = -1 * ( old_mouse_y - mouseListener::mouse_y );
@@ -56,27 +91,35 @@ gameUI.update();
     int mxo = mouseListener::mouse_x - 64;
     int myo = mouseListener::mouse_y - 32;
     int to = 24;
-    if(keyListener::key[ALLEGRO_KEY_1]){
+    if(mouseListener::mouse_pressed & 1 && editor_tool==0){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
         gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),4);
       }
     }
-    if(keyListener::key[ALLEGRO_KEY_2]){
+    if(mouseListener::mouse_pressed & 1 && editor_tool==1){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
         gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),5);
       }
     }
-    if(keyListener::key[ALLEGRO_KEY_3]){
+    if(mouseListener::mouse_pressed & 1 && editor_tool==2){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
         gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),6);
       }
     }
-    if(keyListener::key[ALLEGRO_KEY_4]){
+    if(mouseListener::mouse_pressed & 1 && editor_tool==3){
       if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
         gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),7);
       }
     }
+
+
+
+    ///mother flipping whitespace
+    ///is so fricking nice
+
   }
+
+
   //if( selectedGuest != nullptr )
   //  std::cout << selectedGuest -> getX() << "," << selectedGuest -> getY() << "\n";
 
@@ -193,14 +236,50 @@ void game::draw(){
   for( int i = 0; i < gameEnemies.size(); i++ )
     gameEnemies.at(i) -> draw();
 
+  gameUI.draw();
+
+  bool over_tile=false;
+
+  int mxo = mouseListener::mouse_x - 64;
+  int myo = mouseListener::mouse_y - 32;
+
+    for( int i = 0; i < gameTiles.size(); i++ ){
+      if(editor_tool==0){
+        if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
+          al_draw_bitmap(path_hover,gameTiles.at(i) -> getIsoX(),gameTiles.at(i) -> getIsoY(),0);
+          over_tile=true;
+        }
+      }
+    }
+
   if( selectedGuest != nullptr ){
     selectedGuest -> setX( mouseListener::mouse_x );
     selectedGuest -> setY( mouseListener::mouse_y );
     selectedGuest -> draw();
     al_draw_bitmap( cursor_closed, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
-  else{
+  else if(editor_tool==4){
     al_draw_bitmap( cursor_open, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
-  gameUI.draw();
+
+    if(editor_tool==0){
+      al_draw_bitmap( path[0], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
+    }
+
+    if(editor_tool==1){
+      al_draw_bitmap( path[1], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
+    }
+
+    if(editor_tool==2){
+      al_draw_bitmap( path[2], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
+    }
+    if(editor_tool==3){
+      al_draw_bitmap( path[3], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
+    }
+
+
+
+
+
+
 }
