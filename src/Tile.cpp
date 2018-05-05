@@ -37,6 +37,12 @@ Tile::Tile(int x, int y, int type){
     case 8:
       sprite = tools::load_bitmap_ex("images/tiles/Water.png");
       break;
+    case 9:
+      sprite = tools::load_bitmap_ex("images/tiles/umbrellaStand2.png");
+      break;
+    case 10:
+      sprite = tools::load_bitmap_ex("images/tiles/Coaster.png");
+      break;
     default:
       break;
   }
@@ -60,14 +66,25 @@ int Tile::colliding( int x, int y, int width, int height){
   return tools::collision( x, x + width, iso_x + 32, iso_x + 96, y, y + height, iso_y + 0, iso_y + 64 );
 }
 
+int Tile::colliding_loose( int x, int y, int width, int height){
+  return tools::collision( x, x + width, iso_x + 32-64, iso_x + 96+64, y, y + height, iso_y + 0-32, iso_y + 64+32 );
+}
+
 // Check if x and y are in tile (tight)
 int Tile::colliding_tight( int x, int y, int width, int height){
   return tools::collision( x, x + width, iso_x + 48, iso_x + 80, y, y + height, iso_y + 16, iso_y + 48 );
 }
 
 void Tile::draw(){
-  if( sprite != nullptr )
-    al_draw_bitmap( sprite, iso_x, iso_y, 0);
-  if( grid != nullptr )
+  if( sprite != nullptr ){
+
+    if(type==9)
+          al_draw_bitmap( sprite, iso_x, iso_y-57, 0);
+    else if(type==10)
+          al_draw_bitmap( sprite, iso_x-200, iso_y-300, 0);
+
+    else
+      al_draw_bitmap( sprite, iso_x, iso_y, 0);
+  }if( grid != nullptr )
     al_draw_bitmap( grid, iso_x, iso_y, 0);
 }
