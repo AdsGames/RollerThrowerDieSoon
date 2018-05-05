@@ -7,8 +7,7 @@
 #include "allegro5/allegro_ttf.h"
 #include "vector"
 
-class Message
-{
+class Message{
   public:
     Message();
     virtual ~Message();
