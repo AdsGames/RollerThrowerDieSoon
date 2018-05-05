@@ -42,8 +42,8 @@ game::game(){
 // Update
 void game::update(){
   // Velocity of mouse
-  x_velocity = -1.3 * ( old_mouse_x - mouseListener::mouse_x );
-  y_velocity = -1.3 * ( old_mouse_y - mouseListener::mouse_y );
+  x_velocity = -1 * ( old_mouse_x - mouseListener::mouse_x );
+  y_velocity = -1 * ( old_mouse_y - mouseListener::mouse_y );
 
   old_mouse_x = mouseListener::mouse_x;
   old_mouse_y = mouseListener::mouse_y;
@@ -107,7 +107,9 @@ void game::update(){
                             gameGuests.at(i) -> getY() + 54,
                             gameEnemies.at(j) -> getY() + 100,
                             gameEnemies.at(j) -> getY() + 200)){
+        gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
         gameGuests.erase( gameGuests.begin() + i );
+
       }
     }
   }
