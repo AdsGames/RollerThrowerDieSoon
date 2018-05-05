@@ -72,12 +72,20 @@ void game::load_level( std::string filename ){
       std::istream_iterator<std::string> beg(buf), end;
       std::vector<std::string> tokens( beg, end );
 
+
+      // your moms a joffset
+      int joffset=12;
+
+
+
       int j = 0;
       for( auto& s: tokens){
-        if( s == "100" )
-          gameEnemies.push_back( new Enemy( i, j - 12) );
-        else
-          gameTiles.push_back( createTile( i, j - 12, tools::convertStringToInt(s) ) );
+        if( s == "100" ){
+          gameEnemies.push_back( new Enemy( i, j - joffset) );
+          gameTiles.push_back( createTile( i, j - joffset, 0) );
+
+        }else
+          gameTiles.push_back( createTile( i, j - joffset, tools::convertStringToInt(s) ) );
         j++;
       }
       i++;
@@ -167,7 +175,7 @@ void game::update(){
 
   // Rest of guests
   for( unsigned int i = 0; i < gameGuests.size(); i++ ){
-    bool off_map = false;
+    bool off_map = true;
     bool guest_alive = true;
 
     bool is_cart = gameGuests.at(i) -> getIsCart();
@@ -189,6 +197,12 @@ void game::update(){
 
     // Collision with tiles
     for( unsigned int j = 0; j < gameTiles.size(); j++ ){
+    int guest_x = gameGuests.at(i) -> getX() + 8;
+        int guest_y = gameGuests.at(i) -> getY() + 32;
+      if(gameTiles.at(j) -> colliding_loose( guest_x, guest_y )){
+        off_map=false;
+      }
+
       if( guest_alive ){
         // Shorthand
         int guest_x = gameGuests.at(i) -> getX() + 8;
@@ -249,7 +263,7 @@ void game::update(){
     // Off the edge
     if( off_map ){
         if(!is_cart){
-            std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
+            std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
             Message::sendMessage(stringyboi);
           }
       gameGuests.erase( gameGuests.begin() + i );
