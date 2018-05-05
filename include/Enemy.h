@@ -26,7 +26,7 @@ class Enemy
     int x=1000;
     int y=200;
     int frame=0;
-    int health=1000;
+    int health=10000;
 };
 
 #endif // ENEMY_H

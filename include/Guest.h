@@ -19,6 +19,8 @@ class Guest
     void setY(int d){y=d;}
     void setVelocityX(float bx){x_velocity=bx;}
     void setVelocityY(float by){y_velocity=by;}
+    int getVelocityX(){return x_velocity;}
+    int getVelocityY(){return y_velocity;}
 
 
     void setCaptured(bool b){captured=b;}
