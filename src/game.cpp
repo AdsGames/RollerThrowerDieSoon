@@ -272,8 +272,8 @@ void game::update(){
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 10 ){
       if( tools::random_int( 1, 100 ) == 1 )
-      gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() +128,
-                                         gameTiles.at(i) -> getIsoY()+64 ));
+      gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() +32,
+                                         gameTiles.at(i) -> getIsoY()-64 ));
     }
   }
 }
@@ -362,7 +362,7 @@ void game::draw(){
       al_draw_bitmap( path[3], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
       break;
      case 5:
-      al_draw_bitmap( coaster, mouseListener::mouse_x - 64-200, mouseListener::mouse_y - 32-300, 0 );
+      al_draw_bitmap( coaster, mouseListener::mouse_x - 238, mouseListener::mouse_y - 319, 0 );
       break;
     default:
       break;
