@@ -395,8 +395,15 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 
   //whitespace is heavenly
   //angels glow white because they're made of pure whitespace
+  int inpark=0;
 
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests in park:%u",(unsigned int)gameGuests.size());
+  for( unsigned int i = 0; i < gameGuests.size(); i++ ){
+    if(!gameGuests.at(i) -> getIsCart())
+
+      inpark++;
+  }
+
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests in park:%u",(unsigned int)inpark);
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests rescued:%i",guests_rescued);
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to enemies:%i",guests_died_enemies);
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Guests died to falling:%i",guests_died_falling);
