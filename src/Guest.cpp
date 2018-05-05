@@ -27,21 +27,53 @@ Guest::~Guest()
   //dtor
 }
 void Guest::update(){
-  if(direction==0){
-    x+=1;
-    y-=0.5;
-  }
-  if(direction==1){
-    x+=1;
-    y+=0.5;
-  }
-  if(direction==2){
-    x-=1;
-    y+=0.5;
-  }
-  if(direction==3){
-    x-=1;
-    y-=0.5;
+
+  int threshold=1.0;
+  float decel=1.2f;
+
+  if(x_velocity>-threshold && x_velocity<threshold)
+    x_velocity=0;
+
+  if(y_velocity>-threshold && y_velocity<threshold)
+    y_velocity=0;
+
+   if(y_velocity>threshold)
+    y_velocity/=decel;
+
+   if(y_velocity<-threshold)
+    y_velocity/=decel;
+
+  if(x_velocity>threshold)
+    x_velocity/=decel;
+
+   if(x_velocity<-threshold)
+    x_velocity/=decel;
+
+
+
+
+
+  if(y_velocity==0 && x_velocity==0){
+    if(direction==0){
+      x+=1;
+      y-=0.5;
+    }
+    if(direction==1){
+      x+=1;
+      y+=0.5;
+    }
+    if(direction==2){
+      x-=1;
+      y+=0.5;
+    }
+    if(direction==3){
+      x-=1;
+      y-=0.5;
+    }
+  }else{
+
+    x+=x_velocity;
+    y+=y_velocity;
   }
 
   frame++;
