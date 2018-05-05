@@ -77,14 +77,13 @@ int Tile::colliding_tight( int x, int y, int width, int height){
 
 void Tile::draw(){
   if( sprite != nullptr ){
-
-    if(type==9)
-          al_draw_bitmap( sprite, iso_x, iso_y-57, 0);
-    else if(type==10)
-          al_draw_bitmap( sprite, iso_x-238, iso_y-319, 0);
-
+    if( type == 9 )
+      al_draw_bitmap( sprite, iso_x, iso_y-57, 0);
+    else if( type == 10 )
+      al_draw_bitmap( sprite, iso_x-238, iso_y-319, 0);
     else
       al_draw_bitmap( sprite, iso_x, iso_y, 0);
-  }if( grid != nullptr )
+  }
+  if( grid != nullptr )
     al_draw_bitmap( grid, iso_x, iso_y, 0);
 }

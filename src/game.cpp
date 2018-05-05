@@ -36,7 +36,6 @@ game::game(){
   coaster = tools::load_bitmap_ex( "images/tiles/coaster.png" );
   coaster_small = tools::load_bitmap_ex( "images/tiles/coaster_small.png" );
 
-
   // Load font
   font = al_load_ttf_font( "font/font.ttf", 36, 0);
 
@@ -47,11 +46,6 @@ game::game(){
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
   gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
   gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
-
-
-
-  // Add enemy
-  gameEnemies.push_back( new Enemy() );
 
   // Load images for entrance
   entrance_back = tools::load_bitmap_ex( "images/tiles/EntranceBack.png" );
@@ -76,14 +70,16 @@ void game::load_level( std::string filename ){
     while ( getline( myfile, line ) ){
       std::istringstream buf( line );
       std::istream_iterator<std::string> beg(buf), end;
-      std::vector<std::string> tokens(beg, end);
+      std::vector<std::string> tokens( beg, end );
 
       int j = 0;
-      for(auto& s: tokens){
-        gameTiles.push_back( createTile( i, j - 12, tools::convertStringToInt(s) ));
+      for( auto& s: tokens){
+        if( s == "100" )
+          gameEnemies.push_back( new Enemy( i, j - 12) );
+        else
+          gameTiles.push_back( createTile( i, j - 12, tools::convertStringToInt(s) ) );
         j++;
       }
-
       i++;
     }
     myfile.close();
@@ -353,11 +349,8 @@ void game::draw(){
         gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) ){
       al_draw_bitmap( path_hover, gameTiles.at(i) -> getIsoX(), gameTiles.at(i) -> getIsoY(), 0);
     }
-    if( editor_tool == 5 &&
-                            gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) )
-
+    if( editor_tool == 5 && gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) )
       al_draw_bitmap( coaster, gameTiles.at(i) -> getIsoX()-200, gameTiles.at(i) -> getIsoY()-300, 0);
-
   }
 
   // Picked up guest
