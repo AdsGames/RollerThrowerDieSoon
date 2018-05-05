@@ -23,7 +23,7 @@ Cart::~Cart()
 
 void Cart::update()
 {
-  accel += 0.1f;
+  accel += 0.02f;
     x_velocity += accel * -4;
     y_velocity += accel * -4;
     x += x_velocity;
