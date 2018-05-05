@@ -42,7 +42,6 @@
 			<Add directory="usr/include" />
 			<Add directory="/media/ubuntu-mate/WINDOWS/Danny/allegro5/include/allegro5" />
 		</Linker>
-		<Unit filename="include/CheckBox.h" />
 		<Unit filename="include/DisplayMode.h" />
 		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/Guest.h" />
@@ -51,9 +50,10 @@
 		<Unit filename="include/Options.h" />
 		<Unit filename="include/Sound.h" />
 		<Unit filename="include/Tile.h" />
-		<Unit filename="include/ToggleBox.h" />
-		<Unit filename="include/UIElement.h" />
-		<Unit filename="include/UIHandler.h" />
+		<Unit filename="include/UI/CheckBox.h" />
+		<Unit filename="include/UI/ToggleBox.h" />
+		<Unit filename="include/UI/UIElement.h" />
+		<Unit filename="include/UI/UIHandler.h" />
 		<Unit filename="include/button.h" />
 		<Unit filename="include/game.h" />
 		<Unit filename="include/globals.h" />
@@ -62,13 +62,8 @@
 		<Unit filename="include/keyListener.h" />
 		<Unit filename="include/menu.h" />
 		<Unit filename="include/mouseListener.h" />
-		<Unit filename="include/rapidxml.hpp" />
-		<Unit filename="include/rapidxml_iterators.hpp" />
-		<Unit filename="include/rapidxml_print.hpp" />
-		<Unit filename="include/rapidxml_utils.hpp" />
 		<Unit filename="include/state.h" />
 		<Unit filename="include/tools.h" />
-		<Unit filename="src/CheckBox.cpp" />
 		<Unit filename="src/DisplayMode.cpp" />
 		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/Guest.cpp" />
@@ -76,9 +71,10 @@
 		<Unit filename="src/Options.cpp" />
 		<Unit filename="src/Sound.cpp" />
 		<Unit filename="src/Tile.cpp" />
-		<Unit filename="src/ToggleBox.cpp" />
-		<Unit filename="src/UIElement.cpp" />
-		<Unit filename="src/UIHandler.cpp" />
+		<Unit filename="src/UI/CheckBox.cpp" />
+		<Unit filename="src/UI/ToggleBox.cpp" />
+		<Unit filename="src/UI/UIElement.cpp" />
+		<Unit filename="src/UI/UIHandler.cpp" />
 		<Unit filename="src/button.cpp" />
 		<Unit filename="src/game.cpp" />
 		<Unit filename="src/init.cpp" />
