@@ -24,7 +24,7 @@ class Guest
     int getVelocityY(){return y_velocity;}
 
     void setCaptured(bool b){captured=b;}
-    void giveUmbrella(){has_umbrella=true;}
+    bool giveUmbrella(){if(!has_umbrella){has_umbrella=true;return true;}return false;}
 
   private:
     ALLEGRO_BITMAP *sprite;

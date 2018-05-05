@@ -185,7 +185,8 @@ void game::update(){
         }
         if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) ){
           if( current == 9 ){
-            gameGuests.at(i) ->giveUmbrella();
+            if(gameGuests.at(i) ->giveUmbrella())
+            money+=10;
 
           }
 
