@@ -62,6 +62,7 @@ class game : public state{
     int guests_rescued=0;
     int guests_died_enemies=0;
     int guests_died_falling=0;
+    int money=0;
 
     // Grabber info
     int old_mouse_x;

@@ -24,9 +24,11 @@ class Guest
     int getVelocityY(){return y_velocity;}
 
     void setCaptured(bool b){captured=b;}
+    void giveUmbrella(){has_umbrella=true;}
 
   private:
     ALLEGRO_BITMAP *sprite;
+    ALLEGRO_BITMAP *umbrella;
     ALLEGRO_BITMAP *spritesheet[43];
     ALLEGRO_BITMAP *spritesheet_panic[25];
 
@@ -38,6 +40,7 @@ class Guest
     int frame_panic = 0;
     int direction = 0;
     bool captured = false;
+    bool has_umbrella=false;
 
 };
 

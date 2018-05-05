@@ -26,8 +26,10 @@ game::game(){
     for( int j =- 15; j < 15; j++ ){
       if( i == 15 && j == 14 )
         gameTiles.push_back( createTile( i, j, 2 ) );
-      else if( i == 15 && j == 8 )
+      else if( i == 13 && j == 0 )
         gameTiles.push_back( createTile( i, j, 3 ) );
+      else if( i == 14 && j == 4 )
+        gameTiles.push_back( createTile( i, j, 9) );
       else if(tools::random_int(1,25)!=17)
         gameTiles.push_back( createTile( i, j, 0 ) );
       else
@@ -167,8 +169,26 @@ void game::update(){
         int current = gameTiles.at(j) -> getType();
 
         // Collision with map tile
-        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) )
+        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) ){
+
           off_map = false;
+
+          //wattaa
+          if( current == 8 ){
+            gameGuests.erase( gameGuests.begin() + i );
+            guest_alive = false;
+            guests_died_falling ++;
+            break;
+          }
+        }
+        if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) ){
+          if( current == 9 ){
+            gameGuests.at(i) ->giveUmbrella();
+
+          }
+
+        }
+
 
         // Touching special tile
         if( gameTiles.at(j) -> colliding_tight( guest_x, guest_y )){
@@ -190,12 +210,7 @@ void game::update(){
             break;
           }
           // Water tile
-          if( current == 8 ){
-            gameGuests.erase( gameGuests.begin() + i );
-            guest_alive = false;
-            guests_died_falling ++;
-            break;
-          }
+
         }
       }
     }
@@ -327,6 +342,10 @@ void game::draw(){
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests rescued:%i",guests_rescued);
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests died to enemies:%i",guests_died_enemies);
   al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to falling:%i",guests_died_falling);
+
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Money:%i",money);
+
+
 
   ///send help
 
