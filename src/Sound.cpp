@@ -36,7 +36,6 @@ void Sound::play(){
   else if(Options::music_enabled){
     al_play_sample( sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, sample_id);
     is_playing=true;
-
   }
 }
 

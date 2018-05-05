@@ -3,31 +3,29 @@
 
 #include "allegro5/allegro.h"
 #include "tools.h"
+
 class Tile
 {
-    public:
-        Tile(int,int,int);
-        virtual ~Tile();
-        void draw();
-        int getX(){return x;}
-        int getY(){return y;}
-        int getIsoX(){return iso_x;}
-        int getIsoY(){return iso_y;}
-        void setType(int t){type=t;}
-        int getType(){return type;}
+  public:
+    Tile( int, int, int);
+    virtual ~Tile(){}
+    void draw();
+    int getX(){ return x; }
+    int getY(){ return y; }
+    int getIsoX(){ return iso_x; }
+    int getIsoY(){ return iso_y; }
+    void setType( int type ){ this -> type = type; }
+    int getType(){ return type; }
 
+  private:
+    ALLEGRO_BITMAP *sprite;
+    ALLEGRO_BITMAP *grid;
 
-    protected:
-
-    private:
-        ALLEGRO_BITMAP *sprite;
-        ALLEGRO_BITMAP *grid;
-        ALLEGRO_BITMAP *foreground=nullptr;
-        int x;
-        int y;
-        int type;
-        int iso_x;
-        int iso_y;
+    int x;
+    int y;
+    int type;
+    int iso_x;
+    int iso_y;
 };
 
 #endif // TILE_H
