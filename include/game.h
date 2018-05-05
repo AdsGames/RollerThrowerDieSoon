@@ -63,6 +63,11 @@ class game : public state{
     ALLEGRO_BITMAP *cursor_open;
     ALLEGRO_BITMAP *cursor_closed;
 
+    int old_mouse_x=0;
+    int old_mouse_y=0;
+
+    float x_velocity=0;
+    float y_velocity=0;
     // Functions
 
 };

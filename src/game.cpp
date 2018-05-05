@@ -34,6 +34,13 @@ game::~game(){
 }
 void game::update(){
 
+  x_velocity=-1.3*(old_mouse_x-mouseListener::mouse_x);
+  y_velocity=-1.3*(old_mouse_y-mouseListener::mouse_y);
+
+  old_mouse_x=mouseListener::mouse_x;
+  old_mouse_y=mouseListener::mouse_y;
+
+
   if(selectedGuest!=nullptr)
     selectedGuest -> update();
 
@@ -57,6 +64,8 @@ void game::update(){
   //gameGuests.push_back(createGuest(200,900));
     if(mouseListener::mouse_released & 1 && selectedGuest!=nullptr){
       selectedGuest -> setCaptured(false);
+      selectedGuest -> setVelocityX(x_velocity);
+      selectedGuest -> setVelocityY(y_velocity);
 
       gameGuests.push_back(selectedGuest);
       selectedGuest=nullptr;
@@ -66,7 +75,7 @@ void game::update(){
     for(int i=0; i<gameGuests.size(); i++){
       gameGuests.at(i) -> update();
 
-      if(tools::clicked(gameGuests.at(i) -> getX()-15,gameGuests.at(i) -> getX()+15,gameGuests.at(i) -> getY()-30,gameGuests.at(i) -> getY()+30) && selectedGuest==nullptr){
+      if(tools::clicked(gameGuests.at(i) -> getX()-25,gameGuests.at(i) -> getX()+25,gameGuests.at(i) -> getY()-45,gameGuests.at(i) -> getY()+45) && selectedGuest==nullptr){
         selectedGuest=gameGuests.at(i);
         selectedGuest -> setCaptured(true);
         gameGuests.erase(gameGuests.begin()+i);
