@@ -163,7 +163,7 @@ void game::update(){
     gameGuests.at(i) -> update();
 
     // Pick up guest
-    if( !selectedGuest && editor_tool == 4 && !is_cart && !selectedGuest &&
+    if( !selectedGuest && editor_tool == 4 && !selectedGuest &&
         tools::clicked( gameGuests.at(i) -> getX() - 25,
                         gameGuests.at(i) -> getX() + 25,
                         gameGuests.at(i) -> getY()-30,
