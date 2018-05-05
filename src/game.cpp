@@ -16,6 +16,8 @@ game::game(){
   old_mouse_x = 0;
   old_mouse_y = 0;
 
+  Message::load();
+
   x_velocity = 0;
   y_velocity = 0;
 
@@ -46,6 +48,8 @@ game::game(){
   path[2] = tools::load_bitmap_ex( "images/tiles/Path_2.png" );
   path[3] = tools::load_bitmap_ex( "images/tiles/Path_3.png" );
   coaster = tools::load_bitmap_ex( "images/tiles/coaster.png" );
+    coaster_small = tools::load_bitmap_ex( "images/tiles/coaster_small.png" );
+
 
   // Load font
   font = al_load_ttf_font( "font/font.ttf", 36, 0);
@@ -55,9 +59,9 @@ game::game(){
   gameUI.addElement( new Button( 25 + 128    , 25, "path_1",  path[1] ));
   gameUI.addElement( new Button( 25 + 128 * 2, 25, "path_2",  path[2] ));
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
-  gameUI.addElement( new Button( 25  +128 * 4, 25, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
+  gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
 
-  gameUI.addElement( new Button( 25  +128 * 5, 25, "coaster", coaster));
+  gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
 
 
 
@@ -76,6 +80,7 @@ game::game(){
 
 // Update
 void game::update(){
+  Message::update();
   gameUI.update();
 
   if( gameUI.getElementById("path_0") -> clicked() )
@@ -252,7 +257,11 @@ void game::update(){
                               gameEnemies.at(j) -> getY() + 100,
                               gameEnemies.at(j) -> getY() + 200)){
           gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
+
+          std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
+          Message::sendMessage(stringyboi);
           gameGuests.erase( gameGuests.begin() + i );
+
           guests_died_enemies++;
           break;
         }
@@ -344,6 +353,8 @@ void game::draw(){
     selectedGuest -> draw();
     al_draw_bitmap( cursor_closed, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
+
+
   else if( editor_tool == 4 ){
     al_draw_bitmap( cursor_open, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
@@ -367,6 +378,23 @@ void game::draw(){
     default:
       break;
   }
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+    if(gameTiles.at(i) -> getType() == 10)
+
+      gameTiles.at(i) -> draw();
+}
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+    if(gameTiles.at(i) -> getType() == 10)
+
+      gameTiles.at(i) -> draw();
+}
+for( unsigned int i = 0; i < gameGuests.size(); i++ ){
+    if(gameGuests.at(i) -> getIsCart())
+
+      gameGuests.at(i) -> draw();
+}
+
+
 
   // Cursor pointer
   al_draw_rectangle( mouseListener::mouse_x, mouseListener::mouse_y, mouseListener::mouse_x + 3, mouseListener::mouse_y + 3, al_map_rgb( 255, 255, 255), 3);
@@ -374,13 +402,22 @@ void game::draw(){
 
   //whitespace is heavenly
   //angels glow white because they're made of pure whitespace
+  int inpark=0;
 
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 120, 0, "Guests in park:%u",(unsigned int)gameGuests.size());
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests rescued:%i",guests_rescued);
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests died to enemies:%i",guests_died_enemies);
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to falling:%i",guests_died_falling);
+  for( unsigned int i = 0; i < gameGuests.size(); i++ ){
+    if(!gameGuests.at(i) -> getIsCart())
 
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Money:%i",money);
+      inpark++;
+  }
+
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests in park:%u",(unsigned int)inpark);
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests rescued:%i",guests_rescued);
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to enemies:%i",guests_died_enemies);
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Guests died to falling:%i",guests_died_falling);
+
+  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 370, 0, "Money:%i",money);
+
+  Message::draw();
 
 
 

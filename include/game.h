@@ -54,6 +54,8 @@ class game : public state{
     // Images
     ALLEGRO_BITMAP *tile;
     ALLEGRO_BITMAP *coaster;
+    ALLEGRO_BITMAP *coaster_small;
+
     ALLEGRO_BITMAP *path[4];
     ALLEGRO_BITMAP *entrance_back;
     ALLEGRO_BITMAP *entrance_front;
