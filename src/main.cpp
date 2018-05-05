@@ -263,9 +263,8 @@ void setup(){
     std::cout<<"No joystick is installed.\n";
 
   //Options::read_data();
-  //MusicManager::load();
-
-
+  MusicManager::load();
+  MusicManager::game_music.play();
 }
 
 // Handle events
