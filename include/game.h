@@ -57,6 +57,12 @@ class game : public state{
     ALLEGRO_BITMAP *cursor_closed;
     ALLEGRO_BITMAP *path_hover;
 
+    ALLEGRO_FONT *font;
+
+    int guests_rescued=0;
+    int guests_died_enemies=0;
+    int guests_died_falling=0;
+
     // Grabber info
     int old_mouse_x;
     int old_mouse_y;

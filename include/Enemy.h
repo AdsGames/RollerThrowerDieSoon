@@ -20,6 +20,8 @@ class Enemy
   protected:
 
   private:
+
+
     ALLEGRO_BITMAP *sprite;
     ALLEGRO_BITMAP *spritesheet[62];
     ALLEGRO_FONT *font;

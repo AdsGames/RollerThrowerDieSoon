@@ -33,6 +33,9 @@ game::game(){
   path[2] = tools::load_bitmap_ex( "images/tiles/Path_2.png" );
   path[3] = tools::load_bitmap_ex( "images/tiles/Path_3.png" );
 
+  font = al_load_ttf_font( "font/font.ttf", 36, 0);
+
+
 
   gameUI.addElement(new Button(25,25,"path_0",path[0]));
   gameUI.addElement(new Button(25+128,25,"path_1",path[1]));
@@ -195,6 +198,7 @@ void game::update(){
     if(off_map){
       gameGuests.erase( gameGuests.begin() + i );
       is_this_guest_still_alive_question_mark=false;
+      guests_died_falling++;
     }
     // Guest with enemy collision
     if(is_this_guest_still_alive_question_mark){
@@ -209,6 +213,7 @@ void game::update(){
                               gameEnemies.at(j) -> getY() + 200)){
           gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
           gameGuests.erase( gameGuests.begin() + i );
+          guests_died_enemies++;
           break;
         }
       }
@@ -298,6 +303,22 @@ void game::draw(){
     if(editor_tool==3){
       al_draw_bitmap( path[3], mouseListener::mouse_x - 64, mouseListener::mouse_y - 32, 0 );
     }
+
+
+    //whitespace is heavenly
+    //angels glow white because they're made of pure whitespace
+
+
+
+
+          al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 120, 0, "Guests in park:%i",gameGuests.size());
+          al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests rescued:%i",guests_rescued);
+          al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests died to enemies:%i",guests_died_enemies);
+          al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to falling:%i",guests_died_falling);
+
+          ///send help
+
+          //its 2 am and this is the funniest thing ive ever seen
 
 
 
