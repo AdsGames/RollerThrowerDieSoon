@@ -50,7 +50,7 @@ class game : public state{
   private:
     // Images
     ALLEGRO_BITMAP *tile;
-    ALLEGRO_BITMAP *path[3];
+    ALLEGRO_BITMAP *path[4];
     ALLEGRO_BITMAP *entrance_back;
     ALLEGRO_BITMAP *entrance_front;
     ALLEGRO_BITMAP *cursor_open;
