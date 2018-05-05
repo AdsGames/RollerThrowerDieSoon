@@ -2,7 +2,7 @@
 
 Cart::Cart(int newx, int newy)
 {
-   cart = tools::load_bitmap_ex( "images/cart.png" );
+   cart = tools::load_bitmap_ex( "images/tiles/car.png" );
    x=newx;
    y=newy;
    x_velocity=-40;

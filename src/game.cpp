@@ -45,7 +45,7 @@ game::game(){
   path[1] = tools::load_bitmap_ex( "images/tiles/Path_1.png" );
   path[2] = tools::load_bitmap_ex( "images/tiles/Path_2.png" );
   path[3] = tools::load_bitmap_ex( "images/tiles/Path_3.png" );
-  coaster = tools::load_bitmap_ex( "images/tiles/Coaster.png" );
+  coaster = tools::load_bitmap_ex( "images/tiles/coaster.png" );
 
   // Load font
   font = al_load_ttf_font( "font/font.ttf", 36, 0);
@@ -272,8 +272,8 @@ void game::update(){
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 10 ){
       if( tools::random_int( 1, 100 ) == 1 )
-      gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() ,
-                                         gameTiles.at(i) -> getIsoY() ));
+      gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() +128,
+                                         gameTiles.at(i) -> getIsoY()+64 ));
     }
   }
 }
