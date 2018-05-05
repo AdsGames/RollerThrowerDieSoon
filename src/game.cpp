@@ -41,47 +41,52 @@ game::game(){
 
 // Update
 void game::update(){
+  // Velocity of mouse
   x_velocity = -1.3 * ( old_mouse_x - mouseListener::mouse_x );
   y_velocity = -1.3 * ( old_mouse_y - mouseListener::mouse_y );
 
   old_mouse_x = mouseListener::mouse_x;
   old_mouse_y = mouseListener::mouse_y;
 
-  if( selectedGuest != nullptr )
-    selectedGuest -> update();
-
-  for( int i = 0; i < gameTiles.size(); i++ ){
-    int mxo = mouseListener::mouse_x-64;
-    int myo = mouseListener::mouse_y-32;
+  /*for( int i = 0; i < gameTiles.size(); i++ ){
+    int mxo = mouseListener::mouse_x - 64;
+    int myo = mouseListener::mouse_y - 32;
     int to = 24;
-    //    if(mouseListener::mouse_button & 1)
-    //      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
-    //        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),1);
-    //      }
-    //    }
-  }
+    if(mouseListener::mouse_button & 1)
+      if(mxo>gameTiles.at(i) -> getIsoX()-24 && mxo<gameTiles.at(i) -> getIsoX()+24 && myo<gameTiles.at(i) -> getIsoY()+24 && myo>gameTiles.at(i) -> getIsoY()-24){
+        gameTiles.at(i) = createTile(gameTiles.at(i) -> getX() ,gameTiles.at(i) -> getY(),1);
+      }
+    }
+  }*/
 
-  if( selectedGuest != nullptr )
-    std::cout << selectedGuest -> getX() << "," << selectedGuest -> getY() << "\n";
+  //if( selectedGuest != nullptr )
+  //  std::cout << selectedGuest -> getX() << "," << selectedGuest -> getY() << "\n";
 
-  //gameGuests.push_back(createGuest(200,900));
+  // Release guest
   if( (mouseListener::mouse_released & 1) && selectedGuest){
     selectedGuest -> setCaptured( false );
     selectedGuest -> setVelocityX( x_velocity );
     selectedGuest -> setVelocityY( y_velocity );
 
     gameGuests.push_back(selectedGuest);
-    selectedGuest=nullptr;
+    selectedGuest = nullptr;
   }
 
+  // Enemy logic
   for( int i = 0; i < gameEnemies.size(); i++ ){
     gameEnemies.at(i) -> update();
   }
 
+  // Run guest logic
+  // In grabber
+  if( selectedGuest != nullptr )
+    selectedGuest -> update();
 
+  // Rest of guests
   for( int i = 0; i < gameGuests.size(); i++ ){
     gameGuests.at(i) -> update();
 
+    // Pick up guest
     if( tools::clicked( gameGuests.at(i) -> getX() - 25,
                         gameGuests.at(i) -> getX() + 25,
                         gameGuests.at(i) -> getY() - 45,
@@ -92,6 +97,7 @@ void game::update(){
       break;
     }
 
+    // Guest with enemy collision
     for( int j = 0; j < gameEnemies.size(); j++){
       if( tools::collision( gameGuests.at(i) -> getX(),
                             gameGuests.at(i) -> getX() + 16,
@@ -106,6 +112,7 @@ void game::update(){
     }
   }
 
+  // Spawn guests
   for( int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 2 ){
       if( tools::random_int( 1, 100 ) == 1 )
@@ -146,12 +153,12 @@ void game::draw(){
     gameEnemies.at(i) -> draw();
 
   if( selectedGuest != nullptr ){
-    selectedGuest -> setX(mouseListener::mouse_x);
-    selectedGuest -> setY(mouseListener::mouse_y);
+    selectedGuest -> setX( mouseListener::mouse_x );
+    selectedGuest -> setY( mouseListener::mouse_y );
     selectedGuest -> draw();
-    al_draw_bitmap(cursor_closed,mouseListener::mouse_x-8,mouseListener::mouse_y-56,0);
+    al_draw_bitmap( cursor_closed, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
   else{
-    al_draw_bitmap(cursor_open,mouseListener::mouse_x-8,mouseListener::mouse_y-56,0);
+    al_draw_bitmap( cursor_open, mouseListener::mouse_x - 8, mouseListener::mouse_y - 56, 0 );
   }
 }
