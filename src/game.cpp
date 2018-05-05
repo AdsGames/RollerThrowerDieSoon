@@ -152,9 +152,9 @@ void game::update(){
 
     // Pick up guest
     if( !selectedGuest && editor_tool == 4 &&
-        tools::clicked( gameGuests.at(i) -> getX(),
+        tools::clicked( gameGuests.at(i) -> getX() - 25,
                         gameGuests.at(i) -> getX() + 25,
-                        gameGuests.at(i) -> getY(),
+                        gameGuests.at(i) -> getY()-30,
                         gameGuests.at(i) -> getY() + 45 )){
       selectedGuest = gameGuests.at(i);
       selectedGuest -> setCaptured( true );
@@ -182,11 +182,18 @@ void game::update(){
             guests_died_falling ++;
             break;
           }
+          if( current == 3 ){
+            gameGuests.erase( gameGuests.begin() + i );
+            guest_alive = false;
+            guests_rescued ++;
+            break;
+          }
+
         }
         if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) ){
           if( current == 9 ){
             if(gameGuests.at(i) ->giveUmbrella())
-            money+=10;
+              money+=10;
 
           }
 
@@ -206,12 +213,7 @@ void game::update(){
             gameGuests.at(i) -> setDirection(2);
 
           // End point
-          if( current == 3 ){
-            gameGuests.erase( gameGuests.begin() + i );
-            guest_alive = false;
-            guests_rescued ++;
-            break;
-          }
+
           // Water tile
 
         }
