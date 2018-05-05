@@ -82,8 +82,6 @@ void Guest::draw()
     if(has_umbrella)
       al_draw_bitmap( umbrella, x, y, 0 );
 
-    std::cout << name + " " + inital + "\n";
-
 }
 
 std::string Guest::genName()
