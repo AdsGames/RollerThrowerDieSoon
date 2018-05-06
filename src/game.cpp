@@ -13,6 +13,8 @@
 #include "listeners/joystickListener.h"
 #include "UI/button.h"
 
+int game::level=1;
+
 // Constructor
 game::game(){
   // Init vars
@@ -29,8 +31,12 @@ game::game(){
   srand( time(NULL));
 
   if(level==1){
-    load_level("maps/level3.txt");
+    load_level("maps/level1.txt");
     guest_spawn=10;
+  }
+  if(level==2){
+    load_level("maps/level2.txt");
+    guest_spawn=20;
   }
 
   // Load path images

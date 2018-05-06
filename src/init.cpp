@@ -5,5 +5,5 @@ init::init(){
 
 
   // Goto menu
-  set_next_state( STATE_GAME);
+  set_next_state( STATE_OPTIONS);
 }

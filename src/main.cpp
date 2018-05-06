@@ -158,14 +158,12 @@ void setup(){
 
 
   graphics_mode = windowed;
-  Options::graphics_mode = graphics_mode;
 
   float windowWidth = 1920;
   float windowHeight = 1080;
 
   if(graphics_mode>=1 && graphics_mode<=3){
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
-    Options::draw_cursor=true;
   }
   else if(graphics_mode==fullscreen_true)
     al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
