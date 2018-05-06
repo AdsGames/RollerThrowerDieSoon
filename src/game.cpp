@@ -362,6 +362,11 @@ Cart *game::createCart( int newX, int newY ){
   return newCart;
 }
 
+Particle *game::createParticle( int newX, int newY,int newtype ){
+  Particle *newParticle = new Particle( newX, newY ,newtype);
+  return newParticle;
+}
+
 
 // Draw to screen
 void game::draw(){

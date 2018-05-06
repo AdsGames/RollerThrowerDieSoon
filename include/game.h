@@ -40,6 +40,7 @@ class game : public state{
     // Create guest at coordinate
     Guest *createGuest( int, int );
         Cart *createCart( int, int );
+    Particle *createParticle( int, int, int urmum );
 
     UIHandler gameUI;
 

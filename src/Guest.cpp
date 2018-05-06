@@ -88,7 +88,7 @@ void Guest::draw()
 
 std::string Guest::genName()
 {
-  int nameInt = 49;
+  int nameInt = tools::random_int(0,49);
 
   std::string names [50] = {"Ethel","Chung","Fe","Brooke","Nicky","Gail","Andrea","Sigrid","Carmon","Marybelle","Racquel","Dottie","Wilson","Myra","Jackeline","Vonda","Stacey","Jacquelynn","Phebe","Madeline","Miguelina","Loretta","Malissa","Kandy","Nancee","Petronila","Madelaine","Shakira","Jamika","Quentin","Shanell","Adrian","Clement","Gus","Hung","Tamie","Elidia","Jeneva","Shantel","Sage","Susann","Coralie","Alphonso","Stephanie","Gena","Barbera","Jesusita","Donald","Danno","Allan"};
   return names[nameInt];
@@ -97,7 +97,7 @@ std::string Guest::genName()
 std::string Guest::genInital()
 {
   //int initalInt = tools::random_int(0,25);
-  int initalInt = 18;
+  int initalInt =  tools::random_int(0,25);
   std::string initals [26] = {"Q.", "W.", "E.", "R.", "T.", "Y.", "U.", "I.", "O.", "P.", "A.", "S.", "D.", "F.", "G.", "H.", "J.", "K.", "L.", "Z.", "X.", "C.", "V.", "B.", "N.", "M."};
 
   return initals[initalInt];
