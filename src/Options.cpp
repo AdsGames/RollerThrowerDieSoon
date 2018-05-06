@@ -11,6 +11,9 @@ Options::Options()
 
     background = tools::load_bitmap_ex("images/levelSelecT.png");
 
+    load = tools::load_bitmap_ex("images/loading.png");
+
+
 
 
     OptionsUI.addElement( new Button(  400, 550, "Level 1", font));
@@ -44,6 +47,8 @@ void Options::draw(){
 
 
     al_draw_bitmap(cursor,mouseListener::mouse_x-8,mouseListener::mouse_y-56,0);
+    if(loading)
+      al_draw_bitmap(load,0,0,0);
 
     //al_draw_bitmap(highlight,100,highlight_y,0);
 
@@ -52,27 +57,34 @@ void Options::draw(){
 
 void Options::update(){
 
+  if(keyListener::keyReleased[ALLEGRO_KEY_ESCAPE])
+    set_next_state(STATE_MENU);
+
   if(OptionsUI.getElementByText("Level 1") -> clicked()){
     game::level=1;
-    set_next_state(STATE_GAME);
+        loading=true;
+
   }
 
   if(OptionsUI.getElementByText("Level 2") -> clicked()){
     game::level=2;
-    set_next_state(STATE_GAME);
+        loading=true;
+
   }
 
    if(OptionsUI.getElementByText("Level 3") -> clicked()){
     game::level=3;
-    set_next_state(STATE_GAME);
+        loading=true;
+
   }
 
   if(OptionsUI.getElementByText("Level 4") -> clicked()){
     game::level=4;
-    set_next_state(STATE_GAME);
+    loading=true;
   }
 
-
+  if(loading)
+    set_next_state(STATE_GAME);
 
   OptionsUI.update();
 
