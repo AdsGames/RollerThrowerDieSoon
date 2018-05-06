@@ -6,6 +6,8 @@ Options::Options()
 {
 
     font = al_load_ttf_font( "font/font.ttf", 18, 0);
+        font_big = al_load_ttf_font( "font/font.ttf", 36, 0);
+
 
     cursor = tools::load_bitmap_ex("images/tweezersOpen.png");
 
@@ -16,17 +18,17 @@ Options::Options()
 
 
 
-    OptionsUI.addElement( new Button(  400, 550, "Level 1", font));
+    OptionsUI.addElement( new Button(  400, 550, "Level 1", font_big));
 
-    OptionsUI.addElement( new Button(  600, 550, "Level 2", font));
+    OptionsUI.addElement( new Button(  600, 550, "Level 2", font_big));
 
-    OptionsUI.addElement( new Button(  800, 550, "Level 3", font));
+    OptionsUI.addElement( new Button(  800, 550, "Level 3", font_big));
 
-    OptionsUI.addElement( new Button(  1000, 550, "Level 4", font));
+    OptionsUI.addElement( new Button(  1000, 550, "Level 4", font_big));
 
-    OptionsUI.addElement( new Button(  1200, 550, "Level 5", font));
+    OptionsUI.addElement( new Button(  1200, 550, "Level 5", font_big));
 
-     OptionsUI.addElement( new Button(  1400, 550, "Level 6", font));
+     OptionsUI.addElement( new Button(  1400, 550, "Level 6", font_big));
 
 
 

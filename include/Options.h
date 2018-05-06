@@ -29,6 +29,8 @@ class Options : public state
   private:
 
     ALLEGRO_FONT *font;
+      ALLEGRO_FONT *font_big;
+
 
 
     UIHandler OptionsUI;
