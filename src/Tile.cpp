@@ -69,7 +69,7 @@ int Tile::colliding( int x, int y, int width, int height){
 }
 
 int Tile::colliding_water( int x, int y, int width, int height){
-  return tools::collision( x, x + width, iso_x + 32, iso_x + 96, y, y + height, iso_y + -16, iso_y + 48 );
+  return tools::collision( x, x + width, iso_x + 32, iso_x + 96, y, y + height, iso_y + 16, iso_y + 48 );
 }
 
 

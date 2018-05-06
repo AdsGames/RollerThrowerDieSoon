@@ -532,6 +532,7 @@ void game::update(){
       }
     }
   }
+  money=9000;
 }
 
 // Creates a tile at screen coordinate
