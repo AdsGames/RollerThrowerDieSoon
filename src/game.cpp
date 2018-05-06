@@ -216,6 +216,10 @@ void game::update(){
 
           //wattaa
           if( current == 8 && !is_cart){
+            if(!is_cart){
+              std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
+              Message::sendMessage(stringyboi);
+            }
             gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
             guests_died_falling ++;
@@ -295,21 +299,30 @@ void game::update(){
       }
     }
   }
-
+  frame++;
   // Spawn guests
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 2 ){
-      if( tools::random_int( 1, 100 ) == 1 )
-      gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64 - 8,
+      if( frame>=15){
+        if(guest_spawn>0){
+          gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64 - 8,
                                          gameTiles.at(i) -> getIsoY() + 32 - 20 ));
+          guest_spawn--;
+        }
+        frame=0;
+
+      }
+
     }
   }
-
+  fart_crame++;
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 10 ){
-      if( tools::random_int( 1, 100 ) == 1 )
-      gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() +32,
+      if(fart_crame>=25){
+        gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() +32,
                                          gameTiles.at(i) -> getIsoY()-64 ));
+        fart_crame=0;
+      }
     }
   }
 }
