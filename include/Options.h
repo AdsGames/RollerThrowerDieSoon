@@ -34,6 +34,8 @@ class Options : public state
     UIHandler OptionsUI;
 
     ALLEGRO_BITMAP *cursor;
+    ALLEGRO_BITMAP *background;
+
 
 };
 
