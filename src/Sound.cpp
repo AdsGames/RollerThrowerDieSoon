@@ -20,14 +20,13 @@ void Sound::load_ogg(std::string newPath){
 }
 
 void Sound::play(){
-  if(is_wav && Options::sfx_enabled){
-    is_playing=true;
+
     al_play_sample( sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-  }
-  else if(Options::music_enabled){
-    al_play_sample( sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, sample_id);
-    is_playing=true;
-  }
+
+
+    //al_play_sample( sample, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_LOOP, sample_id);
+
+
 }
 
 void Sound::stop(){
@@ -45,14 +44,12 @@ void Sound::stop(){
 
 void Sound::play_random_frequency(int newMin, int newMax){
 
-  if(Options::sfx_enabled)
     al_play_sample( sample, 1.0, 0.0, (float)tools::random_int(newMin,newMax)/100, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 }
 
 void Sound::play_at_volume(float newVolume){
 
-  if(Options::sfx_enabled)
     al_play_sample( sample, newVolume, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 
 }

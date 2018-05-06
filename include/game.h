@@ -34,6 +34,8 @@ class game : public state{
     void update();
     void draw();
 
+    static int level;
+
     // Create tile at coordinate
     Tile *createTile( int, int, int );
 
@@ -80,7 +82,7 @@ class game : public state{
     int guest_spawn=50;
     bool started=0;
     bool finished=false;
-    int level=1;
+
 
     // Grabber info
     int old_mouse_x;
