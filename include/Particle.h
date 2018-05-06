@@ -1,7 +1,7 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#include "allegro.h"
+#include "allegro5/allegro.h"
 #include "tools.h"
 
 class Particle
