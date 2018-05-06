@@ -49,6 +49,7 @@
 		<Unit filename="include/Message.h" />
 		<Unit filename="include/MusicManager.h" />
 		<Unit filename="include/Options.h" />
+		<Unit filename="include/Particle.h" />
 		<Unit filename="include/Sound.h" />
 		<Unit filename="include/Tile.h" />
 		<Unit filename="include/UI/CheckBox.h" />
@@ -72,6 +73,7 @@
 		<Unit filename="src/Message.cpp" />
 		<Unit filename="src/MusicManager.cpp" />
 		<Unit filename="src/Options.cpp" />
+		<Unit filename="src/Particle.cpp" />
 		<Unit filename="src/Sound.cpp" />
 		<Unit filename="src/Tile.cpp" />
 		<Unit filename="src/UI/CheckBox.cpp" />

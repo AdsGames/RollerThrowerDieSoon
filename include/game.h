@@ -22,10 +22,11 @@
 #include "Enemy.h"
 #include "UI/UIHandler.h"
 #include "Cart.h"
+#include "Particle.h"
 
 class game : public state{
   public:
-    // Construct / destruct
+    // Construct / destruct;
     game();
     ~game(){ };
 
@@ -46,6 +47,7 @@ class game : public state{
     std::vector <Tile*> gameTiles;
     std::vector <Guest*> gameGuests;
     std::vector <Enemy*> gameEnemies;
+    std::vector <Particle*> gameParticles;
 
     // Guest selected by grabber
     Guest *selectedGuest = nullptr;

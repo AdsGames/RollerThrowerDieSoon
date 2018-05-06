@@ -96,6 +96,12 @@ void game::load_level( std::string filename ){
 
 // Update
 void game::update(){
+
+  for( unsigned int i = 0; i < gameParticles.size(); i++ ){
+
+      gameParticles.at(i) -> update();
+  }
+
   Message::update();
   gameUI.update();
 
@@ -432,6 +438,11 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 
       gameGuests.at(i) -> draw();
 }
+
+  for( unsigned int i = 0; i < gameParticles.size(); i++ ){
+
+      gameParticles.at(i) -> draw();
+  }
 
 
 
