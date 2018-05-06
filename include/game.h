@@ -74,6 +74,8 @@ class game : public state{
     ALLEGRO_BITMAP *level_1_help;
 
     ALLEGRO_FONT *font;
+    ALLEGRO_FONT *font_small;
+
 
     int guests_rescued=0;
     int guests_died_enemies=0;

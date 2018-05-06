@@ -62,6 +62,8 @@ game::game(){
 
   // Load font
   font = al_load_ttf_font( "font/font.ttf", 48, 0);
+  font_small = al_load_ttf_font( "font/font.ttf", 24, 0);
+
 
   // Create buttons
   gameUI.addElement( new Button( 25          , 25, "path_0",  path[0] ));
@@ -176,7 +178,7 @@ void game::update(){
    gameUI.getElementByText("Start Game") ->toggleStatus();
   }
   if( gameUI.getElementByText("Finish") -> clicked() )
-    set_next_state(STATE_OPTIONS);
+    set_next_state(STATE_LEVELFINISH);
 
 
   // Velocity of mouse
@@ -543,6 +545,10 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 //  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Guests died to falling:%i",guests_died_falling);
 
   al_draw_textf( font, al_map_rgb( 100, 0, 0), 30, 200, 0, "Money:%i",money);
+  if(level==1)
+    al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",10-(guests_rescued + guests_died_enemies + guests_died_falling ));
+  if(level==2)
+    al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",15-(guests_rescued + guests_died_enemies + guests_died_falling ));
 
   Message::draw();
 
