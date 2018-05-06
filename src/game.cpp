@@ -656,6 +656,13 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 
   //whitespace is heavenly
   //angels glow white because they're made of pure whitespace
+
+
+
+    ///send help
+
+  //its 2 am and this is the funniest thing ive ever seen
+
   int inpark=0;
 
   for( unsigned int i = 0; i < gameGuests.size(); i++ ){
@@ -689,8 +696,6 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 
 
 
-  ///send help
 
-  //its 2 am and this is the funniest thing ive ever seen
 
 }

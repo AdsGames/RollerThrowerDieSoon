@@ -38,7 +38,7 @@ void Options::draw(){
     OptionsUI.draw();
 
 
-    al_draw_bitmap(cursor,mouseListener::mouse_x,mouseListener::mouse_y,0);
+    al_draw_bitmap(cursor,mouseListener::mouse_x-8,mouseListener::mouse_y-56,0);
 
     //al_draw_bitmap(highlight,100,highlight_y,0);
 
