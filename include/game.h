@@ -78,6 +78,8 @@ class game : public state{
     ALLEGRO_BITMAP *level_1_help;
     ALLEGRO_BITMAP *level_2_help;
     ALLEGRO_BITMAP *level_3_help;
+    ALLEGRO_BITMAP *level_4_help;
+
 
 
 
