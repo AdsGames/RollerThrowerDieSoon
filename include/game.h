@@ -83,7 +83,7 @@ class game : public state{
     int old_mouse_x;
     int old_mouse_y;
 
-    int editor_tool=0;
+    int editor_tool=4;
 
     float x_velocity;
     float y_velocity;

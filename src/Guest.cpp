@@ -82,7 +82,7 @@ void Guest::draw()
       al_draw_bitmap( spritesheet_panic[frame_panic], x-10, y-18, 0 );
 
     if(has_umbrella)
-      al_draw_bitmap( umbrella, x, y, 0 );
+      al_draw_bitmap( umbrella, x+3, y-20, 0 );
 
 }
 
