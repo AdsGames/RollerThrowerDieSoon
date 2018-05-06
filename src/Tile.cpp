@@ -68,6 +68,11 @@ int Tile::colliding( int x, int y, int width, int height){
   return tools::collision( x, x + width, iso_x + 32, iso_x + 96, y, y + height, iso_y + 0, iso_y + 64 );
 }
 
+int Tile::colliding_water( int x, int y, int width, int height){
+  return tools::collision( x, x + width, iso_x + 32, iso_x + 96, y, y + height, iso_y + -16, iso_y + 48 );
+}
+
+
 int Tile::colliding_loose( int x, int y, int width, int height){
   return tools::collision( x, x + width, iso_x + 32-64, iso_x + 96+64, y, y + height, iso_y + 0-32, iso_y + 64+32 );
 }

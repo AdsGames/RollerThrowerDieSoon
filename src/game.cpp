@@ -394,7 +394,7 @@ void game::update(){
     // Collision with tiles
     for( unsigned int j = 0; j < gameTiles.size(); j++ ){
       int guest_x = gameGuests.at(i) -> getX() + 8;
-      int guest_y = gameGuests.at(i) -> getY() + 40;
+      int guest_y = gameGuests.at(i) -> getY() + 32;
 
       if(gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) && guest_x<1920 && guest_x>0 && guest_y<1080 && guest_y>0 ){
         off_map=false;
@@ -405,12 +405,7 @@ void game::update(){
 
         int current = gameTiles.at(j) -> getType();
 
-        // Collision with map tile
-        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) && !is_cart){
-
-
-
-          //wattaa
+         if( gameTiles.at(j) -> colliding_water( guest_x, guest_y ) && !is_cart){
           if( current == 8 && !is_cart){
             if(!is_cart){
               std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
@@ -422,6 +417,14 @@ void game::update(){
             guests_died_falling ++;
             break;
           }
+        }
+        // Collision with map tile
+        if( gameTiles.at(j) -> colliding( guest_x, guest_y ) && !is_cart){
+
+
+
+          //wattaa
+
           if( current == 3 && !is_cart){
                         gameParticles.push_back(createParticle(guest_x,guest_y,2));
 
