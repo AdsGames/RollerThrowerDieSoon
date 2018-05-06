@@ -22,10 +22,11 @@
 #include "Enemy.h"
 #include "UI/UIHandler.h"
 #include "Cart.h"
+#include "Particle.h"
 
 class game : public state{
   public:
-    // Construct / destruct
+    // Construct / destruct;
     game();
     ~game(){ };
 
@@ -46,6 +47,7 @@ class game : public state{
     std::vector <Tile*> gameTiles;
     std::vector <Guest*> gameGuests;
     std::vector <Enemy*> gameEnemies;
+    std::vector <Particle*> gameParticles;
 
     // Guest selected by grabber
     Guest *selectedGuest = nullptr;
@@ -72,6 +74,9 @@ class game : public state{
     int guests_died_enemies=0;
     int guests_died_falling=0;
     int money=0;
+    int frame=0;
+    int fart_crame=0;
+    int guest_spawn=50;
 
     // Grabber info
     int old_mouse_x;
