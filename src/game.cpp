@@ -14,9 +14,18 @@
 #include "UI/button.h"
 
 int game::level=1;
+int game::guests_died_enemies=0;
+int game::guests_died_falling=0;
+int game::guests_rescued=0;
+int game::money=0;
 
 // Constructor
 game::game(){
+
+  game::guests_died_enemies=0;
+  game::guests_died_falling=0;
+  game::guests_rescued=0;
+  game::money=0;
   // Init vars
   old_mouse_x = 0;
   old_mouse_y = 0;

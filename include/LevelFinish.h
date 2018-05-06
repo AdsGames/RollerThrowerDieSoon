@@ -35,6 +35,10 @@ class LevelFinish : public state
 
     ALLEGRO_BITMAP *cursor;
     ALLEGRO_FONT *font;
+    ALLEGRO_FONT *font_big;
+    ALLEGRO_FONT *font_extra_thicc;
+
+
 };
 
 #endif // LEVELFINISH_H
