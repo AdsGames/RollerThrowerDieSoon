@@ -51,7 +51,7 @@ game::game(){
   }
   if(level==3){
     load_level("maps/level3.txt");
-    guest_spawn=20;
+    guest_spawn=70;
   }
 
   if(level==4){
@@ -181,7 +181,7 @@ void game::load_level( std::string filename ){
 // Update
 void game::update(){
 
-  Guest::speed=0.5f;
+  Guest::speed=0.4f;
   spawn_rate=16;
   if(gameUI.getElementByText(">>") ->held()){
     Guest::speed=2;
@@ -242,6 +242,19 @@ void game::update(){
     gameUI.getElementByText("Finish") -> toggleStatus();
 
   }
+
+  if(level==3 &&  guests_rescued + guests_died_enemies + guests_died_falling == 70 && finished==false){
+    finished=true;
+    gameUI.getElementByText("Finish") -> toggleStatus();
+
+  }
+
+  if(level==4 &&  guests_rescued + guests_died_enemies + guests_died_falling == 150 && finished==false){
+    finished=true;
+    gameUI.getElementByText("Finish") -> toggleStatus();
+
+  }
+
 
 
 
@@ -665,7 +678,7 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
   if(level==2)
     al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",15-(guests_rescued + guests_died_enemies + guests_died_falling ));
   if(level==3)
-    al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",50-(guests_rescued + guests_died_enemies + guests_died_falling ));
+    al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",70-(guests_rescued + guests_died_enemies + guests_died_falling ));
 
   if(level==4)
     al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",150-(guests_rescued + guests_died_enemies + guests_died_falling ));
