@@ -407,6 +407,9 @@ void game::update(){
           break;
         case 5:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 10 );
+              money-=500;
+
+            editor_tool=4;
           break;
         default:
           break;
