@@ -57,6 +57,9 @@ game::game(){
   coaster = tools::load_bitmap_ex( "images/tiles/coaster.png" );
   coaster_small = tools::load_bitmap_ex( "images/tiles/coaster_small.png" );
 
+  level_1_help = tools::load_bitmap_ex( "images/level_1_help.png" );
+
+
   // Load font
   font = al_load_ttf_font( "font/font.ttf", 48, 0);
 
@@ -516,10 +519,12 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
       gameParticles.at(i) -> draw();
   }
 
+  if(level==1 && !started)
+    al_draw_bitmap( level_1_help,0, 0, 0 );
 
 
   // Cursor pointer
-  al_draw_rectangle( mouseListener::mouse_x, mouseListener::mouse_y, mouseListener::mouse_x + 3, mouseListener::mouse_y + 3, al_map_rgb( 255, 255, 255), 3);
+ // al_draw_rectangle( mouseListener::mouse_x, mouseListener::mouse_y, mouseListener::mouse_x + 3, mouseListener::mouse_y + 3, al_map_rgb( 255, 255, 255), 3);
 
 
   //whitespace is heavenly
