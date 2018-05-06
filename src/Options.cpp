@@ -9,15 +9,17 @@ Options::Options()
 
     cursor = tools::load_bitmap_ex("images/tweezersOpen.png");
 
-    OptionsUI.addElement( new UIElement(  10, 10, "Level Select", font));
+    background = tools::load_bitmap_ex("images/levelSelecT.png");
 
-    OptionsUI.addElement( new Button(  200, 200, "Level 1", font));
 
-    OptionsUI.addElement( new Button(  400, 200, "Level 2", font));
 
-    OptionsUI.addElement( new Button(  600, 200, "Level 3", font));
+    OptionsUI.addElement( new Button(  400, 550, "Level 1", font));
 
-    OptionsUI.addElement( new Button(  800, 200, "Level 4", font));
+    OptionsUI.addElement( new Button(  600, 550, "Level 2", font));
+
+    OptionsUI.addElement( new Button(  800, 550, "Level 3", font));
+
+    OptionsUI.addElement( new Button(  1000, 550, "Level 4", font));
 
 
 
@@ -34,6 +36,9 @@ Options::~Options()
 void Options::draw(){
 
     al_clear_to_color( al_map_rgb(50,50,50));
+
+    al_draw_bitmap(background,0,0,0);
+
 
     OptionsUI.draw();
 

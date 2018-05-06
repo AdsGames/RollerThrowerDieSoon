@@ -129,7 +129,6 @@ game::game(){
 
                 gameUI.getElementById("path_3") -> toggleStatus();
                                 gameUI.getElementById("tweezer") -> toggleStatus();
-                                                                gameUI.getElementById("coaster") -> toggleStatus();
                                                                                                                                 gameUI.getElementByText("Cost:$100") -> toggleStatus();
 
 
@@ -454,7 +453,8 @@ void game::update(){
               gameParticles.push_back(createParticle(guest_x,guest_y,1));
               guests_died_falling ++;
             }
-            gameGuests.erase( gameGuests.begin() + i );
+            if(guest_alive)
+              gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
 
             break;
@@ -465,12 +465,10 @@ void game::update(){
 
 
 
-          //wattaa
-
           if( current == 3 && !is_cart){
                         gameParticles.push_back(createParticle(guest_x,guest_y,2));
 
-            gameGuests.erase( gameGuests.begin() + i );
+            if(guest_alive)gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
             guests_rescued ++;
 
@@ -478,18 +476,19 @@ void game::update(){
           }
 
         }
-        if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) && !is_cart){
-          if( current == 9 ){
-            if(gameGuests.at(i) ->giveUmbrella()){
-              money+=10;
-              gameParticles.push_back(createParticle(guest_x,guest_y,0));
+        if(guest_alive){
+          if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) && !is_cart){
+            if( current == 9 ){
+              if(gameGuests.at(i) ->giveUmbrella()){
+                money+=10;
+                gameParticles.push_back(createParticle(guest_x,guest_y,0));
+              }
             }
-          }
 
+          }
         }
 
-
-
+if(guest_alive){
         // Touching special tile
         if( gameTiles.at(j) -> colliding_tight( guest_x, guest_y )){
           // Directional tilesoff_map
@@ -503,14 +502,14 @@ void game::update(){
             gameGuests.at(i) -> setDirection(2);
 
           // End point
-
+            }
           // Water tile
         }
       }
     }
 
     // Off the edge
-    if( off_map ){
+    if( off_map && guest_alive ){
         if(!is_cart){
             std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
             Message::sendMessage(stringyboi);
@@ -518,6 +517,7 @@ void game::update(){
             guests_died_falling++;
 
           }
+      guest_alive=false;
       gameGuests.erase( gameGuests.begin() + i );
       continue;
     }
