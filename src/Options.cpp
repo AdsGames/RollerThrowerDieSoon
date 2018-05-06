@@ -9,6 +9,9 @@ Options::Options()
 
     cursor = tools::load_bitmap_ex("images/tweezersOpen.png");
 
+    OptionsUI.addElement( new UIElement(  10, 10, "Level Select", font));
+
+    OptionsUI.addElement( new Button(  200, 200, "Level 1", font));
 
 
 
@@ -35,6 +38,11 @@ void Options::draw(){
 }
 
 void Options::update(){
+
+  if(OptionsUI.getElementByText("Level 1") -> clicked()){
+    game::level=1;
+    set_next_state(STATE_GAME);
+  }
 
 
 

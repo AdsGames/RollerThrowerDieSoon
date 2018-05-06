@@ -29,7 +29,7 @@ void menu::draw(){
 void menu::update(){
 
   if(loadingb)
-    set_next_state(STATE_GAME);
+    set_next_state(STATE_OPTIONS);
 
   if(keyListener::anyKeyPressed){
     loadingb=true;
