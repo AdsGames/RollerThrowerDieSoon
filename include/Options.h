@@ -14,6 +14,7 @@
 #include "rapidxml/rapidxml_print.hpp"
 #include "listeners/keyListener.h"
 #include "listeners/joystickListener.h"
+#include "game.h"
 
 class Options : public state
 {

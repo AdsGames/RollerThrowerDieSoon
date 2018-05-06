@@ -148,6 +148,9 @@ void game::update(){
 
    gameUI.getElementByText("Start Game") ->toggleStatus();
   }
+  if( gameUI.getElementByText("Finish") -> clicked() )
+    set_next_state(STATE_OPTIONS);
+
 
   // Velocity of mouse
   x_velocity = -1 * ( old_mouse_x - mouseListener::mouse_x );
