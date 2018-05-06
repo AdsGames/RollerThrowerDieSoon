@@ -8,6 +8,6 @@ MusicManager::MusicManager(){
 }
 
 void MusicManager::load(){
-  game_music.load_ogg("music/RollerCoasterTydoom.ogg");
+ // game_music.load_ogg("music/RollerCoasterTydoom.ogg");
   //menu_music.load_ogg("music/menu.ogg");
 }

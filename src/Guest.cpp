@@ -45,22 +45,24 @@ void Guest::update(){
     if( x_velocity < 0 )
       x_velocity /= decel;
 
+  float speed=0.8f;
+
   if( y_velocity == 0 && x_velocity == 0 ){
     if( direction == 0 ){
-      x ++;
-      y -= 0.5;
+      x +=speed;
+      y -= 0.5*speed;
     }
     if( direction == 1 ){
-      x ++;
-      y += 0.5;
+      x +=speed;
+      y += 0.5*speed;
     }
     if( direction == 2 ){
-      x --;
-      y += 0.5;
+      x -=speed;
+      y += 0.5*speed;
     }
     if( direction == 3 ){
-      x --;
-      y -= 0.5;
+      x -=speed;
+      y -= 0.5*speed;
     }
   }
   else{
