@@ -45,6 +45,7 @@
 		<Unit filename="include/Cart.h" />
 		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/Guest.h" />
+		<Unit filename="include/LevelFinish.h" />
 		<Unit filename="include/LevelSelect.h" />
 		<Unit filename="include/Message.h" />
 		<Unit filename="include/MusicManager.h" />
@@ -70,6 +71,7 @@
 		<Unit filename="src/DisplayMode.cpp" />
 		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/Guest.cpp" />
+		<Unit filename="src/LevelFinish.cpp" />
 		<Unit filename="src/Message.cpp" />
 		<Unit filename="src/MusicManager.cpp" />
 		<Unit filename="src/Options.cpp" />

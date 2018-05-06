@@ -36,7 +36,7 @@ game::game(){
   }
   if(level==2){
     load_level("maps/level2.txt");
-    guest_spawn=20;
+    guest_spawn=15;
   }
   if(level==3){
     load_level("maps/level3.txt");
@@ -74,7 +74,7 @@ game::game(){
   gameUI.addElement( new Button(  200, 500, "Finish", font));
   gameUI.getElementByText("Finish") -> toggleStatus();
 
-  if(level==1){
+  if(level==1 || level==2){
     gameUI.getElementById("path_0") -> toggleStatus();
         gameUI.getElementById("path_1") -> toggleStatus();
 
