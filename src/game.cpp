@@ -189,28 +189,6 @@ void game::update(){
 
   }
 
-
-  if(money>=100){
-
-    gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_0") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_0") ->setActive(true);
-
-    gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_1") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_1") ->setActive(true);
-
-    gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_2") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_2") ->setActive(true);
-
-    gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_3") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_3") ->setActive(true);
-
-
-
-  }else if(level>2){
     gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(100,100,100));
     gameUI.getElementById("path_0") ->setDisableHoverEffect(true);
     gameUI.getElementById("path_0") ->setActive(false);
@@ -228,8 +206,26 @@ void game::update(){
     gameUI.getElementById("path_3") ->setDisableHoverEffect(true);
     gameUI.getElementById("path_3") ->setActive(false);
 
+  if(money>=100 && level>2){
+
+    gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_0") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_0") ->setActive(true);
+
+    gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_1") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_1") ->setActive(true);
+
+    gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_2") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_2") ->setActive(true);
+
+    gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_3") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_3") ->setActive(true);
 
   }
+ // if(money>=500 && level>3)
 
 
   if(level==1 &&  guests_rescued + guests_died_enemies + guests_died_falling == 10 && finished==false){
@@ -537,7 +533,6 @@ void game::update(){
       }
     }
   }
-  money=9000;
 }
 
 // Creates a tile at screen coordinate
