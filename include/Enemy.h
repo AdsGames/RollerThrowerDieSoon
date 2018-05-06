@@ -24,6 +24,7 @@ class Enemy
     // Getters for position
     int getX(){return x;}
     int getY(){return y;}
+    int getHealth(){return health;}
 
   private:
     // Images

@@ -358,8 +358,11 @@ void game::update(){
   }
 
   // Enemy logic
-  for( unsigned int i = 0; i < gameEnemies.size(); i++ )
+  for( unsigned int i = 0; i < gameEnemies.size(); i++ ){
     gameEnemies.at(i) -> update();
+    if(gameEnemies.at(i) ->getHealth()==0)
+      gameEnemies.erase(gameEnemies.begin()+i);
+  }
 
   // Run guest logic
   // In grabber
@@ -411,10 +414,11 @@ void game::update(){
               std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
               Message::sendMessage(stringyboi);
               gameParticles.push_back(createParticle(guest_x,guest_y,1));
+              guests_died_falling ++;
             }
             gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
-            guests_died_falling ++;
+
             break;
           }
         }
@@ -473,9 +477,10 @@ void game::update(){
             std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
             Message::sendMessage(stringyboi);
             gameParticles.push_back(createParticle(guest_x,guest_y,1));
+            guests_died_falling++;
+
           }
       gameGuests.erase( gameGuests.begin() + i );
-      guests_died_falling++;
       continue;
     }
 
@@ -496,11 +501,11 @@ void game::update(){
             std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
             Message::sendMessage(stringyboi);
             gameParticles.push_back(createParticle(guest_x,guest_y,1));
+            guests_died_enemies++;
 
           }
           gameGuests.erase( gameGuests.begin() + i );
 
-          guests_died_enemies++;
           break;
         }
       }
