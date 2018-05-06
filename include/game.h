@@ -71,6 +71,8 @@ class game : public state{
     ALLEGRO_BITMAP *cursor_closed;
     ALLEGRO_BITMAP *path_hover;
 
+    ALLEGRO_BITMAP *level_1_help;
+
     ALLEGRO_FONT *font;
 
     int guests_rescued=0;
