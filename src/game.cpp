@@ -211,6 +211,9 @@ bool game::canPlaceTile(int x, int y){
 // Update
 void game::update(){
 
+  if(keyListener::keyReleased[ALLEGRO_KEY_ESCAPE])
+    set_next_state(STATE_OPTIONS);
+
   Guest::speed=0.4f;
   spawn_rate=16;
   if(gameUI.getElementByText(">>") ->held()){

@@ -35,6 +35,9 @@ class Options : public state
 
     ALLEGRO_BITMAP *cursor;
     ALLEGRO_BITMAP *background;
+    ALLEGRO_BITMAP *load;
+
+    bool loading=false;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 };

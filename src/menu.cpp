@@ -28,10 +28,13 @@ void menu::draw(){
 
 void menu::update(){
 
+  if(keyListener::keyReleased[ALLEGRO_KEY_ESCAPE])
+    set_next_state(STATE_EXIT);
+
   if(loadingb)
     set_next_state(STATE_OPTIONS);
 
-  if(keyListener::anyKeyPressed){
+  if(keyListener::anyKeyPressed && !keyListener::key[ALLEGRO_KEY_ESCAPE]){
     loadingb=true;
   }
 
