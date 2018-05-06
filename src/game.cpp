@@ -71,6 +71,8 @@ game::game(){
   level_1_help = tools::load_bitmap_ex( "images/level_1_help.png" );
   level_2_help = tools::load_bitmap_ex( "images/level_2_help.png" );
   level_3_help = tools::load_bitmap_ex( "images/level_3_help.png" );
+  level_4_help = tools::load_bitmap_ex( "images/level_4_help.png" );
+
 
 
 
@@ -541,7 +543,9 @@ if(guest_alive){
             gameParticles.push_back(createParticle(guest_x,guest_y,1));
             guests_died_enemies++;
 
-          }
+          }else
+            gameParticles.push_back(createParticle(guest_x,guest_y,3));
+
           gameGuests.erase( gameGuests.begin() + i );
 
           break;
@@ -701,6 +705,9 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 
  if(level==3 && !started)
     al_draw_bitmap( level_3_help,0, 0, 0 );
+
+  if(level==4 && !started)
+    al_draw_bitmap( level_4_help,0, 0, 0 );
 
   // Cursor pointer
  // al_draw_rectangle( mouseListener::mouse_x, mouseListener::mouse_y, mouseListener::mouse_x + 3, mouseListener::mouse_y + 3, al_map_rgb( 255, 255, 255), 3);

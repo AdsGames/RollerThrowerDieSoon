@@ -8,6 +8,8 @@ Particle::Particle(int nx, int ny, int ntype)
     sprite = tools::load_bitmap_ex("images/skull.png");
   if(ntype==2)
     sprite = tools::load_bitmap_ex("images/check.png");
+  if(ntype==3)
+    sprite = tools::load_bitmap_ex("images/hit.png");
 
   x=nx;
   y=ny;
