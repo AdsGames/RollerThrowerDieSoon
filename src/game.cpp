@@ -62,7 +62,7 @@ game::game(){
     load_level("maps/level5.txt");
     guest_spawn=150;
   }
-   if(level==6){
+  if(level==6){
     load_level("maps/level6.txt");
     guest_spawn=150;
   }
@@ -221,14 +221,39 @@ void game::update(){
   if(keyListener::keyReleased[ALLEGRO_KEY_ESCAPE])
     set_next_state(STATE_OPTIONS);
 
-  Guest::speed=0.4f;
+  Guest::speed=speed_g;
+
   spawn_rate=16;
-  if(gameUI.getElementByText(">>") ->held()){
+  if(gameUI.getElementByText(">>") ->held() || keyListener::key[ALLEGRO_KEY_F]){
     Guest::speed=2;
     spawn_rate=4;
 
+  }else{
+
   }
 
+
+  if(keyListener::keyReleased[ALLEGRO_KEY_1]){
+    speed_g=0.1f;
+    Message::sendMessage("Difficulty set to 1");
+  }
+  if(keyListener::keyReleased[ALLEGRO_KEY_2]){
+    speed_g=0.2f;
+        Message::sendMessage("Difficulty set to 2");
+}
+  if(keyListener::keyReleased[ALLEGRO_KEY_3]){
+    speed_g=0.3f;
+        Message::sendMessage("Difficulty set to 3");
+}
+  if(keyListener::keyReleased[ALLEGRO_KEY_4]){
+    speed_g=0.4f;
+        Message::sendMessage("Difficulty set to 4");
+}
+  if(keyListener::keyReleased[ALLEGRO_KEY_5]){
+    speed_g=0.5f;
+        Message::sendMessage("Difficulty set to 5");
+
+}
     gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(100,100,100));
     gameUI.getElementById("path_0") ->setDisableHoverEffect(true);
     gameUI.getElementById("path_0") ->setActive(false);
@@ -416,7 +441,6 @@ void game::update(){
 
     }
   }
-  money = 8934578754894;
 
   // Run guest logic
   // In grabber
