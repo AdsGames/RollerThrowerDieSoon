@@ -29,6 +29,8 @@ class Guest
     bool giveUmbrella(){if(!has_umbrella){has_umbrella=true;return true;}return false;}
     std::string getName();
 
+    static float speed;
+
   protected:
     ALLEGRO_BITMAP *sprite;
     ALLEGRO_BITMAP *umbrella;
@@ -39,6 +41,7 @@ class Guest
     float y = 0;
     float x_velocity = 0;
     float y_velocity = 0;
+
     int frame = 0;
     int frame_panic = 0;
     int direction = 0;

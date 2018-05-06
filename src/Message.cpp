@@ -30,6 +30,10 @@ void Message::update(){
       messageList.erase(messageList.begin());
   }
 }
+void Message::clear(){
+
+  messageList.clear();
+}
 
 void Message::draw(){
   if( messageList.size() > 0 )

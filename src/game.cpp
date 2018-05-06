@@ -22,6 +22,7 @@ int game::money=0;
 // Constructor
 game::game(){
 
+  Guest::speed=0.5;
   game::guests_died_enemies=0;
   game::guests_died_falling=0;
   game::guests_rescued=0;
@@ -31,6 +32,7 @@ game::game(){
   old_mouse_y = 0;
 
   Message::load();
+  Message::clear();
 
   x_velocity = 0;
   y_velocity = 0;
@@ -67,6 +69,8 @@ game::game(){
   coaster_small = tools::load_bitmap_ex( "images/tiles/coaster_small.png" );
 
   level_1_help = tools::load_bitmap_ex( "images/level_1_help.png" );
+  level_2_help = tools::load_bitmap_ex( "images/level_2_help.png" );
+
 
 
   // Load font
@@ -90,12 +94,18 @@ game::game(){
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
   gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(100,100,100));
 
+  gameUI.addElement( new UIElement( 25+4+ 128 * 4, 25, "Cost:$100",  font_small ));
+  gameUI.getElementByText("Cost:$100") ->setDisableHoverEffect(true);
+
 
 
   gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
   gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
   gameUI.addElement( new Button(  200, 500, "Start Game", font));
   gameUI.addElement( new Button(  200, 500, "Finish", font));
+
+  gameUI.addElement( new Button(  1800, 5, ">>", font));
+
   gameUI.getElementByText("Finish") -> toggleStatus();
 
   if(level==1 || level==2){
@@ -107,10 +117,17 @@ game::game(){
                 gameUI.getElementById("path_3") -> toggleStatus();
                                 gameUI.getElementById("tweezer") -> toggleStatus();
                                                                 gameUI.getElementById("coaster") -> toggleStatus();
+                                                                                                                                gameUI.getElementByText("Cost:$100") -> toggleStatus();
+
+
 
 
 
   }
+  if(level==1)
+                  gameUI.getElementByText(">>") -> toggleStatus();
+
+
 
 
 
@@ -163,6 +180,15 @@ void game::load_level( std::string filename ){
 
 // Update
 void game::update(){
+
+  Guest::speed=0.5f;
+  spawn_rate=16;
+  if(gameUI.getElementByText(">>") ->held()){
+    Guest::speed=2;
+    spawn_rate=4;
+
+  }
+
 
   if(money>=100){
 
@@ -270,27 +296,26 @@ void game::update(){
         case 0:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 5 );
           money-=100;
-          if(money<100);
             editor_tool=4;
           break;
         case 1:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 6 );
           money-=100;
           editor_tool=4;
- if(money<100);
+
             editor_tool=4;
           break;
         case 2:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 7 );
           money-=100;
-           if(money<100);
+
             editor_tool=4;
 
           break;
         case 3:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 4 );
                     money-=100;
- if(money<100);
+
             editor_tool=4;
           break;
         case 5:
@@ -467,7 +492,7 @@ void game::update(){
   // Spawn guests
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 2 ){
-      if( frame>=15){
+      if( frame>=spawn_rate){
         if(guest_spawn>0 && started){
           gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64 - 8,
                                          gameTiles.at(i) -> getIsoY() + 32 - 20 ));
@@ -479,13 +504,13 @@ void game::update(){
 
     }
   }
-  fart_crame++;
+
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 10 ){
-      if(fart_crame>=25){
+      if(tools::random_int(1,100)==1){
         gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() +32,
                                          gameTiles.at(i) -> getIsoY()-64 ));
-        fart_crame=0;
+
       }
     }
   }
@@ -608,6 +633,8 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
   if(level==1 && !started)
     al_draw_bitmap( level_1_help,0, 0, 0 );
 
+ if(level==2 && !started)
+    al_draw_bitmap( level_2_help,0, 0, 0 );
 
   // Cursor pointer
  // al_draw_rectangle( mouseListener::mouse_x, mouseListener::mouse_y, mouseListener::mouse_x + 3, mouseListener::mouse_y + 3, al_map_rgb( 255, 255, 255), 3);
@@ -629,10 +656,20 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 //  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Guests died to falling:%i",guests_died_falling);
 
   al_draw_textf( font, al_map_rgb( 100, 0, 0), 30, 200, 0, "Money:%i",money);
+
+ // al_draw_textf( font, al_map_rgb( 255, 255, 255), 600, 20, 0, "Cost:100$",money);
+
+
   if(level==1)
     al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",10-(guests_rescued + guests_died_enemies + guests_died_falling ));
   if(level==2)
     al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",15-(guests_rescued + guests_died_enemies + guests_died_falling ));
+  if(level==3)
+    al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",50-(guests_rescued + guests_died_enemies + guests_died_falling ));
+
+  if(level==4)
+    al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",150-(guests_rescued + guests_died_enemies + guests_died_falling ));
+
 
   Message::draw();
 

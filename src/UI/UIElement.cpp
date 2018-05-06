@@ -137,6 +137,9 @@ bool UIElement::hover(){
 bool UIElement::clicked(){
   return hovering && mouseListener::mouse_pressed & 1;
 }
+bool UIElement::held(){
+  return hovering && mouseListener::mouse_button & 1;
+}
 
 bool UIElement::mouseReleased(){
   return mouse_released;

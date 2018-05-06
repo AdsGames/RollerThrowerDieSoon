@@ -76,6 +76,8 @@ class game : public state{
     ALLEGRO_BITMAP *path_hover;
 
     ALLEGRO_BITMAP *level_1_help;
+    ALLEGRO_BITMAP *level_2_help;
+
 
     ALLEGRO_FONT *font;
     ALLEGRO_FONT *font_small;
@@ -87,6 +89,7 @@ class game : public state{
     int guest_spawn=50;
     bool started=0;
     bool finished=false;
+    int spawn_rate=16;
 
 
     // Grabber info

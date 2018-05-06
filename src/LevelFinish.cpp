@@ -48,6 +48,10 @@ void LevelFinish::draw(){
       total_guests=10;
     if(game::level==2)
       total_guests=15;
+    if(game::level==3)
+      total_guests=50;
+     if(game::level==4)
+      total_guests=150;
 
     al_draw_textf( font_big, al_map_rgb( 150, 150, 150), 200, 200, 0, "Total guests:%i",total_guests);
     al_draw_textf( font_big, al_map_rgb( 150, 0, 0), 200, 260, 0, "Total drowned:%i",game::guests_died_falling);
@@ -56,8 +60,8 @@ void LevelFinish::draw(){
     al_draw_textf( font_big, al_map_rgb( 0, 150, 0), 200, 440, 0, "Final cash:%i",game::money);
 
     float total_f=total_guests;
-    float total_lost_f=game::guests_died_falling+game::guests_died_enemies;
-    float percent = (total_lost_f/total_guests)*100;
+    float total_lived=game::guests_rescued;
+    float percent = (total_lived/total_guests)*100;
 
     al_draw_textf( font_extra_thicc, al_map_rgb( 200, 50, 50), 1200, 300, 0, "%.1f%%",percent);
     al_draw_textf( font, al_map_rgb( 200, 50, 50), 1250, 420, 0, "of guests survived.");
