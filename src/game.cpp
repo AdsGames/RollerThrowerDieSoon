@@ -76,9 +76,22 @@ game::game(){
 
   // Create buttons
   gameUI.addElement( new Button( 25          , 25, "path_0",  path[0] ));
+  gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(100,100,100));
+
+
   gameUI.addElement( new Button( 25 + 128    , 25, "path_1",  path[1] ));
+  gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(100,100,100));
+
+
   gameUI.addElement( new Button( 25 + 128 * 2, 25, "path_2",  path[2] ));
+  gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(100,100,100));
+
+
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
+  gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(100,100,100));
+
+
+
   gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
   gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
   gameUI.addElement( new Button(  200, 500, "Start Game", font));
@@ -98,6 +111,7 @@ game::game(){
 
 
   }
+
 
 
   // Load images for entrance
@@ -150,12 +164,50 @@ void game::load_level( std::string filename ){
 // Update
 void game::update(){
 
+  if(money>=100){
+
+    gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_0") ->setDisableHoverEffect(true);
+    gameUI.getElementById("path_0") ->setStatus(false);
+
+    gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_1") ->setDisableHoverEffect(true);
+    gameUI.getElementById("path_1") ->setStatus(false);
+
+    gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_2") ->setDisableHoverEffect(true);
+    gameUI.getElementById("path_2") ->setStatus(false);
+
+    gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_3") ->setDisableHoverEffect(true);
+    gameUI.getElementById("path_3") ->setStatus(false);
+
+
+
+  }else{
+    gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(100,100,100));
+    gameUI.getElementById("path_0") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_0") ->setStatus(false);
+
+    gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(100,100,100));
+    gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(100,100,100));
+    gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(100,100,100));
+
+
+  }
+
 
   if(level==1 &&  guests_rescued + guests_died_enemies + guests_died_falling == 10 && finished==false){
     finished=true;
     gameUI.getElementByText("Finish") -> toggleStatus();
 
   }
+  if(level==2 &&  guests_rescued + guests_died_enemies + guests_died_falling == 15 && finished==false){
+    finished=true;
+    gameUI.getElementByText("Finish") -> toggleStatus();
+
+  }
+
 
 
   for( unsigned int i = 0; i < gameParticles.size(); i++ ){
@@ -201,7 +253,7 @@ void game::update(){
     int mxo = mouseListener::mouse_x - 64;
     int myo = mouseListener::mouse_y - 32;
 
-    if( (mouseListener::mouse_button & 1) &&
+    if( (mouseListener::mouse_button & 1 && !gameUI.isHovering()) &&
         mxo > gameTiles.at(i) -> getIsoX() - 32 && mxo < gameTiles.at(i) -> getIsoX() + 32 &&
         myo < gameTiles.at(i) -> getIsoY() + 32 && myo > gameTiles.at(i) -> getIsoY() - 32 ){
 
