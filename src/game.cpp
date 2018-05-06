@@ -158,6 +158,8 @@ void game::update(){
       selectedGuest -> setCaptured( false );
       selectedGuest -> setVelocityX( x_velocity );
       selectedGuest -> setVelocityY( y_velocity );
+      selectedGuest -> setDirection(0 );
+
 
       gameGuests.push_back( selectedGuest );
       selectedGuest = nullptr;
