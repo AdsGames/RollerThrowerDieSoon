@@ -45,7 +45,7 @@ void Guest::update(){
     if( x_velocity < 0 )
       x_velocity /= decel;
 
-  float speed=0.8f;
+  float speed=0.5f;
 
   if( y_velocity == 0 && x_velocity == 0 ){
     if( direction == 0 ){
