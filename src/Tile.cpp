@@ -99,7 +99,8 @@ void Tile::draw(){
     else
       al_draw_bitmap( sprite, iso_x, iso_y, 0);
   }
-  if( grid != nullptr)
-    al_draw_bitmap( grid, iso_x, iso_y, 0);
-
+  if(type!=9){
+    if( grid != nullptr)
+      al_draw_bitmap( grid, iso_x, iso_y, 0);
+  }
 }
