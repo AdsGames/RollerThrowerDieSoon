@@ -22,6 +22,7 @@ class Tile
     int colliding( int x, int y, int width = 0, int height = 0 );
     int colliding_tight( int x, int y, int width = 0, int height = 0 );
     int colliding_loose( int x, int y, int width = 0, int height = 0 );
+    int colliding_water( int x, int y, int width = 0, int height = 0 );
 
 
   private:
