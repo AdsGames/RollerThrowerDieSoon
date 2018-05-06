@@ -19,6 +19,7 @@ class Particle
     int x;
     int y;
     int lifetime=0;
+    int type=1;
 };
 
 #endif // PARTICLE_H

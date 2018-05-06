@@ -40,7 +40,7 @@ class Enemy
     int frame=0;
 
     // Hit points
-    int health=10000;
+    int health=1000;
 };
 
 #endif // ENEMY_H
