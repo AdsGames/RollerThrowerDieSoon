@@ -60,11 +60,11 @@ game::game(){
   }
  if(level==5){
     load_level("maps/level5.txt");
-    guest_spawn=150;
+    guest_spawn=200;
   }
   if(level==6){
     load_level("maps/level6.txt");
-    guest_spawn=150;
+    guest_spawn=200;
   }
 
   // Load path images
@@ -325,6 +325,20 @@ void game::update(){
     gameUI.getElementByText("Finish") -> toggleStatus();
 
   }
+
+
+  if(level==5 &&  guests_rescued + guests_died_enemies + guests_died_falling == 200 && finished==false){
+    finished=true;
+    gameUI.getElementByText("Finish") -> toggleStatus();
+
+  }
+
+    if(level==6 &&  guests_rescued + guests_died_enemies + guests_died_falling == 200 && finished==false){
+    finished=true;
+    gameUI.getElementByText("Finish") -> toggleStatus();
+
+  }
+
 
 
 
@@ -797,7 +811,10 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 
   if(level==4)
     al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",150-(guests_rescued + guests_died_enemies + guests_died_falling ));
-
+  if(level==5)
+    al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",200-(guests_rescued + guests_died_enemies + guests_died_falling ));
+  if(level==6)
+    al_draw_textf( font_small, al_map_rgb( 0, 0, 0), 30, 260, 0, "Remaining Guests:%i",200-(guests_rescued + guests_died_enemies + guests_died_falling ));
 
   Message::draw();
 

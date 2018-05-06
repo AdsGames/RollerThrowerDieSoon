@@ -52,6 +52,8 @@ void LevelFinish::draw(){
       total_guests=70;
      if(game::level==4)
       total_guests=150;
+    if(game::level==5 || game::level==6 )
+      total_guests=200;
 
     al_draw_textf( font_big, al_map_rgb( 150, 150, 150), 200, 200, 0, "Total guests:%i",total_guests);
     al_draw_textf( font_big, al_map_rgb( 150, 0, 0), 200, 260, 0, "Total drowned:%i",game::guests_died_falling);
