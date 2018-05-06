@@ -37,7 +37,7 @@ game::game(){
   coaster_small = tools::load_bitmap_ex( "images/tiles/coaster_small.png" );
 
   // Load font
-  font = al_load_ttf_font( "font/font.ttf", 36, 0);
+  font = al_load_ttf_font( "font/font.ttf", 48, 0);
 
   // Create buttons
   gameUI.addElement( new Button( 25          , 25, "path_0",  path[0] ));
@@ -46,6 +46,8 @@ game::game(){
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
   gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
   gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
+  gameUI.addElement( new Button(  300, 500, "Start Game", font));
+
 
   // Load images for entrance
   entrance_back = tools::load_bitmap_ex( "images/tiles/EntranceBack.png" );
@@ -117,6 +119,12 @@ void game::update(){
     editor_tool = 4;
    if( gameUI.getElementById("coaster") -> clicked() )
     editor_tool = 5;
+
+  if( gameUI.getElementByText("Start Game") -> clicked() ){
+   started=true;
+
+   gameUI.getElementByText("Start Game") ->toggleStatus();
+  }
 
   // Velocity of mouse
   x_velocity = -1 * ( old_mouse_x - mouseListener::mouse_x );
@@ -312,7 +320,7 @@ void game::update(){
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 2 ){
       if( frame>=15){
-        if(guest_spawn>0){
+        if(guest_spawn>0 && started){
           gameGuests.push_back( createGuest( gameTiles.at(i) -> getIsoX() + 64 - 8,
                                          gameTiles.at(i) -> getIsoY() + 32 - 20 ));
           guest_spawn--;
@@ -460,12 +468,12 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
       inpark++;
   }
 
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests in park:%u",(unsigned int)inpark);
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests rescued:%i",guests_rescued);
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to enemies:%i",guests_died_enemies);
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Guests died to falling:%i",guests_died_falling);
+//  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 170, 0, "Guests in park:%u",(unsigned int)inpark);
+//  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 220, 0, "Guests rescued:%i",guests_rescued);
+//  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 270, 0, "Guests died to enemies:%i",guests_died_enemies);
+//  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 320, 0, "Guests died to falling:%i",guests_died_falling);
 
-  al_draw_textf( font, al_map_rgb( 0, 0, 0), 10, 370, 0, "Money:%i",money);
+  al_draw_textf( font, al_map_rgb( 100, 0, 0), 30, 200, 0, "Money:%i",money);
 
   Message::draw();
 
