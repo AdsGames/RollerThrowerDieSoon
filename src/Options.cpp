@@ -15,6 +15,11 @@ Options::Options()
 
     OptionsUI.addElement( new Button(  400, 200, "Level 2", font));
 
+    OptionsUI.addElement( new Button(  600, 200, "Level 3", font));
+
+    OptionsUI.addElement( new Button(  800, 200, "Level 4", font));
+
+
 
 
 
@@ -49,6 +54,16 @@ void Options::update(){
 
   if(OptionsUI.getElementByText("Level 2") -> clicked()){
     game::level=2;
+    set_next_state(STATE_GAME);
+  }
+
+   if(OptionsUI.getElementByText("Level 3") -> clicked()){
+    game::level=3;
+    set_next_state(STATE_GAME);
+  }
+
+  if(OptionsUI.getElementByText("Level 4") -> clicked()){
+    game::level=4;
     set_next_state(STATE_GAME);
   }
 

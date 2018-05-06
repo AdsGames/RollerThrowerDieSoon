@@ -38,6 +38,16 @@ game::game(){
     load_level("maps/level2.txt");
     guest_spawn=20;
   }
+  if(level==3){
+    load_level("maps/level3.txt");
+    guest_spawn=20;
+  }
+
+  if(level==4){
+    load_level("maps/level4.txt");
+    guest_spawn=20;
+  }
+
 
   // Load path images
   path[0] = tools::load_bitmap_ex( "images/tiles/Path_0.png" );
@@ -57,9 +67,23 @@ game::game(){
   gameUI.addElement( new Button( 25 + 128 * 3, 25, "path_3",  path[3] ));
   gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
   gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
-  gameUI.addElement( new Button(  300, 500, "Start Game", font));
-  gameUI.addElement( new Button(  300, 500, "Finish", font));
+  gameUI.addElement( new Button(  200, 500, "Start Game", font));
+  gameUI.addElement( new Button(  200, 500, "Finish", font));
   gameUI.getElementByText("Finish") -> toggleStatus();
+
+  if(level==1){
+    gameUI.getElementById("path_0") -> toggleStatus();
+        gameUI.getElementById("path_1") -> toggleStatus();
+
+            gameUI.getElementById("path_2") -> toggleStatus();
+
+                gameUI.getElementById("path_3") -> toggleStatus();
+                                gameUI.getElementById("tweezer") -> toggleStatus();
+                                                                gameUI.getElementById("coaster") -> toggleStatus();
+
+
+
+  }
 
 
   // Load images for entrance
