@@ -49,7 +49,7 @@ void LevelFinish::draw(){
     if(game::level==2)
       total_guests=15;
     if(game::level==3)
-      total_guests=50;
+      total_guests=70;
      if(game::level==4)
       total_guests=150;
 

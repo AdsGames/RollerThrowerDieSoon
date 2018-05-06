@@ -393,8 +393,9 @@ void game::update(){
 
     // Collision with tiles
     for( unsigned int j = 0; j < gameTiles.size(); j++ ){
-    int guest_x = gameGuests.at(i) -> getX() + 8;
-        int guest_y = gameGuests.at(i) -> getY() + 32;
+      int guest_x = gameGuests.at(i) -> getX() + 8;
+      int guest_y = gameGuests.at(i) -> getY() + 40;
+
       if(gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) && guest_x<1920 && guest_x>0 && guest_y<1080 && guest_y>0 ){
         off_map=false;
       }
