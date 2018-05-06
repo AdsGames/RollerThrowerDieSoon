@@ -29,7 +29,7 @@ game::game(){
   srand( time(NULL));
 
   if(level==1){
-    load_level("maps/level1.txt");
+    load_level("maps/level3.txt");
     guest_spawn=10;
   }
 
