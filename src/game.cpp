@@ -70,6 +70,8 @@ game::game(){
 
   level_1_help = tools::load_bitmap_ex( "images/level_1_help.png" );
   level_2_help = tools::load_bitmap_ex( "images/level_2_help.png" );
+  level_3_help = tools::load_bitmap_ex( "images/level_3_help.png" );
+
 
 
 
@@ -138,9 +140,11 @@ game::game(){
   if(level==1)
                   gameUI.getElementByText(">>") -> toggleStatus();
 
-  if(level==1 || level==2 || level==3)
+  if(level==1 || level==2 || level==3){
                                                                                                                                   gameUI.getElementById("coaster") -> toggleStatus();
+                                                                                                                                  gameUI.getElementByText("Cost:$500") -> toggleStatus();
 
+  }
 
 
 
@@ -190,6 +194,17 @@ void game::load_level( std::string filename ){
     }
     myfile.close();
   }
+}
+bool game::canPlaceTile(int x, int y){
+  for( unsigned int i = 0; i < gameTiles.size(); i++ ){
+    if(x==gameTiles.at(i) -> getX() && y==gameTiles.at(i) -> getY()){
+      if(gameTiles.at(i) -> getType()==8 || gameTiles.at(i) -> getType()==2 || gameTiles.at(i) -> getType()==9 || gameTiles.at(i) -> getType()==3)
+       return false;
+    }
+
+  }
+  return true;
+
 }
 
 // Update
@@ -321,9 +336,12 @@ void game::update(){
     int mxo = mouseListener::mouse_x - 64;
     int myo = mouseListener::mouse_y - 32;
 
-    if( (mouseListener::mouse_button & 1 && !gameUI.isHovering()) &&
+    if( (mouseListener::mouse_button & 1 && !gameUI.isHovering()) && canPlaceTile(gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY()) &&
+
         mxo > gameTiles.at(i) -> getIsoX() - 32 && mxo < gameTiles.at(i) -> getIsoX() + 32 &&
         myo < gameTiles.at(i) -> getIsoY() + 32 && myo > gameTiles.at(i) -> getIsoY() - 32 ){
+
+
 
         switch( editor_tool){
         case 0:
@@ -614,12 +632,14 @@ void game::draw(){
 
   // Modified x and y for isometric conversions
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
-    if( editor_tool >= 0 && editor_tool <= 3 &&
-        gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) ){
-      al_draw_bitmap( path_hover, gameTiles.at(i) -> getIsoX(), gameTiles.at(i) -> getIsoY(), 0);
+    if(canPlaceTile(gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY())){
+      if( editor_tool >= 0 && editor_tool <= 3 &&
+          gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) ){
+        al_draw_bitmap( path_hover, gameTiles.at(i) -> getIsoX(), gameTiles.at(i) -> getIsoY(), 0);
+      }
+      if( editor_tool == 5 && gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) )
+        al_draw_bitmap( coaster, gameTiles.at(i) -> getIsoX()-200, gameTiles.at(i) -> getIsoY()-300, 0);
     }
-    if( editor_tool == 5 && gameTiles.at(i) -> colliding( mouseListener::mouse_x, mouseListener::mouse_y ) )
-      al_draw_bitmap( coaster, gameTiles.at(i) -> getIsoX()-200, gameTiles.at(i) -> getIsoY()-300, 0);
   }
 
   // Picked up guest
@@ -678,6 +698,9 @@ for( unsigned int i = 0; i < gameGuests.size(); i++ ){
 
  if(level==2 && !started)
     al_draw_bitmap( level_2_help,0, 0, 0 );
+
+ if(level==3 && !started)
+    al_draw_bitmap( level_3_help,0, 0, 0 );
 
   // Cursor pointer
  // al_draw_rectangle( mouseListener::mouse_x, mouseListener::mouse_y, mouseListener::mouse_x + 3, mouseListener::mouse_y + 3, al_map_rgb( 255, 255, 255), 3);
