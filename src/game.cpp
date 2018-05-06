@@ -28,6 +28,11 @@ game::game(){
 
   srand( time(NULL));
 
+  if(level==1){
+    load_level("maps/level1.txt");
+    guest_spawn=10;
+  }
+
   // Load path images
   path[0] = tools::load_bitmap_ex( "images/tiles/Path_0.png" );
   path[1] = tools::load_bitmap_ex( "images/tiles/Path_1.png" );
@@ -47,6 +52,8 @@ game::game(){
   gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
   gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
   gameUI.addElement( new Button(  300, 500, "Start Game", font));
+  gameUI.addElement( new Button(  300, 500, "Finish", font));
+  gameUI.getElementByText("Finish") -> toggleStatus();
 
 
   // Load images for entrance
@@ -59,7 +66,7 @@ game::game(){
   cursor_closed = tools::load_bitmap_ex( "images/tweezersClosed.png" );
 
   // Load level
-  load_level("maps/level1.txt");
+
 }
 
 // Load map from text
@@ -98,6 +105,14 @@ void game::load_level( std::string filename ){
 
 // Update
 void game::update(){
+
+
+  if(level==1 &&  guests_rescued + guests_died_enemies + guests_died_falling == 10 && finished==false){
+    finished=true;
+    gameUI.getElementByText("Finish") -> toggleStatus();
+
+  }
+
 
   for( unsigned int i = 0; i < gameParticles.size(); i++ ){
 
