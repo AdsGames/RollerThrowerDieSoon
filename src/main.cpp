@@ -269,6 +269,8 @@ void setup(){
   //Options::read_data();
   MusicManager::load();
   MusicManager::game_music.play();
+  Guest::speed=0.4f;
+
 }
 
 // Handle events

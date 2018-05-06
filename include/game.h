@@ -94,7 +94,7 @@ class game : public state{
     bool started=0;
     bool finished=false;
     int spawn_rate=16;
-
+    float speed_g=0.5f;
     bool canPlaceTile(int sullys, int nose);
 
 

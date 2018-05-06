@@ -1,7 +1,7 @@
 #include "Guest.h"
 
 Guest::Guest(){int butts;};
-float Guest::speed=0.5;
+float Guest::speed;
 
 Guest::Guest(int x, int y){
 
