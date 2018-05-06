@@ -2,7 +2,7 @@
 
 Enemy::Enemy( int x, int y ){
   sprite = tools::load_bitmap_ex( "images/flail.png" );
-  font = al_load_ttf_font( "font/font.ttf", 18, 0 );
+  font = al_load_ttf_font( "font/font.ttf", 32, 0 );
 
   for( int i = 0; i < 8; i++){
     for( int t = 0; t < 8; t++){
@@ -39,5 +39,5 @@ void Enemy::update(){
 
 void Enemy::draw(){
   al_draw_bitmap( spritesheet[frame], x, y, 0 );
-  al_draw_textf( font, al_map_rgb( 0, 0, 0 ), x + 300, y, 0, "%i", health );
+  al_draw_textf( font, al_map_rgb( 255, 0, 0 ), x + 200, y-50, 0, "HP:%i", health );
 }
