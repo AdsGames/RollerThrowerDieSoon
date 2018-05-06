@@ -20,7 +20,7 @@ void menu::draw(){
 
   al_draw_bitmap(splash,0,0,0);
   if(loadingb){
-    al_draw_bitmap(loading,0,0,0);
+    //al_draw_bitmap(loading,0,0,0);
 
   }
 

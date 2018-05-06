@@ -22,6 +22,7 @@
 
 #include "Options.h"
 #include "MusicManager.h"
+#include "LevelFinish.h"
 
 // Current state object
 state *currentState = nullptr;
@@ -94,6 +95,11 @@ void change_state(){
       case STATE_MENU:
         currentState = new menu();
         std::cout<<"Switched state to main menu.\n";
+        break;
+
+      case STATE_LEVELFINISH:
+        currentState = new LevelFinish();
+        std::cout<<"Switched state to level finish.\n";
         break;
       case STATE_EXIT:
         std::cout<<"Exiting program.\n";
