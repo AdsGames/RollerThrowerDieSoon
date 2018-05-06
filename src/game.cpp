@@ -99,8 +99,19 @@ game::game(){
 
 
 
-  gameUI.addElement( new Button( 25  , 25+64, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
-  gameUI.addElement( new Button( 25  +128 * 1, 25+64, "coaster", coaster_small));
+  gameUI.addElement( new Button( 25  , 25+64+4, "tweezer", tools::load_bitmap_ex( "images/tweezersButton.png" )));
+
+
+
+
+  gameUI.addElement( new Button( 25  +128 * 3, 25+64+4, "coaster", coaster_small));
+
+
+
+
+  gameUI.addElement( new UIElement( 25+4+ 128 * 4, 29+64, "Cost:$500",  font_small ));
+  gameUI.getElementByText("Cost:$500") -> setDisableHoverEffect(true);
+
   gameUI.addElement( new Button(  200, 500, "Start Game", font));
   gameUI.addElement( new Button(  200, 500, "Finish", font));
 
@@ -126,6 +137,9 @@ game::game(){
   }
   if(level==1)
                   gameUI.getElementByText(">>") -> toggleStatus();
+
+  if(level==1 || level==2 || level==3)
+                                                                                                                                  gameUI.getElementById("coaster") -> toggleStatus();
 
 
 
@@ -189,28 +203,6 @@ void game::update(){
 
   }
 
-
-  if(money>=100){
-
-    gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_0") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_0") ->setActive(true);
-
-    gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_1") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_1") ->setActive(true);
-
-    gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_2") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_2") ->setActive(true);
-
-    gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_3") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_3") ->setActive(true);
-
-
-
-  }else if(level>2){
     gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(100,100,100));
     gameUI.getElementById("path_0") ->setDisableHoverEffect(true);
     gameUI.getElementById("path_0") ->setActive(false);
@@ -228,6 +220,34 @@ void game::update(){
     gameUI.getElementById("path_3") ->setDisableHoverEffect(true);
     gameUI.getElementById("path_3") ->setActive(false);
 
+  if(money>=100 && level>2){
+
+    gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_0") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_0") ->setActive(true);
+
+    gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_1") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_1") ->setActive(true);
+
+    gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_2") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_2") ->setActive(true);
+
+    gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("path_3") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_3") ->setActive(true);
+
+  }
+  //                 sully made me do it
+  if(money>=500 && !level<3){
+    gameUI.getElementById("coaster") ->setBackgroundColour( al_map_rgb(0,220,0));
+    gameUI.getElementById("coaster") ->setDisableHoverEffect(false);
+    gameUI.getElementById("coaster") ->setActive(true);
+  }else{
+    gameUI.getElementById("coaster") ->setBackgroundColour( al_map_rgb(100,100,100));
+    gameUI.getElementById("coaster") ->setDisableHoverEffect(true);
+    gameUI.getElementById("coaster") ->setActive(false);
 
   }
 
@@ -358,8 +378,11 @@ void game::update(){
   }
 
   // Enemy logic
-  for( unsigned int i = 0; i < gameEnemies.size(); i++ )
+  for( unsigned int i = 0; i < gameEnemies.size(); i++ ){
     gameEnemies.at(i) -> update();
+    if(gameEnemies.at(i) ->getHealth()==0)
+      gameEnemies.erase(gameEnemies.begin()+i);
+  }
 
   // Run guest logic
   // In grabber
@@ -411,10 +434,11 @@ void game::update(){
               std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
               Message::sendMessage(stringyboi);
               gameParticles.push_back(createParticle(guest_x,guest_y,1));
+              guests_died_falling ++;
             }
             gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
-            guests_died_falling ++;
+
             break;
           }
         }
@@ -473,9 +497,10 @@ void game::update(){
             std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
             Message::sendMessage(stringyboi);
             gameParticles.push_back(createParticle(guest_x,guest_y,1));
+            guests_died_falling++;
+
           }
       gameGuests.erase( gameGuests.begin() + i );
-      guests_died_falling++;
       continue;
     }
 
@@ -496,11 +521,11 @@ void game::update(){
             std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
             Message::sendMessage(stringyboi);
             gameParticles.push_back(createParticle(guest_x,guest_y,1));
+            guests_died_enemies++;
 
           }
           gameGuests.erase( gameGuests.begin() + i );
 
-          guests_died_enemies++;
           break;
         }
       }
