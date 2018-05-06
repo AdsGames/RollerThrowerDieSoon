@@ -55,6 +55,15 @@ void LevelFinish::draw(){
     al_draw_textf( font_big, al_map_rgb( 0, 150, 0), 200, 380, 0, "Total rescued:%i",game::guests_rescued);
     al_draw_textf( font_big, al_map_rgb( 0, 150, 0), 200, 440, 0, "Final cash:%i",game::money);
 
+    float total_f=total_guests;
+    float total_lost_f=game::guests_died_falling+game::guests_died_enemies;
+    float percent = (total_lost_f/total_guests)*100;
+
+    al_draw_textf( font_extra_thicc, al_map_rgb( 200, 50, 50), 1200, 300, 0, "%.1f%%",percent);
+    al_draw_textf( font, al_map_rgb( 200, 50, 50), 1250, 420, 0, "of guests survived.");
+
+
+
 
 
 
