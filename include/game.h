@@ -77,6 +77,8 @@ class game : public state{
 
     ALLEGRO_BITMAP *level_1_help;
     ALLEGRO_BITMAP *level_2_help;
+    ALLEGRO_BITMAP *level_3_help;
+
 
 
     ALLEGRO_FONT *font;
@@ -90,6 +92,8 @@ class game : public state{
     bool started=0;
     bool finished=false;
     int spawn_rate=16;
+
+    bool canPlaceTile(int sullys, int nose);
 
 
     // Grabber info
