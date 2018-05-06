@@ -19,6 +19,7 @@ class Message{
     static ALLEGRO_FONT *font;
     static int time;
     static std::vector<std::string> messageList;
+    static void clear();
   protected:
 
   private:

@@ -69,6 +69,8 @@ class UIElement
     bool mouseReleased();
     bool hover();
     bool clicked();
+    bool held();
+
     virtual bool getChecked(){
       return false;
     }

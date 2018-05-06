@@ -1,6 +1,7 @@
 #include "Guest.h"
 
 Guest::Guest(){int butts;};
+float Guest::speed=0.5;
 
 Guest::Guest(int x, int y){
 
@@ -45,7 +46,6 @@ void Guest::update(){
     if( x_velocity < 0 )
       x_velocity /= decel;
 
-  float speed=0.5f;
 
   if( y_velocity == 0 && x_velocity == 0 ){
     if( direction == 0 ){
