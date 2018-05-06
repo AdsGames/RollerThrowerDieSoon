@@ -58,7 +58,14 @@ game::game(){
     load_level("maps/level4.txt");
     guest_spawn=150;
   }
-
+ if(level==5){
+    load_level("maps/level5.txt");
+    guest_spawn=150;
+  }
+   if(level==6){
+    load_level("maps/level6.txt");
+    guest_spawn=150;
+  }
 
   // Load path images
   path[0] = tools::load_bitmap_ex( "images/tiles/Path_0.png" );
