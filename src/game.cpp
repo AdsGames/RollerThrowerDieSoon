@@ -197,6 +197,8 @@ void game::update(){
     bool guest_alive = true;
 
     bool is_cart = gameGuests.at(i) -> getIsCart();
+    int guest_x = gameGuests.at(i) -> getX() + 8;
+    int guest_y = gameGuests.at(i) -> getY() + 32;
 
 
     gameGuests.at(i) -> update();
@@ -223,8 +225,7 @@ void game::update(){
 
       if( guest_alive ){
         // Shorthand
-        int guest_x = gameGuests.at(i) -> getX() + 8;
-        int guest_y = gameGuests.at(i) -> getY() + 32;
+
         int current = gameTiles.at(j) -> getType();
 
         // Collision with map tile
@@ -237,6 +238,7 @@ void game::update(){
             if(!is_cart){
               std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
               Message::sendMessage(stringyboi);
+              gameParticles.push_back(createParticle(guest_x,guest_y,1));
             }
             gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
@@ -244,18 +246,22 @@ void game::update(){
             break;
           }
           if( current == 3 && !is_cart){
+                        gameParticles.push_back(createParticle(guest_x,guest_y,2));
+
             gameGuests.erase( gameGuests.begin() + i );
             guest_alive = false;
             guests_rescued ++;
+
             break;
           }
 
         }
         if( gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) && !is_cart){
           if( current == 9 ){
-            if(gameGuests.at(i) ->giveUmbrella())
+            if(gameGuests.at(i) ->giveUmbrella()){
               money+=10;
-
+              gameParticles.push_back(createParticle(guest_x,guest_y,0));
+            }
           }
 
         }
@@ -286,6 +292,7 @@ void game::update(){
         if(!is_cart){
             std::string stringyboi = gameGuests.at(i) -> getName() + " has died from drowining.";
             Message::sendMessage(stringyboi);
+            gameParticles.push_back(createParticle(guest_x,guest_y,1));
           }
       gameGuests.erase( gameGuests.begin() + i );
       guests_died_falling++;
@@ -308,6 +315,8 @@ void game::update(){
           if(!is_cart){
             std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
             Message::sendMessage(stringyboi);
+            gameParticles.push_back(createParticle(guest_x,guest_y,1));
+
           }
           gameGuests.erase( gameGuests.begin() + i );
 
