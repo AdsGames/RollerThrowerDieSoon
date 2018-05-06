@@ -72,6 +72,9 @@ class game : public state{
     int guests_died_enemies=0;
     int guests_died_falling=0;
     int money=0;
+    int frame=0;
+    int fart_crame=0;
+    int guest_spawn=50;
 
     // Grabber info
     int old_mouse_x;

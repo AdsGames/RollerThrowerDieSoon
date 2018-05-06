@@ -7,7 +7,7 @@ std::vector<std::string> Message::messageList;
 
 void Message::sendMessage(std::string newMessage){
   messageList.insert(messageList.begin(), newMessage);
-  time = 120;
+  time = 60;
 }
 
 Message::Message(){
@@ -25,7 +25,7 @@ Message::~Message(){
 void Message::update(){
   time--;
   if(time<=0){
-    time=120;
+    time=60;
     if(messageList.size()>0)
       messageList.erase(messageList.begin());
   }
