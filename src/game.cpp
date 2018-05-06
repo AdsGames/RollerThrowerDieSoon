@@ -402,9 +402,14 @@ void game::update(){
   // Enemy logic
   for( unsigned int i = 0; i < gameEnemies.size(); i++ ){
     gameEnemies.at(i) -> update();
-    if(gameEnemies.at(i) ->getHealth()==0)
+    if(gameEnemies.at(i) ->getHealth()==0){
+          gameParticles.push_back(createParticle(gameEnemies.at(i) -> getX(),gameEnemies.at(i) -> getY(),4));
+
       gameEnemies.erase(gameEnemies.begin()+i);
+
+    }
   }
+  money = 8934578754894;
 
   // Run guest logic
   // In grabber
@@ -489,12 +494,11 @@ void game::update(){
                 gameParticles.push_back(createParticle(guest_x,guest_y,0));
               }
             }
-
           }
         }
 
-if(guest_alive){
-        // Touching special tile
+      if(guest_alive){
+      // Touching special tile
         if( gameTiles.at(j) -> colliding_tight( guest_x, guest_y )){
           // Directional tilesoff_map
           if( current == 4 )
@@ -538,16 +542,23 @@ if(guest_alive){
                               gameGuests.at(i) -> getY() + 54,
                               gameEnemies.at(j) -> getY() + 100,
                               gameEnemies.at(j) -> getY() + 200)){
-          gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
 
           if(!is_cart){
             std::string stringyboi = gameGuests.at(i) -> getName() + " has died from an angry octopus.";
             Message::sendMessage(stringyboi);
             gameParticles.push_back(createParticle(guest_x,guest_y,1));
             guests_died_enemies++;
+            if(gameGuests.at(i) -> getVelocityX()!=0 && gameGuests.at(i) -> getVelocityY()!=0){
+              gameGuests.at(i) -> setVelocityX(10);
+              gameGuests.at(i) -> setVelocityY(0);
+              gameParticles.push_back(createParticle(guest_x+32,guest_y+32,3));
+}
 
           }else
             gameParticles.push_back(createParticle(guest_x,guest_y,3));
+
+          gameEnemies.at(j) -> applyDamage(abs(gameGuests.at(i) -> getVelocityX()) + abs(gameGuests.at(i) -> getVelocityY()));
+
 
           gameGuests.erase( gameGuests.begin() + i );
 
