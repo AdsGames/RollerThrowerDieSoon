@@ -368,6 +368,7 @@ void game::update(){
 
   // Rest of guests
   for( unsigned int i = 0; i < gameGuests.size(); i++ ){
+
     bool off_map = true;
     bool guest_alive = true;
 
@@ -394,7 +395,7 @@ void game::update(){
     for( unsigned int j = 0; j < gameTiles.size(); j++ ){
     int guest_x = gameGuests.at(i) -> getX() + 8;
         int guest_y = gameGuests.at(i) -> getY() + 32;
-      if(gameTiles.at(j) -> colliding_loose( guest_x, guest_y )){
+      if(gameTiles.at(j) -> colliding_loose( guest_x, guest_y ) && guest_x<1920 && guest_x>0 && guest_y<1080 && guest_y>0 ){
         off_map=false;
       }
 
@@ -406,7 +407,7 @@ void game::update(){
         // Collision with map tile
         if( gameTiles.at(j) -> colliding( guest_x, guest_y ) && !is_cart){
 
-          off_map = false;
+
 
           //wattaa
           if( current == 8 && !is_cart){
