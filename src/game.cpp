@@ -160,6 +160,8 @@ game::game(){
   // Load images for entrance
   entrance_back = tools::load_bitmap_ex( "images/tiles/EntranceBack.png" );
   entrance_front = tools::load_bitmap_ex( "images/tiles/EntranceFront.png" );
+    entrance_front_transparent = tools::load_bitmap_ex( "images/tiles/EntranceFrontTrans.png" );
+
   path_hover = tools::load_bitmap_ex( "images/tiles/Path_Hover.png" );
 
   // Load grabber images
@@ -684,11 +686,14 @@ void game::draw(){
 
   al_draw_bitmap( entrance_back, 129, 640, 0 );
 
+  al_draw_bitmap( entrance_front, 255, 767, 0 );
+
+
   // Draw guests
   for( unsigned int i = 0; i < gameGuests.size(); i++ )
     gameGuests.at(i) -> draw();
 
-  al_draw_bitmap( entrance_front, 255, 767, 0 );
+  al_draw_bitmap( entrance_front_transparent, 255, 767, 0 );
 
   // Draw enemies
   for( unsigned int i = 0; i < gameEnemies.size(); i++ )

@@ -71,6 +71,8 @@ class game : public state{
     ALLEGRO_BITMAP *path[4];
     ALLEGRO_BITMAP *entrance_back;
     ALLEGRO_BITMAP *entrance_front;
+      ALLEGRO_BITMAP *entrance_front_transparent;
+
     ALLEGRO_BITMAP *cursor_open;
     ALLEGRO_BITMAP *cursor_closed;
     ALLEGRO_BITMAP *path_hover;
@@ -79,6 +81,7 @@ class game : public state{
     ALLEGRO_BITMAP *level_2_help;
     ALLEGRO_BITMAP *level_3_help;
     ALLEGRO_BITMAP *level_4_help;
+
 
 
 
