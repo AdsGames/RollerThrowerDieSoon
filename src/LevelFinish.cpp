@@ -3,6 +3,10 @@
 LevelFinish::LevelFinish()
 {
     font = al_load_ttf_font( "font/font.ttf", 18, 0);
+    font_big = al_load_ttf_font( "font/font.ttf", 56, 0);
+    font_extra_thicc = al_load_ttf_font( "font/font.ttf", 100, 0);
+
+
 
     cursor = tools::load_bitmap_ex("images/tweezersOpen.png");
 
@@ -24,6 +28,11 @@ LevelFinish::~LevelFinish()
 
 void LevelFinish::update(){
   LevelFinishUI.update();
+
+  if(LevelFinishUI.getElementByText("Continue") -> clicked()){
+   game::level=4;
+    set_next_state(STATE_OPTIONS);
+  }
 }
 
 void LevelFinish::draw(){
@@ -32,11 +41,24 @@ void LevelFinish::draw(){
 
     LevelFinishUI.draw();
 
+    al_draw_textf( font_extra_thicc, al_map_rgb( 200, 0, 0), 700, 20, 0, "Carnage Report");
+
+    int total_guests=123;
+    if(game::level==1)
+      total_guests=10;
+    if(game::level==2)
+      total_guests=15;
+
+    al_draw_textf( font_big, al_map_rgb( 150, 150, 150), 200, 200, 0, "Total guests:%i",total_guests);
+    al_draw_textf( font_big, al_map_rgb( 150, 0, 0), 200, 260, 0, "Total drowned:%i",game::guests_died_falling);
+    al_draw_textf( font_big, al_map_rgb( 150, 0, 0), 200, 320, 0, "Total killed by octopi:%i",game::guests_died_enemies);
+    al_draw_textf( font_big, al_map_rgb( 0, 150, 0), 200, 380, 0, "Total rescued:%i",game::guests_rescued);
+    al_draw_textf( font_big, al_map_rgb( 0, 150, 0), 200, 440, 0, "Final cash:%i",game::money);
+
+
+
 
     al_draw_bitmap(cursor,mouseListener::mouse_x,mouseListener::mouse_y,0);
 
-//  if(LevelFinishUI().getElementByText("Level 4") -> clicked()){
-//    game::level=4;
-//    set_next_state(STATE_OPTIONS);
-//  }
+
 }

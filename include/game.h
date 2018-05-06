@@ -35,6 +35,10 @@ class game : public state{
     void draw();
 
     static int level;
+    static int guests_rescued;
+    static int guests_died_enemies;
+    static int guests_died_falling;
+    static int money;
 
     // Create tile at coordinate
     Tile *createTile( int, int, int );
@@ -77,10 +81,7 @@ class game : public state{
     ALLEGRO_FONT *font_small;
 
 
-    int guests_rescued=0;
-    int guests_died_enemies=0;
-    int guests_died_falling=0;
-    int money=0;
+
     int frame=0;
     int fart_crame=0;
     int guest_spawn=50;
