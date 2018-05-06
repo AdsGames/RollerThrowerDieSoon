@@ -101,7 +101,9 @@ void game::update(){
 
   for( unsigned int i = 0; i < gameParticles.size(); i++ ){
 
-      gameParticles.at(i) -> update();
+      if(gameParticles.at(i) -> update())
+        gameParticles.erase( gameParticles.begin() + i );
+
   }
 
   Message::update();

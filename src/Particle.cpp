@@ -2,7 +2,11 @@
 
 Particle::Particle(int nx, int ny, int ntype)
 {
-  //ctor
+  if(ntype==0)
+    sprite = tools::load_bitmap_ex("images/money.png");
+
+  x=nx;
+  y=ny;
 }
 
 Particle::~Particle()
@@ -12,10 +16,15 @@ Particle::~Particle()
 
 void Particle::draw(){
 
+  al_draw_bitmap( sprite, x-8, y-8, 0 );
 
 }
 
-void Particle::update(){
+bool Particle::update(){
 
-
+  y+=10;
+  lifetime++;
+  if(lifetime>60)
+    return true;
+  return false;
 }
