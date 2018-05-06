@@ -79,6 +79,8 @@ class game : public state{
     int fart_crame=0;
     int guest_spawn=50;
     bool started=0;
+    bool finished=false;
+    int level=1;
 
     // Grabber info
     int old_mouse_x;
