@@ -54,7 +54,7 @@ game::game(){
 
   if(level==4){
     load_level("maps/level4.txt");
-    guest_spawn=20;
+    guest_spawn=150;
   }
 
 
@@ -167,31 +167,40 @@ void game::update(){
   if(money>=100){
 
     gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_0") ->setDisableHoverEffect(true);
-    gameUI.getElementById("path_0") ->setStatus(false);
+    gameUI.getElementById("path_0") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_0") ->setActive(true);
 
     gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_1") ->setDisableHoverEffect(true);
-    gameUI.getElementById("path_1") ->setStatus(false);
+    gameUI.getElementById("path_1") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_1") ->setActive(true);
 
     gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_2") ->setDisableHoverEffect(true);
-    gameUI.getElementById("path_2") ->setStatus(false);
+    gameUI.getElementById("path_2") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_2") ->setActive(true);
 
     gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(0,220,0));
-    gameUI.getElementById("path_3") ->setDisableHoverEffect(true);
-    gameUI.getElementById("path_3") ->setStatus(false);
+    gameUI.getElementById("path_3") ->setDisableHoverEffect(false);
+    gameUI.getElementById("path_3") ->setActive(true);
 
 
 
-  }else{
+  }else if(level>2){
     gameUI.getElementById("path_0") ->setBackgroundColour( al_map_rgb(100,100,100));
-    gameUI.getElementById("path_0") ->setDisableHoverEffect(false);
-    gameUI.getElementById("path_0") ->setStatus(false);
+    gameUI.getElementById("path_0") ->setDisableHoverEffect(true);
+    gameUI.getElementById("path_0") ->setActive(false);
 
     gameUI.getElementById("path_1") ->setBackgroundColour( al_map_rgb(100,100,100));
+    gameUI.getElementById("path_1") ->setDisableHoverEffect(true);
+    gameUI.getElementById("path_1") ->setActive(false);
+
+
     gameUI.getElementById("path_2") ->setBackgroundColour( al_map_rgb(100,100,100));
+    gameUI.getElementById("path_2") ->setDisableHoverEffect(true);
+    gameUI.getElementById("path_2") ->setActive(false);
+
     gameUI.getElementById("path_3") ->setBackgroundColour( al_map_rgb(100,100,100));
+    gameUI.getElementById("path_3") ->setDisableHoverEffect(true);
+    gameUI.getElementById("path_3") ->setActive(false);
 
 
   }
@@ -260,15 +269,29 @@ void game::update(){
         switch( editor_tool){
         case 0:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 5 );
+          money-=100;
+          if(money<100);
+            editor_tool=4;
           break;
         case 1:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 6 );
+          money-=100;
+          editor_tool=4;
+ if(money<100);
+            editor_tool=4;
           break;
         case 2:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 7 );
+          money-=100;
+           if(money<100);
+            editor_tool=4;
+
           break;
         case 3:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 4 );
+                    money-=100;
+ if(money<100);
+            editor_tool=4;
           break;
         case 5:
           gameTiles.at(i) = createTile( gameTiles.at(i) -> getX(), gameTiles.at(i) -> getY(), 10 );

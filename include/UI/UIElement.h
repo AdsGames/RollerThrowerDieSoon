@@ -44,6 +44,7 @@ class UIElement
       active = newStatus;
     }
     void setJustification(int newJustification){justification=newJustification;}
+    void setActive(bool n){active=n;}
 
     int getWidth(){ return width + padding_x * 2; }
     int getHeight(){ return height + padding_y * 2; }
