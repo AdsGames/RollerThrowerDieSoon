@@ -57,6 +57,7 @@ class game : public state{
     std::vector <Particle*> gameParticles;
 
     // Guest selected by grabber
+
     Guest *selectedGuest = nullptr;
 
   private:

@@ -24,6 +24,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add directory="include" />
 			<Add directory="/usr/include" />
 			<Add directory="/media/ubuntu-mate/WINDOWS/Danny/allegro5/include/allegro5" />
