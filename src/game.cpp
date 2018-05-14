@@ -636,7 +636,7 @@ void game::update(){
 
   for( unsigned int i = 0; i < gameTiles.size(); i++ ){
     if( gameTiles.at(i) -> getType() == 10 ){
-      if(tools::random_int(1,100)==1){
+      if(tools::random_int(1,20)==1){
         gameGuests.push_back( createCart( gameTiles.at(i) -> getIsoX() +32,
                                          gameTiles.at(i) -> getIsoY()-64 ));
 
