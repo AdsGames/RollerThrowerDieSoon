@@ -5,10 +5,9 @@
 #include "tools.h"
 #include "allegro5/allegro_ttf.h"
 
-class Enemy
-{
+class Enemy {
   public:
-    Enemy( int x, int y );
+    Enemy (int x, int y);
     virtual ~Enemy();
 
     // Run any logic needed by enemy
@@ -19,12 +18,18 @@ class Enemy
 
     // Applys a variable amount of damage
     // to enemy
-    void applyDamage(int);
+    void applyDamage (int);
 
     // Getters for position
-    int getX(){return x;}
-    int getY(){return y;}
-    int getHealth(){return health;}
+    int getX() {
+      return x;
+    }
+    int getY() {
+      return y;
+    }
+    int getHealth() {
+      return health;
+    }
 
   private:
     // Images
@@ -37,10 +42,10 @@ class Enemy
     int y;
 
     // Animation
-    int frame=0;
+    int frame = 0;
 
     // Hit points
-    int health=1000;
+    int health = 1000;
 };
 
 #endif // ENEMY_H
