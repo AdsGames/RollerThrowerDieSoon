@@ -12,7 +12,6 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="include" />
@@ -23,11 +22,21 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Wnon-virtual-dtor" />
+			<Add option="-Winit-self" />
+			<Add option="-Wredundant-decls" />
+			<Add option="-Wcast-align" />
+			<Add option="-Wundef" />
+			<Add option="-Wfloat-equal" />
+			<Add option="-Winline" />
+			<Add option="-Wunreachable-code" />
+			<Add option="-Wmissing-include-dirs" />
+			<Add option="-Wswitch-enum" />
+			<Add option="-Wswitch-default" />
+			<Add option="-Wzero-as-null-pointer-constant" />
+			<Add option="-Wmain" />
 			<Add option="-Wall" />
-			<Add option="-std=c++11" />
-			<Add directory="include" />
-			<Add directory="/usr/include" />
-			<Add directory="/media/ubuntu-mate/WINDOWS/Danny/allegro5/include/allegro5" />
+			<Add option="-std=c++14" />
 		</Compiler>
 		<Linker>
 			<Add option="-lallegro" />
@@ -39,9 +48,6 @@
 			<Add option="-lallegro_dialog" />
 			<Add option="-lallegro_ttf" />
 			<Add option="-lallegro_acodec" />
-			<Add directory="include" />
-			<Add directory="usr/include" />
-			<Add directory="/media/ubuntu-mate/WINDOWS/Danny/allegro5/include/allegro5" />
 		</Linker>
 		<Unit filename="include/Cart.h" />
 		<Unit filename="include/Enemy.h" />
