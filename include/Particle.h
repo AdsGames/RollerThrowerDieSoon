@@ -4,10 +4,9 @@
 #include "allegro5/allegro.h"
 #include "tools.h"
 
-class Particle
-{
+class Particle {
   public:
-    Particle(int,int,int);
+    Particle (int, int, int);
     virtual ~Particle();
     bool update();
     void draw();
@@ -18,8 +17,8 @@ class Particle
     ALLEGRO_BITMAP *sprite;
     int x;
     int y;
-    int lifetime=0;
-    int type=1;
+    int lifetime = 0;
+    int type = 1;
 };
 
 #endif // PARTICLE_H

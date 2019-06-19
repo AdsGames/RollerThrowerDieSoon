@@ -1,11 +1,9 @@
 #include "DisplayMode.h"
 
-DisplayMode::DisplayMode()
-{
+DisplayMode::DisplayMode() {
   //ctor
 }
 
-DisplayMode::~DisplayMode()
-{
+DisplayMode::~DisplayMode() {
   //dtor
 }

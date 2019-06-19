@@ -10,60 +10,118 @@
 #include <listeners/mouseListener.h>
 #include <tools.h>
 
-class UIElement
-{
+class UIElement {
   public:
     // Constructor
     UIElement();
-    UIElement(int, int, std::string,ALLEGRO_FONT*);
-    UIElement(int, int, std::string,std::string,ALLEGRO_FONT*);
+    UIElement (int, int, std::string, ALLEGRO_FONT *);
+    UIElement (int, int, std::string, std::string, ALLEGRO_FONT *);
 
-    ~UIElement();
+    virtual ~UIElement();
 
     // Getters
-    int getX(){ return x; }
-    int getY(){ return y; }
+    int getX() {
+      return x;
+    }
+    int getY() {
+      return y;
+    }
 
 
-    std::string getText(){ return text; }
-    std::string getId(){ return id; }
+    std::string getText() {
+      return text;
+    }
+    std::string getId() {
+      return id;
+    }
 
 
     void setDefaults();
-    void setVisibility( bool newVisible){ visible = newVisible; }
+    void setVisibility (bool newVisible) {
+      visible = newVisible;
+    }
     void toggleVisibility();
     void toggleStatus();
-    void setTransparency(float newAlpha){alpha = newAlpha;}
-    void setBitmapRotationAngle(float newRotation){bitmap_rotation_angle=newRotation;}
-    void setX(int newX){x=newX;}
-    void setTextColour(ALLEGRO_COLOR newColour){text_colour = newColour;}
-    void setBackgroundColour(ALLEGRO_COLOR newColour){background_colour = newColour;}
-    void setCellFillTransparent(bool n){transparent_cell_fill=n;}
-    void setStatus(bool newStatus){
+    void setTransparency (float newAlpha) {
+      alpha = newAlpha;
+    }
+    void setBitmapRotationAngle (float newRotation) {
+      bitmap_rotation_angle = newRotation;
+    }
+    void setX (int newX) {
+      x = newX;
+    }
+    void setTextColour (ALLEGRO_COLOR newColour) {
+      text_colour = newColour;
+    }
+    void setBackgroundColour (ALLEGRO_COLOR newColour) {
+      background_colour = newColour;
+    }
+    void setCellFillTransparent (bool n) {
+      transparent_cell_fill = n;
+    }
+    void setStatus (bool newStatus) {
       visible = newStatus;
       active = newStatus;
     }
-    void setJustification(int newJustification){justification=newJustification;}
-    void setActive(bool n){active=n;}
+    void setJustification (int newJustification) {
+      justification = newJustification;
+    }
+    void setActive (bool n) {
+      active = n;
+    }
 
-    int getWidth(){ return width + padding_x * 2; }
-    int getHeight(){ return height + padding_y * 2; }
-    int getPaddingX(){ return padding_x; }
-    int getPaddingY(){ return padding_y; }
-    int getRightX(){ return x+getWidth();}
-    void setPadding( int padding_x, int padding_y){ this -> padding_x = padding_x; this -> padding_y = padding_y; }
+    int getWidth() {
+      return width + padding_x * 2;
+    }
+    int getHeight() {
+      return height + padding_y * 2;
+    }
+    int getPaddingX() {
+      return padding_x;
+    }
+    int getPaddingY() {
+      return padding_y;
+    }
+    int getRightX() {
+      return x + getWidth();
+    }
+    void setPadding (int padding_x, int padding_y) {
+      this -> padding_x = padding_x;
+      this -> padding_y = padding_y;
+    }
     // Setters
-    void setPosition( int x, int y){ this -> x = x; this -> y = y; }
-    void setSize( int width, int height){ this -> width = width; this -> height = height;}
-    void setText( std::string text){ this -> text = text; }
-    void setId( std::string id){ this -> id = id; }
-    void setImage( ALLEGRO_BITMAP *image);
-    void setFont( ALLEGRO_FONT *font);
-    void setVisibleBackground(bool b){visible_background=b;}
-    void setWidth(int newWidth){width=newWidth;}
-    void setHeight(int newHeight){height=newHeight;}
-    void setOutlineThickness(int newThickness){outline_thickness=newThickness;}
-    void setDisableHoverEffect(bool b){disabled_hover_effect=b;}
+    void setPosition (int x, int y) {
+      this -> x = x;
+      this -> y = y;
+    }
+    void setSize (int width, int height) {
+      this -> width = width;
+      this -> height = height;
+    }
+    void setText (std::string text) {
+      this -> text = text;
+    }
+    void setId (std::string id) {
+      this -> id = id;
+    }
+    void setImage (ALLEGRO_BITMAP *image);
+    void setFont (ALLEGRO_FONT *font);
+    void setVisibleBackground (bool b) {
+      visible_background = b;
+    }
+    void setWidth (int newWidth) {
+      width = newWidth;
+    }
+    void setHeight (int newHeight) {
+      height = newHeight;
+    }
+    void setOutlineThickness (int newThickness) {
+      outline_thickness = newThickness;
+    }
+    void setDisableHoverEffect (bool b) {
+      disabled_hover_effect = b;
+    }
 
 
     bool mouseReleased();
@@ -71,7 +129,7 @@ class UIElement
     bool clicked();
     bool held();
 
-    virtual bool getChecked(){
+    virtual bool getChecked() {
       return false;
     }
 
@@ -81,7 +139,7 @@ class UIElement
 
 
   protected:
-     // Variables
+    // Variables
     int x;
     int y;
     int width;

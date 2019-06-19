@@ -21,8 +21,7 @@
 #include "Options.h"
 
 
-class LevelSelect : public state
-{
+class LevelSelect : public state {
   public:
     LevelSelect();
     virtual ~LevelSelect();
@@ -30,7 +29,7 @@ class LevelSelect : public state
     void draw();
     void update();
 
-    static void setLevelComplete(int urmom);
+    static void setLevelComplete (int urmom);
 
 
     static bool completed_level_list[16];
@@ -44,20 +43,20 @@ class LevelSelect : public state
     ALLEGRO_BITMAP *highlight_levelselect;
     ALLEGRO_BITMAP *highlight;
 
-    void createLevelButton(int,int,int);
+    void createLevelButton (int, int, int);
 
     ALLEGRO_FONT *levelselect_font;
     ALLEGRO_FONT *levelselect_font_large;
     UIHandler levelSelectUI;
 
-    int highlight_y=110;
-    int highlight_y_destination=110;
-    int highlight_game_reset_y=650;
-    int highlight_game_reset_y_destination=650;
+    int highlight_y = 110;
+    int highlight_y_destination = 110;
+    int highlight_game_reset_y = 650;
+    int highlight_game_reset_y_destination = 650;
 
 
     bool joystick_direction_hit;
-    bool reset_game_menu=false;
+    bool reset_game_menu = false;
 };
 
 #endif // LEVELSELECT_H

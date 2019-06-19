@@ -1,21 +1,25 @@
 #include "Particle.h"
 
-Particle::Particle(int nx, int ny, int ntype)
+Particle::Particle (int nx, int ny, int ntype)
 {
-  if(ntype==0)
-    sprite = tools::load_bitmap_ex("images/money.png");
-  if(ntype==1)
-    sprite = tools::load_bitmap_ex("images/skull.png");
-  if(ntype==2)
-    sprite = tools::load_bitmap_ex("images/check.png");
-  if(ntype==3)
-    sprite = tools::load_bitmap_ex("images/hit.png");
-  if(ntype==4)
-    sprite = tools::load_bitmap_ex("images/skullBig.png");
+  if (ntype == 0)
+    sprite = tools::load_bitmap_ex ("images/money.png");
 
-  x=nx;
-  y=ny;
-  type=ntype;
+  if (ntype == 1)
+    sprite = tools::load_bitmap_ex ("images/skull.png");
+
+  if (ntype == 2)
+    sprite = tools::load_bitmap_ex ("images/check.png");
+
+  if (ntype == 3)
+    sprite = tools::load_bitmap_ex ("images/hit.png");
+
+  if (ntype == 4)
+    sprite = tools::load_bitmap_ex ("images/skullBig.png");
+
+  x = nx;
+  y = ny;
+  type = ntype;
 }
 
 Particle::~Particle()
@@ -23,20 +27,22 @@ Particle::~Particle()
   //dtor
 }
 
-void Particle::draw(){
+void Particle::draw() {
 
-  if(type==4)
-    al_draw_bitmap( sprite, x+128, y+64, 0 );
+  if (type == 4)
+    al_draw_bitmap (sprite, x + 128, y + 64, 0);
   else
-    al_draw_bitmap( sprite, x-8, y-8, 0 );
+    al_draw_bitmap (sprite, x - 8, y - 8, 0);
 
 }
 
-bool Particle::update(){
+bool Particle::update() {
 
-  y-=5;
+  y -= 5;
   lifetime++;
-  if(lifetime>60)
+
+  if (lifetime > 60)
     return true;
+
   return false;
 }

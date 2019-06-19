@@ -16,8 +16,7 @@
 #include "listeners/joystickListener.h"
 #include "game.h"
 
-class Options : public state
-{
+class Options : public state {
   public:
     Options();
     virtual ~Options();
@@ -29,7 +28,7 @@ class Options : public state
   private:
 
     ALLEGRO_FONT *font;
-      ALLEGRO_FONT *font_big;
+    ALLEGRO_FONT *font_big;
 
 
 
@@ -39,7 +38,7 @@ class Options : public state
     ALLEGRO_BITMAP *background;
     ALLEGRO_BITMAP *load;
 
-    bool loading=false;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    bool loading = false;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 };

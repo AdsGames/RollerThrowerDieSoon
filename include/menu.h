@@ -23,10 +23,10 @@
 
 
 // Menu
-class menu : public state{
+class menu : public state {
   public:
     menu();
-    virtual ~menu(){};
+    virtual ~menu() {};
 
     void update();
     void draw();
@@ -41,7 +41,7 @@ class menu : public state{
 
     ALLEGRO_FONT *menu_font;
 
-    bool loadingb=false;
+    bool loadingb = false;
 
 
 

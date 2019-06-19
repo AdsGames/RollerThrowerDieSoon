@@ -4,8 +4,7 @@
 #include "UI/UIElement.h"
 
 
-class ToggleBox : public UIElement
-{
+class ToggleBox : public UIElement {
   public:
     ToggleBox();
     virtual ~ToggleBox();

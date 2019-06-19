@@ -3,8 +3,7 @@
 
 #include "Sound.h"
 
-class MusicManager
-{
+class MusicManager {
   public:
     MusicManager();
     virtual ~MusicManager() {};

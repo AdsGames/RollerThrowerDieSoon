@@ -24,11 +24,11 @@
 #include "Cart.h"
 #include "Particle.h"
 
-class game : public state{
+class game : public state {
   public:
     // Construct / destruct;
     game();
-    ~game(){ };
+    ~game() { };
 
     // Override parent
     void update();
@@ -41,20 +41,20 @@ class game : public state{
     static int money;
 
     // Create tile at coordinate
-    Tile *createTile( int, int, int );
+    Tile *createTile (int, int, int);
 
     // Create guest at coordinate
-    Guest *createGuest( int, int );
-        Cart *createCart( int, int );
-    Particle *createParticle( int, int, int urmum );
+    Guest *createGuest (int, int);
+    Cart *createCart (int, int);
+    Particle *createParticle (int, int, int urmum);
 
     UIHandler gameUI;
 
     // Test mode
-    std::vector <Tile*> gameTiles;
-    std::vector <Guest*> gameGuests;
-    std::vector <Enemy*> gameEnemies;
-    std::vector <Particle*> gameParticles;
+    std::vector <Tile *> gameTiles;
+    std::vector <Guest *> gameGuests;
+    std::vector <Enemy *> gameEnemies;
+    std::vector <Particle *> gameParticles;
 
     // Guest selected by grabber
 
@@ -62,7 +62,7 @@ class game : public state{
 
   private:
     // Load map from text
-    void load_level( std::string filename);
+    void load_level (std::string filename);
 
     // Images
     ALLEGRO_BITMAP *tile;
@@ -72,7 +72,7 @@ class game : public state{
     ALLEGRO_BITMAP *path[4];
     ALLEGRO_BITMAP *entrance_back;
     ALLEGRO_BITMAP *entrance_front;
-      ALLEGRO_BITMAP *entrance_front_transparent;
+    ALLEGRO_BITMAP *entrance_front_transparent;
 
     ALLEGRO_BITMAP *cursor_open;
     ALLEGRO_BITMAP *cursor_closed;
@@ -92,21 +92,21 @@ class game : public state{
 
 
 
-    int frame=0;
-    int fart_crame=0;
-    int guest_spawn=50;
-    bool started=0;
-    bool finished=false;
-    int spawn_rate=16;
-    float speed_g=0.5f;
-    bool canPlaceTile(int sullys, int nose);
+    int frame = 0;
+    int fart_crame = 0;
+    int guest_spawn = 50;
+    bool started = 0;
+    bool finished = false;
+    int spawn_rate = 16;
+    float speed_g = 0.5f;
+    bool canPlaceTile (int sullys, int nose);
 
 
     // Grabber info
     int old_mouse_x;
     int old_mouse_y;
 
-    int editor_tool=4;
+    int editor_tool = 4;
 
     float x_velocity;
     float y_velocity;

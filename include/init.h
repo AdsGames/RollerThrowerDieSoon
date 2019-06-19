@@ -14,14 +14,13 @@
 
 #include "state.h"
 
-class init : public state
-{
+class init : public state {
   public:
     init();
-    ~init(){};
+    ~init() {};
 
-    void update(){};
-    void draw(){}
+    void update() {};
+    void draw() {}
 
   protected:
 

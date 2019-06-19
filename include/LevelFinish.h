@@ -19,14 +19,13 @@
 #include "listeners/joystickListener.h"
 #include "game.h"
 
-class LevelFinish : public state
-{
+class LevelFinish : public state {
   public:
     LevelFinish();
     virtual ~LevelFinish();
 
-     void draw();
-     void update();
+    void draw();
+    void update();
 
   protected:
 

@@ -4,15 +4,14 @@
 #include "UI/UIElement.h"
 
 
-class CheckBox : public UIElement
-{
+class CheckBox : public UIElement {
   public:
     CheckBox();
-    CheckBox(int, int, std::string, ALLEGRO_FONT*);
+    CheckBox (int, int, std::string, ALLEGRO_FONT *);
     virtual ~CheckBox();
     void update() override;
     virtual void draw();
-    bool getChecked(){
+    bool getChecked() {
       return checked;
     }
 

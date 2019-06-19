@@ -5,26 +5,29 @@
 
 
 
-class Button : public UIElement
-{
+class Button : public UIElement {
   public:
-    Button( int x, int y, std::string text, ALLEGRO_FONT *button_font);
-    Button( int x, int y, std::string text, std::string id, ALLEGRO_FONT *button_font);
-    Button( int x, int y, std::string text, ALLEGRO_FONT *button_font, int w, int h);
-    Button( int x, int y, std::string text, ALLEGRO_BITMAP *newImage,float newRotation);
-    Button( int x, int y, std::string id, ALLEGRO_BITMAP *newImage);
+    Button (int x, int y, std::string text, ALLEGRO_FONT *button_font);
+    Button (int x, int y, std::string text, std::string id, ALLEGRO_FONT *button_font);
+    Button (int x, int y, std::string text, ALLEGRO_FONT *button_font, int w, int h);
+    Button (int x, int y, std::string text, ALLEGRO_BITMAP *newImage, float newRotation);
+    Button (int x, int y, std::string id, ALLEGRO_BITMAP *newImage);
 
 
-    Button(){};
+    Button() {};
 
     //void setWidthTo100(){width=100;}
 
-    void setWidth(int newWidth){width=newWidth;}
-    void setHeight(int newHeight){height=newHeight;}
+    void setWidth (int newWidth) {
+      width = newWidth;
+    }
+    void setHeight (int newHeight) {
+      height = newHeight;
+    }
 
     virtual void draw();
 
-   // Button();
+    // Button();
     virtual ~Button();
 
   protected:

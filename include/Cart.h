@@ -4,10 +4,9 @@
 #include "Guest.h"
 
 
-class Cart : public Guest
-{
+class Cart : public Guest {
   public:
-    Cart(int,int);
+    Cart (int, int);
     virtual ~Cart();
     void update();
     void draw();
@@ -15,9 +14,9 @@ class Cart : public Guest
   protected:
 
   private:
-      float accel;
-      float spin;
-      ALLEGRO_BITMAP *cart;
+    float accel;
+    float spin;
+    ALLEGRO_BITMAP *cart;
 
 };
 

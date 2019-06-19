@@ -12,15 +12,14 @@
 #include <iostream>
 #include <allegro5/allegro.h>
 
-class keyListener
-{
+class keyListener {
   public:
     keyListener();
     virtual ~keyListener();
 
     static bool anyKeyPressed;
 
-    void on_event( ALLEGRO_EVENT_TYPE event_type, int keycode);
+    void on_event (ALLEGRO_EVENT_TYPE event_type, int keycode);
     void update();
 
     static bool key[ALLEGRO_KEY_MAX];
