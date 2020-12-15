@@ -1,8 +1,7 @@
 #ifndef DISPLAYMODE_H
 #define DISPLAYMODE_H
 
-
-enum{
+enum {
   fullscreen_window_stretch,
   fullscreen_window_letterbox,
   fullscreen_window_center,
@@ -10,17 +9,16 @@ enum{
   windowed,
 };
 
-class DisplayMode
-{
-  public:
-    DisplayMode();
-    virtual ~DisplayMode();
+class DisplayMode {
+ public:
+  DisplayMode();
+  virtual ~DisplayMode();
 
-    static int mode;
-    static int game_render_width;
-    static int game_render_height;
-    static int window_render_height;
-    static int window_render_width;
+  static int mode;
+  static int game_render_width;
+  static int game_render_height;
+  static int window_render_height;
+  static int window_render_width;
 };
 
-#endif // DISPLAYMODE_H
+#endif  // DISPLAYMODE_H

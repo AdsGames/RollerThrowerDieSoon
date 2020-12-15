@@ -1,17 +1,15 @@
 #ifndef TOGGLEBOX_H
 #define TOGGLEBOX_H
 
-#include "UI/UIElement.h"
-
+#include "UIElement.h"
 
 class ToggleBox : public UIElement {
-  public:
-    ToggleBox();
-    virtual ~ToggleBox();
+ public:
+  ToggleBox();
+  virtual ~ToggleBox();
 
-  protected:
-
-  private:
+ protected:
+ private:
 };
 
-#endif // TOGGLEBOX_H
+#endif  // TOGGLEBOX_H

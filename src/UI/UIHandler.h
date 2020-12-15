@@ -1,36 +1,38 @@
 #ifndef UIHANDLER_H
 #define UIHANDLER_H
 
-#include<vector>
-#include<string>
-#include "UIElement.h"
-#include "globals.h"
+#include <string>
+#include <vector>
 
-//class UIElement;
+#include "../globals.h"
+#include "UIElement.h"
+
+// class UIElement;
 
 class UIHandler {
-  public:
-    UIHandler() {};
-    virtual ~UIHandler() {};
-    void addElement (UIElement *newUIElement);
-    void draw();
-    void update();
-    bool isHovering();
-    UIElement *getElementByText (std::string);
-    UIElement *getElementById (std::string);
+ public:
+  UIHandler(){};
+  virtual ~UIHandler(){};
+  void addElement(UIElement* newUIElement);
+  void draw();
+  void update();
+  bool isHovering();
+  UIElement* getElementByText(std::string);
+  UIElement* getElementById(std::string);
 
-    std::vector<UIElement *> getUIElements() {
-      return ui_elements;
-    }
+  std::vector<UIElement*> getUIElements() { return ui_elements; }
 
-    void createButton (int x, int y, std::string newText, ALLEGRO_FONT *newFont);
-    void createAnchoredButton (std::string, ALLEGRO_FONT *, std::string, bool);
-    void createAnchoredButton (std::string, ALLEGRO_FONT *, std::string, std::string, bool);
+  void createButton(int x, int y, std::string newText, ALLEGRO_FONT* newFont);
+  void createAnchoredButton(std::string, ALLEGRO_FONT*, std::string, bool);
+  void createAnchoredButton(std::string,
+                            ALLEGRO_FONT*,
+                            std::string,
+                            std::string,
+                            bool);
 
-  protected:
-
-  private:
-    std::vector<UIElement *> ui_elements;
+ protected:
+ private:
+  std::vector<UIElement*> ui_elements;
 };
 
-#endif // UIHANDLER_H
+#endif  // UIHANDLER_H

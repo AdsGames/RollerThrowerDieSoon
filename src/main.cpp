@@ -5,27 +5,26 @@
  * 09/05/2017
  */
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
-#include <allegro5/allegro_image.h>
-#include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_primitives.h>
 
-#include <listeners/mouseListener.h>
-#include <listeners/keyListener.h>
-#include <listeners/joystickListener.h>
+#include "listeners/joystickListener.h"
+#include "listeners/keyListener.h"
+#include "listeners/mouseListener.h"
 
-#include "init.h"
-#include "state.h"
 #include "game.h"
+#include "init.h"
 #include "menu.h"
+#include "state.h"
 
-
-#include "Options.h"
-#include "MusicManager.h"
 #include "LevelFinish.h"
+#include "MusicManager.h"
+#include "Options.h"
 
 // Current state object
-state *currentState = nullptr;
+state* currentState = nullptr;
 
 // FPS system variables
 int fps;
@@ -39,10 +38,10 @@ bool closing = false;
 bool joystick_enabled = false;
 
 // Allegro events
-ALLEGRO_EVENT_QUEUE *event_queue = nullptr;
-ALLEGRO_TIMER *timer = nullptr;
-ALLEGRO_DISPLAY *display = nullptr;
-ALLEGRO_BITMAP *buffer;
+ALLEGRO_EVENT_QUEUE* event_queue = nullptr;
+ALLEGRO_TIMER* timer = nullptr;
+ALLEGRO_DISPLAY* display = nullptr;
+ALLEGRO_BITMAP* buffer;
 
 int graphics_mode;
 
@@ -74,14 +73,14 @@ void clean_up() {
 
 // Change game screen
 void change_state() {
-  //If the state needs to be changed
+  // If the state needs to be changed
   if (nextState != STATE_NULL) {
-    //Delete the current state
+    // Delete the current state
     if (nextState != STATE_EXIT) {
       delete currentState;
     }
 
-    //Change the state
+    // Change the state
     switch (nextState) {
       case STATE_INIT:
         currentState = new init();
@@ -117,17 +116,16 @@ void change_state() {
         currentState = new game();
     }
 
-    //Change the current state ID
+    // Change the current state ID
     stateID = nextState;
 
-    //NULL the next state ID
+    // NULL the next state ID
     nextState = STATE_NULL;
   }
 }
 
 // Setup game
 void setup() {
-
   std::cout << "Initializing Allegro.";
 
   // Init allegro
@@ -148,7 +146,7 @@ void setup() {
   // Audio
   al_install_audio();
   al_init_acodec_addon();
-  al_reserve_samples (20);
+  al_reserve_samples(20);
 
   graphics_mode = windowed;
 
@@ -156,28 +154,27 @@ void setup() {
   float windowHeight = 1080;
 
   if (graphics_mode >= 1 && graphics_mode <= 3) {
-    al_set_new_display_flags (ALLEGRO_FULLSCREEN_WINDOW);
-  }
-  else if (graphics_mode == fullscreen_true)
-    al_set_new_display_flags (ALLEGRO_FULLSCREEN_WINDOW);
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+  } else if (graphics_mode == fullscreen_true)
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
   else
-    al_set_new_display_flags (ALLEGRO_WINDOWED);
+    al_set_new_display_flags(ALLEGRO_WINDOWED);
 
-  display = al_create_display (windowWidth, windowHeight);
-  al_hide_mouse_cursor (display);
+  display = al_create_display(windowWidth, windowHeight);
+  al_hide_mouse_cursor(display);
 
   // Window title
-  al_set_window_title (display, "Loading...");
+  al_set_window_title(display, "Loading...");
 
-  windowWidth = al_get_display_width (display);
-  windowHeight = al_get_display_height (display);
+  windowWidth = al_get_display_width(display);
+  windowHeight = al_get_display_height(display);
 
-  buffer = al_create_bitmap (screenWidth, screenHeight);
+  buffer = al_create_bitmap(screenWidth, screenHeight);
 
   // calculate scaling factor
   float sx = windowWidth / screenWidth;
   float sy = windowHeight / screenHeight;
-  float scale = std::min (sx, sy);
+  float scale = std::min(sx, sy);
 
   if (graphics_mode == fullscreen_window_stretch) {
     // calculate how much the buffer should be scaled
@@ -191,7 +188,8 @@ void setup() {
     scaleW = screenWidth * 1;
     scaleH = screenHeight * 1;
     scaleX = (windowHeight - scaleH) / 2;
-    scaleY = (windowWidth - scaleW) / 2;;
+    scaleY = (windowWidth - scaleW) / 2;
+    ;
   }
 
   if (graphics_mode == fullscreen_window_letterbox) {
@@ -201,37 +199,34 @@ void setup() {
     scaleY = (windowHeight - scaleH) / 2;
   }
 
-
-
   if (!display)
-    tools::abort_on_error ("Screen could not be created", "Error");
+    tools::abort_on_error("Screen could not be created", "Error");
 
   // Timer
-  timer = al_create_timer (1.0 / MAX_FPS);
+  timer = al_create_timer(1.0 / MAX_FPS);
 
   // Register events
   event_queue = al_create_event_queue();
-  al_register_event_source (event_queue, al_get_display_event_source (display));
-  al_register_event_source (event_queue, al_get_timer_event_source (timer));
-  al_register_event_source (event_queue, al_get_keyboard_event_source());
-  al_register_event_source (event_queue, al_get_joystick_event_source());
+  al_register_event_source(event_queue, al_get_display_event_source(display));
+  al_register_event_source(event_queue, al_get_timer_event_source(timer));
+  al_register_event_source(event_queue, al_get_keyboard_event_source());
+  al_register_event_source(event_queue, al_get_joystick_event_source());
 
   // Timer
-  al_start_timer (timer);
+  al_start_timer(timer);
 
   // Window title
-  al_set_window_title (display, "Roller Thrower DieSoon");
+  al_set_window_title(display, "Roller Thrower DieSoon");
 
   std::cout << " Sucesss.\n";
 
-  #if defined(DEBUG)
+#if defined(DEBUG)
   std::cout << "Build target: Debug\n";
-  #endif
+#endif
 
-  #if defined(RELEASE)
+#if defined(RELEASE)
   std::cout << "Build target: Release\n";
-  #endif
-
+#endif
 
   // Probably never going to be relevant but pretty cool anyways
   uint32_t version = al_get_allegro_version();
@@ -240,32 +235,33 @@ void setup() {
   int revision = (version >> 8) & 255;
   int release = version & 255;
 
-  std::cout << "Allegro version " << major << "." << minor << "." << revision << "." << release << "\n";
+  std::cout << "Allegro version " << major << "." << minor << "." << revision
+            << "." << release << "\n";
 
-  // This is actually completely irrelevant other than making fun of Allan's PC when he runs this
-  // Sorry, your PC is a very nice PC
-  std::cout << "Running as " << al_get_app_name() << ", with " << al_get_ram_size() << " MB RAM.\n";
-
+  // This is actually completely irrelevant other than making fun of Allan's PC
+  // when he runs this Sorry, your PC is a very nice PC
+  std::cout << "Running as " << al_get_app_name() << ", with "
+            << al_get_ram_size() << " MB RAM.\n";
 
   joystick_enabled = (al_get_num_joysticks() > 0);
 
   if (joystick_enabled)
-    std::cout << al_get_joystick_name (al_get_joystick (0)) << " is installed and being used.\n";
+    std::cout << al_get_joystick_name(al_get_joystick(0))
+              << " is installed and being used.\n";
   else
     std::cout << "No joystick is installed.\n";
 
-  //Options::read_data();
+  // Options::read_data();
   MusicManager::load();
   MusicManager::game_music.play();
   Guest::speed = 0.4f;
-
 }
 
 // Handle events
 void update() {
   // Event checking
   ALLEGRO_EVENT ev;
-  al_wait_for_event (event_queue, &ev);
+  al_wait_for_event(event_queue, &ev);
 
   // Timer
   if (ev.type == ALLEGRO_EVENT_TIMER) {
@@ -278,19 +274,21 @@ void update() {
     j_listener.update();
 
     // Update state
-    currentState -> update();
+    currentState->update();
   }
   // Exit
   else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
     closing = true;
   }
   // Keyboard
-  else if (ev.type == ALLEGRO_EVENT_KEY_DOWN || ev.type == ALLEGRO_EVENT_KEY_UP) {
-    k_listener.on_event (ev.type, ev.keyboard.keycode);
+  else if (ev.type == ALLEGRO_EVENT_KEY_DOWN ||
+           ev.type == ALLEGRO_EVENT_KEY_UP) {
+    k_listener.on_event(ev.type, ev.keyboard.keycode);
   }
   // Joystick
-  else if (ev.type == ALLEGRO_EVENT_JOYSTICK_BUTTON_DOWN || ev.type == ALLEGRO_EVENT_JOYSTICK_BUTTON_UP) {
-    j_listener.on_event (ev.type, ev.joystick.button);
+  else if (ev.type == ALLEGRO_EVENT_JOYSTICK_BUTTON_DOWN ||
+           ev.type == ALLEGRO_EVENT_JOYSTICK_BUTTON_UP) {
+    j_listener.on_event(ev.type, ev.joystick.button);
   }
 
   // Joystick plugged or unplugged
@@ -300,22 +298,23 @@ void update() {
   }
 
   // Drawing
-  if (al_is_event_queue_empty (event_queue)) {
+  if (al_is_event_queue_empty(event_queue)) {
     // Clear buffer
-    al_clear_to_color (al_map_rgb (0, 0, 0));
+    al_clear_to_color(al_map_rgb(0, 0, 0));
 
     // render a frame
     if (graphics_mode >= 1 && graphics_mode <= 3) {
-      al_set_target_bitmap (buffer);
-      al_clear_to_color (al_map_rgb (0, 0, 0));
+      al_set_target_bitmap(buffer);
+      al_clear_to_color(al_map_rgb(0, 0, 0));
     }
 
-    currentState -> draw();
+    currentState->draw();
 
     if (graphics_mode >= 1 && graphics_mode <= 3) {
-      al_set_target_backbuffer (display);
-      al_clear_to_color (al_map_rgb (0, 0, 0));
-      al_draw_scaled_bitmap (buffer, 0, 0, screenWidth, screenHeight, scaleX, scaleY, scaleW, scaleH, 0);
+      al_set_target_backbuffer(display);
+      al_clear_to_color(al_map_rgb(0, 0, 0));
+      al_draw_scaled_bitmap(buffer, 0, 0, screenWidth, screenHeight, scaleX,
+                            scaleY, scaleW, scaleH, 0);
     }
 
     // Flip (OpenGL)
@@ -336,16 +335,15 @@ void update() {
     // FPS = average
     fps = fps_total / 100;
     // al_set_window_title(display,tools::convertIntToString(fps).c_str());
-
   }
 }
 
 // Start here
-int main (int argc, char **argv) {
+int main(int argc, char** argv) {
   // Basic init
   setup();
 
-  //Set the current state ID
+  // Set the current state ID
   stateID = STATE_INIT;
   currentState = new init();
 
@@ -354,7 +352,7 @@ int main (int argc, char **argv) {
     update();
 
   // Destory display
-  al_destroy_display (display);
+  al_destroy_display(display);
 
   return 0;
 }

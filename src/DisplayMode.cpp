@@ -1,9 +1,9 @@
 #include "DisplayMode.h"
 
 DisplayMode::DisplayMode() {
-  //ctor
+  // ctor
 }
 
 DisplayMode::~DisplayMode() {
-  //dtor
+  // dtor
 }

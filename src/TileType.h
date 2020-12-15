@@ -3,13 +3,13 @@
 
 #include <allegro5/allegro.h>
 
-class TileType{
-  public:
-    TileType(int id, ALLEGRO_BITMAP* image);
-    virtual ~TileType();
+class TileType {
+ public:
+  TileType(int id, ALLEGRO_BITMAP* image);
+  virtual ~TileType();
 
-    ALLEGRO_BITMAP *image;
-    int id;
+  ALLEGRO_BITMAP* image;
+  int id;
 };
 
-#endif // TILETYPE_H
+#endif  // TILETYPE_H

@@ -4,17 +4,17 @@
 #include "Sound.h"
 
 class MusicManager {
-  public:
-    MusicManager();
-    virtual ~MusicManager() {};
+ public:
+  MusicManager();
+  virtual ~MusicManager(){};
 
-    static Sound menu_music;
-    static Sound game_music;
+  static Sound menu_music;
+  static Sound game_music;
 
-    static void load();
-  protected:
+  static void load();
 
-  private:
+ protected:
+ private:
 };
 
-#endif // MUSICMANAGER_H
+#endif  // MUSICMANAGER_H

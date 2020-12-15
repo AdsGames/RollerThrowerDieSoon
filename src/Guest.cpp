@@ -2,29 +2,25 @@
 
 float Guest::speed = 0.0f;
 
-Guest::Guest() {
+Guest::Guest() {}
 
-};
-
-Guest::Guest (int x, int y) {
-
-  sprite = tools::load_bitmap_ex ("images/walk.png");
-  umbrella = tools::load_bitmap_ex ("images/Umbrella.png");
+Guest::Guest(int x, int y) {
+  sprite = tools::load_bitmap_ex("images/walk.png");
+  umbrella = tools::load_bitmap_ex("images/Umbrella.png");
 
   name = genName();
   inital = genInital();
 
   for (int i = 0; i < 43; i++)
-    spritesheet[i] = al_create_sub_bitmap (sprite, 0, i * 38, 17, 38);
+    spritesheet[i] = al_create_sub_bitmap(sprite, 0, i * 38, 17, 38);
 
-  sprite = tools::load_bitmap_ex ("images/panic.png");
+  sprite = tools::load_bitmap_ex("images/panic.png");
 
   for (int i = 0; i < 25; i++)
-    spritesheet_panic[i] = al_create_sub_bitmap (sprite, 0, i * 36, 17, 36);
+    spritesheet_panic[i] = al_create_sub_bitmap(sprite, 0, i * 36, 17, 36);
 
-  this -> x = x;
-  this -> y = y;
-
+  this->x = x;
+  this->y = y;
 }
 
 void Guest::update() {
@@ -49,7 +45,6 @@ void Guest::update() {
   if (x_velocity < 0)
     x_velocity /= decel;
 
-
   if (y_velocity == 0 && x_velocity == 0) {
     if (direction == 0) {
       x += speed;
@@ -70,8 +65,7 @@ void Guest::update() {
       x -= speed;
       y -= 0.5 * speed;
     }
-  }
-  else {
+  } else {
     x += x_velocity;
     y += y_velocity;
   }
@@ -80,37 +74,44 @@ void Guest::update() {
   frame_panic = (frame + 1) % 25;
 }
 
-void Guest::draw()
-{
+void Guest::draw() {
   if (!captured)
-    al_draw_bitmap (spritesheet[frame], x - 8, y - 18, 0);
+    al_draw_bitmap(spritesheet[frame], x - 8, y - 18, 0);
   else
-    al_draw_bitmap (spritesheet_panic[frame_panic], x - 10, y - 18, 0);
+    al_draw_bitmap(spritesheet_panic[frame_panic], x - 10, y - 18, 0);
 
   if (has_umbrella)
-    al_draw_bitmap (umbrella, x + 3, y - 20, 0);
-
+    al_draw_bitmap(umbrella, x + 3, y - 20, 0);
 }
 
-std::string Guest::genName()
-{
-  int nameInt = tools::random_int (0, 49);
+std::string Guest::genName() {
+  int nameInt = tools::random_int(0, 49);
 
-  std::string names [50] = {"Ethel", "Chung", "Fe", "Brooke", "Nicky", "Gail", "Andrea", "Sigrid", "Carmon", "Marybelle", "Racquel", "Dottie", "Wilson", "Myra", "Jackeline", "Vonda", "Stacey", "Jacquelynn", "Phebe", "Madeline", "Miguelina", "Loretta", "Malissa", "Kandy", "Nancee", "Petronila", "Madelaine", "Shakira", "Jamika", "Quentin", "Shanell", "Adrian", "Clement", "Gus", "Hung", "Tamie", "Elidia", "Jeneva", "Shantel", "Sage", "Susann", "Coralie", "Alphonso", "Stephanie", "Gena", "Barbera", "Jesusita", "Donald", "Danno", "Allan"};
+  std::string names[50] = {
+      "Ethel",     "Chung",     "Fe",         "Brooke",    "Nicky",
+      "Gail",      "Andrea",    "Sigrid",     "Carmon",    "Marybelle",
+      "Racquel",   "Dottie",    "Wilson",     "Myra",      "Jackeline",
+      "Vonda",     "Stacey",    "Jacquelynn", "Phebe",     "Madeline",
+      "Miguelina", "Loretta",   "Malissa",    "Kandy",     "Nancee",
+      "Petronila", "Madelaine", "Shakira",    "Jamika",    "Quentin",
+      "Shanell",   "Adrian",    "Clement",    "Gus",       "Hung",
+      "Tamie",     "Elidia",    "Jeneva",     "Shantel",   "Sage",
+      "Susann",    "Coralie",   "Alphonso",   "Stephanie", "Gena",
+      "Barbera",   "Jesusita",  "Donald",     "Danno",     "Allan"};
   return names[nameInt];
 }
 
-std::string Guest::genInital()
-{
-  //int initalInt = tools::random_int(0,25);
-  int initalInt =  tools::random_int (0, 25);
-  std::string initals [26] = {"Q.", "W.", "E.", "R.", "T.", "Y.", "U.", "I.", "O.", "P.", "A.", "S.", "D.", "F.", "G.", "H.", "J.", "K.", "L.", "Z.", "X.", "C.", "V.", "B.", "N.", "M."};
+std::string Guest::genInital() {
+  // int initalInt = tools::random_int(0,25);
+  int initalInt = tools::random_int(0, 25);
+  std::string initals[26] = {"Q.", "W.", "E.", "R.", "T.", "Y.", "U.",
+                             "I.", "O.", "P.", "A.", "S.", "D.", "F.",
+                             "G.", "H.", "J.", "K.", "L.", "Z.", "X.",
+                             "C.", "V.", "B.", "N.", "M."};
 
   return initals[initalInt];
 }
 
-std::string Guest::getName()
-{
+std::string Guest::getName() {
   return name + " " + inital;
 }
-
