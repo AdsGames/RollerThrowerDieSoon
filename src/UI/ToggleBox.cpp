@@ -1,11 +1,9 @@
-#include "UI/ToggleBox.h"
+#include "ToggleBox.h"
 
-ToggleBox::ToggleBox()
-{
-  //ctor
+ToggleBox::ToggleBox() {
+  // ctor
 }
 
-ToggleBox::~ToggleBox()
-{
-  //dtor
+ToggleBox::~ToggleBox() {
+  // dtor
 }

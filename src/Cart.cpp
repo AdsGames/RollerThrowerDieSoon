@@ -1,8 +1,7 @@
 #include "Cart.h"
 
-Cart::Cart (int newx, int newy)
-{
-  cart = tools::load_bitmap_ex ("images/tiles/car.png");
+Cart::Cart(int newx, int newy) {
+  cart = tools::load_bitmap_ex("images/tiles/car.png");
   x = newx;
   y = newy;
   /*
@@ -14,16 +13,13 @@ Cart::Cart (int newx, int newy)
   x_velocity = -0;
   y_velocity = -0;
   is_cart = true;
-
 }
 
-Cart::~Cart()
-{
-  //dtor
+Cart::~Cart() {
+  // dtor
 }
 
-void Cart::update()
-{
+void Cart::update() {
   accel += 0.02f;
 
   if (accel > 0.4f)
@@ -33,12 +29,9 @@ void Cart::update()
   y_velocity += accel * -4;
   x += x_velocity;
   y += y_velocity;
-
 }
 
-void Cart::draw()
-{
-  //al_draw_bitmap(cart, x, y, 0 );
-  al_draw_rotated_bitmap (cart, 24, 16, x, y, spin, 0);
-
+void Cart::draw() {
+  // al_draw_bitmap(cart, x, y, 0 );
+  al_draw_rotated_bitmap(cart, 24, 16, x, y, spin, 0);
 }
